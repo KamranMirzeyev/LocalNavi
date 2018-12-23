@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Kamran Mirzeyev">
+    <meta name="description" content="This is my page">
+    <meta name="keywords" content="#">
+
+    <!-- Page Title -->
+    <title>LocalNavi</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Public/css/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+
+    <!-- Themify Icon -->
+    <link rel="stylesheet" href="~/Public/css/themify-icons.css">
+
+    <!-- Line Icon -->
+    <link rel="stylesheet" href="~/Public/css/simple-line-icons.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Public/css/font-awesome.min.css">
+
+    <!-- Hover Effects -->
+    <link href="~/Public/css/set1.css" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="~/Public/css/style.css">
+
+    <!-- Owl Stylesheets -->
+    <link rel="stylesheet" href="~/Public/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Public/css/owl.theme.default.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/Public/images/favicon.png" sizes="16x16" type="image/png">
+
+</head>
+
+<body>
+
+    <!--============================= HEADER =============================-->
+    <div class="nav-menu sticky-top">
+        <div class="bg transition">
+            <div class="container fixed">
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="navbar-logo"><a href="@Url.Action("index","Home")"><img src="~/Public/images/logo.png" alt="logo"></a></div>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="ti-menu"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="listing.html">Explore</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="about.html">About</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="contact.html">Blog</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="contact.html">Help</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="add-listing.html" class="btn btn-outline-danger top-btn">
+                                            <span class="ti-plus"></span>
+                                            Add Listing
+                                        </a>
+                                    </li>
+                                    <li>
+                                        @if (@Session["Login"] == null)
+                                        {
+                                            <a class="btn btn-success top-btn ml-2" data-toggle="modal"
+                                               data-target="#exampleModal">Login</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-success top-btn ml-2" href="#">Profile</a>
+                                        }
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Log In & Signup -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="login" data-toggle="pill" href="#pills-home" role="tab"
+                           aria-controls="pills-home" aria-selected="true">LOGIN</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="sign-up" data-toggle="pill" href="#pills-profile" role="tab"
+                           aria-controls="pills-profile" aria-selected="false">SIGN UP</a>
+                    </li>
+
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="login">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><img src="~/Public/images/logo.png" alt="logo"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span class="ti-close"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="@Url.Action("login","Account")" method="post">
+                                <div class="form-group">
+                                    <input type="text" name="Email" class="form-control add-listing_form" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="Password" class="form-control add-listing_form" placeholder="Password">
+                                </div>
+                                <div class="form-group justify-content-center">
+                                    <button type="submit" class="btn btn-primary">LOG IN</button>
+                                </div>
+                            </form>
+                        </div>
+                       
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="sign-up">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><img src="~/Public/images/logo.png" alt="logo"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span class="ti-close"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="@Url.Action("Register","Account")" method="post">
+                                <div class="form-group">
+                                    <input type="text" name="FullName" data-validation="required" class="form-control add-listing_form" id="name" placeholder="Your name" data-validation-error-msg="Boş buraxmayın">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="Email" data-validation="email" class="form-control add-listing_form" id="email" placeholder="Email" data-validation-error-msg="Düzgün email yazın">
+                                </div>
+                               
+                                <div class="form-group">
+                                    <input type="password" name="Password" data-validation="length" class="form-control add-listing_form" id="Password" data-validation-length="min3"
+                                           placeholder="Password" data-validation-error-msg="Minimum 3 simvol yazmalısız">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control add-listing_form" 
+                                           placeholder="Repeat Password" data-validation="confirmation" data-validation-confirm="Password" data-validation-error-msg="Şifrəni düzgün daxil etmədiniz!">
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary" style="margin-left: 30%;">CREATE ACCOUNT</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--// Log In & Signup -->
+    <!--//END HEADER -->
+    <!--============================= MAIN TITLE =============================-->
+  
+
+@RenderBody()
+
+
+<!--============================= ADD LISTING =============================-->
+
+    <section class="main-block">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="title-block">
+                        <h2>Reach Millions of People</h2>
+                        <p>Add your business infront of millions and earn 3x profits from our tool</p>
+                    </div>
+                    <div class="btn-wrap btn-wrap2">
+                        <a href="add-listing.html" class="btn btn-simple">Add your Listing →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--//END ADD LISTING -->
+    <!--============================= FOOTER =============================-->
+
+    <footer class="footer main-block gray">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-2 col-lg-2 col-xl-2">
+                    <div class="custom-footer-menu">
+                        <!-- Logo -->
+                        <div class="footer-logo"><a href="@Url.Action("index","Home")"><img src="~/Public/images/logo.png" alt="LocalNavi"></a></div>
+                        <!-- Logo End -->
+                        <div class="footer-about mt-20">
+                            Sed ut perspiciatis unde omnis iste natus error sit uhks s
+                            voluptatem accusantium dna sa doloremque.
+                        </div>
+                        <ul class="social">
+                            <li><a href="JavaScript:Void(0)"><i class="fa fa-facebook-f" aria-hidden="true"></i></a></li>
+                            <li><a href="JavaScript:Void(0)"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                            <li><a href="JavaScript:Void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="JavaScript:Void(0)"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                           <li></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 col-lg-2 col-xl-2">
+                    <div class="footer-menu">
+                        <h6>Explore</h6>
+                        <ul>
+                            <li><a href="about.html">About us</a></li>
+                            <li><a href="JavaScript:Void(0)">Press & Media</a></li>
+                            <li><a href="JavaScript:Void(0)">News & Blog</a></li>
+                            <li><a href="JavaScript:Void(0)">Contact Us</a></li>
+                            <li><a href="JavaScript:Void(0)">Careers</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 col-lg-2 col-xl-2">
+                    <div class="footer-menu">
+                        <h6>Pages</h6>
+                        <ul>
+                            <li><a href="index.html">Home One</a></li>
+                            <li><a href="index-two.html">Home Two</a></li>
+                            <li><a href="index-three.html">Home Three</a></li>
+                            <li><a href="listing.html">Listing</a></li>
+                            <li><a href="detail.html">Listing Detail</a></li>
+                            <li><a href="add-listing.html">Add new Listing</a></li>
+                            <li><a href="payment-method.html">Payment Method</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 col-lg-2 col-xl-2">
+                    <div class="footer-menu">
+                        <h6>Blog</h6>
+                        <ul>
+                            <li><a href="blog.html">Blog Listing</a></li>
+                            <li><a href="blog-two.html">Blog Layout Two</a></li>
+                            <li><a href="blog-detail.html">Blog Detail</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 col-lg-2 col-xl-2">
+                    <div class="footer-menu">
+                        <h6>Legal</h6>
+                        <ul>
+                            <li><a href="terms.html">Terms</a></li>
+                            <li><a href="privacy-policy.html">Privacy</a></li>
+                            <li><a href="JavaScript:Void(0)">Location</a></li>
+                            <li><a href="JavaScript:Void(0)">Forums</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 col-lg-2 col-xl-2">
+                    <div class="footer-menu visit">
+                        <h6>Visit</h6>
+                        <p>
+                            406 Orange Ave,<br>
+                            Mountain View<br>
+                            CA 94045, United States
+                        </p>
+                    </div>
+                    <div class="footer-menu visit">
+                        <h6>New Busniess</h6>
+                        <p>+010 2345 6789</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>© 2018 LocalNavi Inc. All rights reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--//END FOOTER -->
+    <!-- jQuery, Bootstrap JS. -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/Public/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Public/js/popper.min.js"></script>
+    <script src="~/Public/js/bootstrap.min.js"></script>
+    <script src="~/Public/js/owl.carousel.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script src="~/Public/js/main.js"></script>
+<script>
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+        margin: 10,
+        loop: true,
+        nav: true,
+        autoplay: true,
+        navClass: ['owl-prev', 'owl-next'],
+        responsive: {
+            0: {
+                items: 1
+            },
+            400: {
+                items: 2
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 7
+            }
+        }
+    })
+
+    $(".owl-prev").html('<i class="fa fa-chevron-left fa-lg" style></i>');
+    $(".owl-next").html('<i class="fa fa-chevron-right fa-lg"></i>');
+</script>
+
+
+@RenderSection("scripts",false)
+</body>
+
+</html>
