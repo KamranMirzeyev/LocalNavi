@@ -68,3 +68,5 @@ C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.countrycategorytableedit1.resources
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.usertable.resources
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.useredit1.resources
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.useredit2.resources
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.categoryedit1.resources

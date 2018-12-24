@@ -23,7 +23,6 @@ namespace Navigation.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Boş buraxmayın")]
-        [MaxLength(30,ErrorMessage = "Maxsimum 30 simvol istifadə edə bilərsiniz")]
         [MinLength(3,ErrorMessage = "Minimum 3 simvol daxil etməlisiniz")]
         public string Password { get; set; }
         public string Photo { get; set; }

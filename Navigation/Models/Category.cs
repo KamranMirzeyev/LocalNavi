@@ -15,6 +15,8 @@ namespace Navigation.Models
         [Required]
         public string Name { get; set; }
 
+        public string Icon { get; set; }
+
         private List<Listing> Listings { get; set; }
     }
 }

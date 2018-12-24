@@ -133,6 +133,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\NaviContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -159,9 +160,18 @@
     <Compile Include="Migrations\201812231604388_user-edit1.Designer.cs">
       <DependentUpon>201812231604388_user-edit1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812232000097_user-edit2.cs" />
+    <Compile Include="Migrations\201812232000097_user-edit2.Designer.cs">
+      <DependentUpon>201812232000097_user-edit2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812241015529_category-edit1.cs" />
+    <Compile Include="Migrations\201812241015529_category-edit1.Designer.cs">
+      <DependentUpon>201812241015529_category-edit1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\Listing.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -237,6 +247,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -257,6 +268,11 @@
     <Content Include="Public\fonts\themify.woff" />
     <Content Include="Public\js\swiper.min.js.map" />
     <Content Include="Public\scss\style.scss" />
+    <Content Include="Views\Home\Blog.cshtml" />
+    <Content Include="Views\Home\Listing.cshtml" />
+    <Content Include="Public\js\jquery-3.3.1.min.js" />
+    <Content Include="Views\Home\AddListing.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812231052140_init1.resx">
@@ -273,6 +289,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812231604388_user-edit1.resx">
       <DependentUpon>201812231604388_user-edit1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812232000097_user-edit2.resx">
+      <DependentUpon>201812232000097_user-edit2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812241015529_category-edit1.resx">
+      <DependentUpon>201812241015529_category-edit1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

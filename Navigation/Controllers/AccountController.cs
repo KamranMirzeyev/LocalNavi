@@ -12,9 +12,32 @@ namespace Navigation.Controllers
     public class AccountController : Controller
     {
       private readonly NaviContext db = new NaviContext();
-        
 
         [HttpPost]
+        public ActionResult Login(User user)
+        {
+            if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password))
+            {
+                return HttpNotFound();
+            }
+
+            User u = db.Users.FirstOrDefault(x => x.Email == user.Email);
+
+            if (u != null)
+            {
+                if (Crypto.VerifyHashedPassword(u.Password, user.Password))
+                {
+                    Session["Login"] = true;
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return RedirectToAction("Index","Home");
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(User user)
         {
             if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.FullName) || string.IsNullOrEmpty(user.Password))
@@ -34,7 +57,8 @@ namespace Navigation.Controllers
             if (ModelState.IsValid)
             {
                 user.Status = true;
-                Crypto.HashPassword(user.Password);
+                string pass= Crypto.HashPassword(user.Password);
+                user.Password = pass;
                 db.Users.Add(user);
                 db.SaveChanges();
                 
@@ -45,7 +69,8 @@ namespace Navigation.Controllers
 
             }
 
-            return RedirectToAction("Index", "Home");
+           
+            return Redirect("/Home/Index#registered");
         }
     }
 }

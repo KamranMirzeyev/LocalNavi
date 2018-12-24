@@ -1,13 +1,22 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
-</head>
-<body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
-</body>
-</html>
+﻿@{
+    ViewBag.Title = "Error 404";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<!--============================= 404 =============================-->
+
+<section class="main-block d-flex align-items-center error-404">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="error-page">
+                    <h2>404</h2>
+                    <p>The page you are looking for doesn't exist</p>
+                    <a href="@Url.Action("index","Home")" class="btn btn-outline-danger btn-confirmation">GO TO HOME PAGE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--//END 404 -->
