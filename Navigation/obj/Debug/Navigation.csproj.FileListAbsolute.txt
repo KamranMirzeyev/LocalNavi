@@ -53,7 +53,6 @@ C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\bin\
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.csprojAssemblyReference.cache
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.csproj.CoreCompileInputs.cache
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.csproj.CopyComplete
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.dll
@@ -70,3 +69,6 @@ C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.useredit1.resources
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.useredit2.resources
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.categoryedit1.resources
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.databaseedit.resources
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.update.resources
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.csprojAssemblyReference.cache

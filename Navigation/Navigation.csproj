@@ -168,12 +168,28 @@
     <Compile Include="Migrations\201812241015529_category-edit1.Designer.cs">
       <DependentUpon>201812241015529_category-edit1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812251237328_database-edit.cs" />
+    <Compile Include="Migrations\201812251237328_database-edit.Designer.cs">
+      <DependentUpon>201812251237328_database-edit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812251531525_update.cs" />
+    <Compile Include="Migrations\201812251531525_update.Designer.cs">
+      <DependentUpon>201812251531525_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\CategoryService.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CommentPhoto.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\Listing.cs" />
+    <Compile Include="Models\ListPhoto.cs" />
+    <Compile Include="Models\ListService.cs" />
+    <Compile Include="Models\Reaction.cs" />
+    <Compile Include="Models\Service.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\WorkHour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +263,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Account\" />
-    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -273,6 +288,7 @@
     <Content Include="Public\js\jquery-3.3.1.min.js" />
     <Content Include="Views\Home\AddListing.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812231052140_init1.resx">
@@ -295,6 +311,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812241015529_category-edit1.resx">
       <DependentUpon>201812241015529_category-edit1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812251237328_database-edit.resx">
+      <DependentUpon>201812251237328_database-edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812251531525_update.resx">
+      <DependentUpon>201812251531525_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

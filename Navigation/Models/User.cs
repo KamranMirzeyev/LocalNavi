@@ -9,7 +9,7 @@ namespace Navigation.Models
 {
     public class User
     {
-        [Key]
+       
         public int Id { get; set; }
         public bool Status { get; set; }
 
@@ -26,6 +26,10 @@ namespace Navigation.Models
         [MinLength(3,ErrorMessage = "Minimum 3 simvol daxil etməlisiniz")]
         public string Password { get; set; }
         public string Photo { get; set; }
+
+        public List<Listing> Listings { get; set; }
+        public List<Comment> Comments { get; set; }
+        public List<Reaction> Reactions { get; set; }
 
     }
 }

@@ -8,7 +8,25 @@
 
     });
 
-   
+
+    $("#registerForm").submit(function(ev) {
+        ev.preventDefault();
+
+        $.ajax({
+            url: $(this).attr("action"),
+            type: $(this).attr("method"),
+            dataType: "json",
+            data: $(this).serialize(),
+            success: function(responce) {
+                console.log(responce);
+            }
+
+    });
+    });
+
+
+
+
     //mail yoxlama varsa register tekrar olmalidi
     $(window).on("load", function () {
      
@@ -34,6 +52,7 @@
             $('#pills-profile').removeClass("active");
             $('#pills-profile').removeClass("show");
         }
+
 
 
         });

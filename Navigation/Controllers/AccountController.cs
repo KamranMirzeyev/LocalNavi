@@ -36,41 +36,48 @@ namespace Navigation.Controllers
 
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(User user)
-        {
-            if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.FullName) || string.IsNullOrEmpty(user.Password))
-            {
-                return HttpNotFound();
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public JsonResult Register(User user)
+        //{
+        //    if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.FullName) || string.IsNullOrEmpty(user.Password))
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            foreach (var item in db.Users.ToList())
-            {
-                if (user.Email==item.Email)
-                {
-                 ModelState.AddModelError("Email","Bu email artıq var");
+        //    foreach (var item in db.Users.ToList())
+        //    {
+        //        if (user.Email==item.Email)
+        //        {
+        //         ModelState.AddModelError("Email","Bu email artıq var");
                     
-                }
-            }
+        //        }
+        //    }
 
-            if (ModelState.IsValid)
-            {
-                user.Status = true;
-                string pass= Crypto.HashPassword(user.Password);
-                user.Password = pass;
-                db.Users.Add(user);
-                db.SaveChanges();
+        //    if (ModelState.IsValid)
+        //    {
+        //        user.Status = true;
+        //        string pass= Crypto.HashPassword(user.Password);
+        //        user.Password = pass;
+        //        db.Users.Add(user);
+        //        db.SaveChanges();
                 
-                Session["User"] = user;
-                Session["Login"] = true;
+        //        Session["User"] = user;
+        //        Session["Login"] = true;
 
-                return RedirectToAction("Index", "Home");
+        //        return RedirectToAction("Index", "Home");
 
-            }
+        //    }
 
            
-            return Redirect("/Home/Index#registered");
-        }
+        //    return Redirect("/Home/Index#registered");
+        //}
+
+
+
+        //public JsonResult EmailHave()
+        //{
+
+        //}
     }
 }

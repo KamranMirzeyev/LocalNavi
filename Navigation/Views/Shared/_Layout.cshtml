@@ -75,7 +75,15 @@
                                     </li>
 
                                     <li>
-                                        <a href="@Url.Action("AddListing","Home")" class="btn btn-outline-danger top-btn">
+                                        @if (Session["Error"] != null)
+                                        {
+                                        <div class="alert alert-danger">
+                                            @Session["Error"] 
+                                        </div>
+                                            Session["Error"] = null;
+                                        }
+                                        
+                                        <a href="@Url.Action("AddListing", "Home")" class="btn btn-outline-danger top-btn">
                                             <span class="ti-plus"></span>
                                             Add Listing
                                         </a>
@@ -152,7 +160,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="@Url.Action("Register", "Account")" method="post">
+                            <form action="@Url.Action("Register", "Account")" method="post" id="registerForm">
                                 @Html.AntiForgeryToken()
                                 <div class="form-group">
                                     <input type="text" name="FullName" data-validation="required" class="form-control add-listing_form" id="name" placeholder="Your name" data-validation-error-msg="Boş buraxmayın">
@@ -172,8 +180,8 @@
                                     <input type="password" class="form-control add-listing_form"
                                            placeholder="Repeat Password" data-validation="confirmation" data-validation-confirm="Password" data-validation-error-msg="Şifrəni düzgün daxil etmədiniz!">
                                 </div>
-
-                                <button type="submit" class="btn btn-primary" style="margin-left: 30%;">CREATE ACCOUNT</button>
+                                
+                                <button type="submit"  class="btn btn-primary" style="margin-left: 30%;">CREATE ACCOUNT</button>
                             </form>
                         </div>
                         

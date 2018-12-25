@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace Navigation.Models
 {
-    public class Country
+    public class ListPhoto
     {
-        [Key]
         public int Id { get; set; }
+        public int ListId { get; set; }
+        public string Photo { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        public Listing Listing { get; set; }
     }
 }

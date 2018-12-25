@@ -17,6 +17,9 @@ namespace Navigation.Models
 
         public string Icon { get; set; }
 
-        private List<Listing> Listings { get; set; }
+        public  List<CategoryService> CategoryServices { get; set; }
+        public  List<Listing> Listings { get; set; }
+
+   
     }
 }

@@ -11,24 +11,24 @@ namespace Navigation.Controllers
 {
     public class HomeController : Controller
     {
-        NaviContext db = new NaviContext();
+       private  readonly NaviContext db = new NaviContext();
         public ActionResult Index()
         {
-            HomeViewModel model = new HomeViewModel();
+           HomeViewModel model = new HomeViewModel();
             model.category = db.Categories.ToList();
             return View(model);
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+           
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+           
 
             return View();
         }
