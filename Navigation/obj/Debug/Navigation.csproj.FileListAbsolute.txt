@@ -72,3 +72,5 @@ C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.databaseedit.resources
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.update.resources
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.csprojAssemblyReference.cache
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.edit22.resources
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.edit23.resources

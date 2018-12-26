@@ -135,6 +135,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlaceController.cs" />
     <Compile Include="DAL\NaviContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -176,6 +177,14 @@
     <Compile Include="Migrations\201812251531525_update.Designer.cs">
       <DependentUpon>201812251531525_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812261844123_edit22.cs" />
+    <Compile Include="Migrations\201812261844123_edit22.Designer.cs">
+      <DependentUpon>201812261844123_edit22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812261846292_edit23.cs" />
+    <Compile Include="Migrations\201812261846292_edit23.Designer.cs">
+      <DependentUpon>201812261846292_edit23.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryService.cs" />
@@ -211,6 +220,7 @@
     <Content Include="Public\fonts\Simple-Line-Icons.svg" />
     <Content Include="Public\fonts\slick.svg" />
     <Content Include="Public\fonts\themify.svg" />
+    <Content Include="Public\images\addlist.jpg" />
     <Content Include="Public\images\avatar.jpg" />
     <Content Include="Public\images\bootstrap-formhelpers-countries.flags.png" />
     <Content Include="Public\images\bootstrap-formhelpers-currencies.flags.png" />
@@ -233,6 +243,7 @@
     <Content Include="Public\js\bootstrap.min.js" />
     <Content Include="Public\js\bParticles.js" />
     <Content Include="Public\js\contact.js" />
+    <Content Include="Public\js\gmaps.js" />
     <Content Include="Public\js\jarallax-video.js" />
     <Content Include="Public\js\jarallax.js" />
     <Content Include="Public\js\jquery-3.2.1.min.js" />
@@ -286,9 +297,9 @@
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\Listing.cshtml" />
     <Content Include="Public\js\jquery-3.3.1.min.js" />
-    <Content Include="Views\Home\AddListing.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Place\AddListing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812231052140_init1.resx">
@@ -317,6 +328,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812251531525_update.resx">
       <DependentUpon>201812251531525_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812261844123_edit22.resx">
+      <DependentUpon>201812261844123_edit22.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812261846292_edit23.resx">
+      <DependentUpon>201812261846292_edit23.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

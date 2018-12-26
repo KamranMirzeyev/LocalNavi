@@ -1,10 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "AddListing";
+    ViewBag.Title = "Yeni Yer əlavə et";
 }
-
-
-
 
 
 <!--============================= SUBPAGE HEADER BG =============================-->
@@ -30,7 +27,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="listing-wrap">
-                    <form action="#">
+                    <form action="@Url.Action("AddListing","Place")" method="post" enctype="multipart/form-data">
                         <!-- General Information -->
                         <div class="listing-title">
                             <span class="ti-files"></span>
@@ -41,14 +38,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Listing Title</label>
-                                    <input type="text" class="form-control add-listing_form">
+                                    <label>Title</label>
+                                    <input type="text" name="Title" class="form-control add-listing_form">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Keyword</label>
-                                    <input type="text" class="form-control add-listing_form">
+                                    <label>Sloqan</label>
+                                    <input type="text" name="Slogan" class="form-control add-listing_form">
                                 </div>
                             </div>
                         </div>
@@ -56,10 +53,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Category</label>
-                                    <select class="form-control add-listing_form">
-                                        <option>1</option>
-                                        <option>2</option>
+                                    <label for="CategoryId">Category</label>
+                                    <select name="CategoryId" class="form-control add-listing_form">
+                                        <option value="0">Secin</option>
+                                        <option value="">2</option>
                                         <option>3</option>
                                         <option>4</option>
                                         <option>5</option>
@@ -69,29 +66,21 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Website</label>
-                                    <input type="text" class="form-control add-listing_form">
+                                    <input type="text" name="Website" class="form-control add-listing_form">
                                 </div>
                             </div>
                         </div>
-                        <!--//End General Information -->
-                        <!-- Add Location -->
-                        <div class="listing-title">
-                            <span class="ti-location-pin"></span>
-                            <h4>Add Location</h4>
-                            <p>Write Something General Information About Your Listing</p>
-                        </div>
-
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input type="text" class="form-control add-listing_form">
+                                    <input type="text" name="Address" class="form-control add-listing_form">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Temporary Address</label>
+                                    <label>Phone</label>
                                     <input type="text" class="form-control add-listing_form">
                                 </div>
                             </div>
@@ -101,124 +90,50 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>City</label>
-                                    <input type="text" class="form-control add-listing_form">
+                                    <select class="form-control add-listing_form">
+                                        <option>Secin</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>State</label>
-                                    <input type="text" class="form-control add-listing_form">
-                                </div>
-                            </div>
+
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Country</label>
-                                    <select class="form-control bfh-countries" data-country="US"></select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Zip-Code</label>
-                                    <input type="text" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                        </div>
-                        <!--//End Add Location -->
-                        <!-- Full Details -->
-                        <div class="listing-title">
-                            <span class="ti-location-pin"></span>
-                            <h4>Full Details</h4>
-                            <p>Write Something General Information About Your Listing</p>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Owner Name</label>
-                                    <input type="text" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Email</label>
-                                    <input type="email" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="number" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Website</label>
-                                    <input type="text" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Owner Designation</label>
-                                    <input type="text" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Company</label>
-                                    <input type="text" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Facebook Link</label>
-                                    <input type="text" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Twitter User</label>
-                                    <input type="text" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Google Plus</label>
-                                    <input type="text" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Linked In</label>
-                                    <input type="text" class="form-control add-listing_form">
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Description</label>
-                                    <textarea class="form-control add-listing_form" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control add-listing_form" name="Description" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
                         <!--//End Full Details -->
+                        <!--//End General Information -->
+                        <!-- Add Location -->
+                        <div class="listing-title">
+                            <span class="ti-location-pin"></span>
+                            <h4>Add Location</h4>
+                            <p>Write Something General Information About Your Listing</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="hidden" name="lat">
+                                    <input type="hidden" name="lng">
+                                    <div id="map" style="height: 400px"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
                         <!-- Add Gallery -->
-                        <!--<div class="listing-title">
+                        <div class="listing-title">
                             <span class="ti-gallery"></span>
                             <h4>Add Gallery</h4>
                             <p>Write Something General Information About Your Listing</p>
@@ -230,10 +145,10 @@
                                         <i class="ti-gallery"></i>
                                         <span>Drag &amp; Drop To Change Logo</span>
                                     </div>
-                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <input type="file" name="Photo" class="custom-file-input" id="customFile">
                                 </div>
                             </div>
-                        </div>-->
+                        </div>
                         <!--//End Add Gallery -->
                         <!-- Amenities -->
                         <div class="listing-title">
@@ -355,7 +270,7 @@
 
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="listing-time">Weekdays</label>
+                                <label class="listing-time">Bazarertəsi</label>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
@@ -381,19 +296,19 @@
                                 <div class="form-group">
                                     <select class="form-control">
                                         <option selected>Closing Time</option>
-                                        <option>1 :00 AM</option>
-                                        <option>2 :00 AM</option>
-                                        <option>3 :00 AM</option>
-                                        <option>4 :00 AM</option>
-                                        <option>5 :00 AM</option>
-                                        <option>6 :00 AM</option>
-                                        <option>7 :00 AM</option>
-                                        <option>8 :00 AM</option>
-                                        <option>9 :00 AM</option>
-                                        <option>10 :00 AM</option>
-                                        <option>11 :00 AM</option>
-                                        <option>12 :00 AM</option>
                                         <option>1 :00 PM</option>
+                                        <option>2 :00 PM</option>
+                                        <option>3 :00 PM</option>
+                                        <option>4 :00 PM</option>
+                                        <option>5 :00 PM</option>
+                                        <option>6 :00 PM</option>
+                                        <option>7 :00 PM</option>
+                                        <option>8 :00 PM</option>
+                                        <option>9 :00 PM</option>
+                                        <option>10 :00 PM</option>
+                                        <option>11 :00 PM</option>
+                                        <option>12 :00 PM</option>
+                                        <option>1 :00 AM</option>
                                     </select>
                                 </div>
                             </div>
@@ -401,7 +316,7 @@
 
                         <div class="row">
                             <div class="col-md-2">
-                                <label class="listing-time">Weekends</label>
+                                <label class="listing-time">Cərşəmbə axşamı</label>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
@@ -427,6 +342,32 @@
                                 <div class="form-group">
                                     <select class="form-control">
                                         <option selected>Closing Time</option>
+                                        <option>1 :00 PM</option>
+                                        <option>2 :00 PM</option>
+                                        <option>3 :00 PM</option>
+                                        <option>4 :00 PM</option>
+                                        <option>5 :00 PM</option>
+                                        <option>6 :00 PM</option>
+                                        <option>7 :00 PM</option>
+                                        <option>8 :00 PM</option>
+                                        <option>9 :00 PM</option>
+                                        <option>10 :00 PM</option>
+                                        <option>11 :00 PM</option>
+                                        <option>12 :00 PM</option>
+                                        <option>1 :00 AM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="listing-time">Cərşəmbə</label>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Opening Time</option>
                                         <option>1 :00 AM</option>
                                         <option>2 :00 AM</option>
                                         <option>3 :00 AM</option>
@@ -440,6 +381,209 @@
                                         <option>11 :00 AM</option>
                                         <option>12 :00 AM</option>
                                         <option>1 :00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Closing Time</option>
+                                        <option>1 :00 PM</option>
+                                        <option>2 :00 PM</option>
+                                        <option>3 :00 PM</option>
+                                        <option>4 :00 PM</option>
+                                        <option>5 :00 PM</option>
+                                        <option>6 :00 PM</option>
+                                        <option>7 :00 PM</option>
+                                        <option>8 :00 PM</option>
+                                        <option>9 :00 PM</option>
+                                        <option>10 :00 PM</option>
+                                        <option>11 :00 PM</option>
+                                        <option>12 :00 PM</option>
+                                        <option>1 :00 AM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="listing-time">Cumə axşamı</label>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Opening Time</option>
+                                        <option>1 :00 AM</option>
+                                        <option>2 :00 AM</option>
+                                        <option>3 :00 AM</option>
+                                        <option>4 :00 AM</option>
+                                        <option>5 :00 AM</option>
+                                        <option>6 :00 AM</option>
+                                        <option>7 :00 AM</option>
+                                        <option>8 :00 AM</option>
+                                        <option>9 :00 AM</option>
+                                        <option>10 :00 AM</option>
+                                        <option>11 :00 AM</option>
+                                        <option>12 :00 AM</option>
+                                        <option>1 :00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Closing Time</option>
+                                        <option>1 :00 PM</option>
+                                        <option>2 :00 PM</option>
+                                        <option>3 :00 PM</option>
+                                        <option>4 :00 PM</option>
+                                        <option>5 :00 PM</option>
+                                        <option>6 :00 PM</option>
+                                        <option>7 :00 PM</option>
+                                        <option>8 :00 PM</option>
+                                        <option>9 :00 PM</option>
+                                        <option>10 :00 PM</option>
+                                        <option>11 :00 PM</option>
+                                        <option>12 :00 PM</option>
+                                        <option>1 :00 AM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="listing-time">Cumə</label>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Opening Time</option>
+                                        <option>1 :00 AM</option>
+                                        <option>2 :00 AM</option>
+                                        <option>3 :00 AM</option>
+                                        <option>4 :00 AM</option>
+                                        <option>5 :00 AM</option>
+                                        <option>6 :00 AM</option>
+                                        <option>7 :00 AM</option>
+                                        <option>8 :00 AM</option>
+                                        <option>9 :00 AM</option>
+                                        <option>10 :00 AM</option>
+                                        <option>11 :00 AM</option>
+                                        <option>12 :00 AM</option>
+                                        <option>1 :00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Closing Time</option>
+                                        <option>1 :00 PM</option>
+                                        <option>2 :00 PM</option>
+                                        <option>3 :00 PM</option>
+                                        <option>4 :00 PM</option>
+                                        <option>5 :00 PM</option>
+                                        <option>6 :00 PM</option>
+                                        <option>7 :00 PM</option>
+                                        <option>8 :00 PM</option>
+                                        <option>9 :00 PM</option>
+                                        <option>10 :00 PM</option>
+                                        <option>11 :00 PM</option>
+                                        <option>12 :00 PM</option>
+                                        <option>1 :00 AM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="listing-time">Şənbə</label>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Opening Time</option>
+                                        <option>1 :00 AM</option>
+                                        <option>2 :00 AM</option>
+                                        <option>3 :00 AM</option>
+                                        <option>4 :00 AM</option>
+                                        <option>5 :00 AM</option>
+                                        <option>6 :00 AM</option>
+                                        <option>7 :00 AM</option>
+                                        <option>8 :00 AM</option>
+                                        <option>9 :00 AM</option>
+                                        <option>10 :00 AM</option>
+                                        <option>11 :00 AM</option>
+                                        <option>12 :00 AM</option>
+                                        <option>1 :00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Closing Time</option>
+                                        <option>1 :00 PM</option>
+                                        <option>2 :00 PM</option>
+                                        <option>3 :00 PM</option>
+                                        <option>4 :00 PM</option>
+                                        <option>5 :00 PM</option>
+                                        <option>6 :00 PM</option>
+                                        <option>7 :00 PM</option>
+                                        <option>8 :00 PM</option>
+                                        <option>9 :00 PM</option>
+                                        <option>10 :00 PM</option>
+                                        <option>11 :00 PM</option>
+                                        <option>12 :00 PM</option>
+                                        <option>1 :00 AM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="listing-time">Bazar</label>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Opening Time</option>
+                                        <option>1 :00 AM</option>
+                                        <option>2 :00 AM</option>
+                                        <option>3 :00 AM</option>
+                                        <option>4 :00 AM</option>
+                                        <option>5 :00 AM</option>
+                                        <option>6 :00 AM</option>
+                                        <option>7 :00 AM</option>
+                                        <option>8 :00 AM</option>
+                                        <option>9 :00 AM</option>
+                                        <option>10 :00 AM</option>
+                                        <option>11 :00 AM</option>
+                                        <option>12 :00 AM</option>
+                                        <option>1 :00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Closing Time</option>
+                                        <option>1 :00 PM</option>
+                                        <option>2 :00 PM</option>
+                                        <option>3 :00 PM</option>
+                                        <option>4 :00 PM</option>
+                                        <option>5 :00 PM</option>
+                                        <option>6 :00 PM</option>
+                                        <option>7 :00 PM</option>
+                                        <option>8 :00 PM</option>
+                                        <option>9 :00 PM</option>
+                                        <option>10 :00 PM</option>
+                                        <option>11 :00 PM</option>
+                                        <option>12 :00 PM</option>
+                                        <option>1 :00 AM</option>
                                     </select>
                                 </div>
                             </div>
@@ -448,7 +592,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="btn-wrap btn-wrap2">
-                                    <a href="#" class="btn btn-simple">SUBMIT LISTING</a>
+                                    <button type="submit" class="btn btn-simple">SUBMIT LISTING</button>
                                 </div>
                             </div>
                         </div>

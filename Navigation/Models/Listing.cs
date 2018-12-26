@@ -30,10 +30,10 @@ namespace Navigation.Models
         public string Phone { get; set; }
         
      
-        public string CityId { get; set; }
+        public int CityId { get; set; }
       
         [Required]
-        public string UserId { get; set; }  
+        public int UserId { get; set; }  
        
         public string Lat { get; set; }
         public string Lng { get; set; }

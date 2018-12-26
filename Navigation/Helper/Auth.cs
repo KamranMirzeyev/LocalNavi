@@ -12,7 +12,7 @@ namespace Navigation.Helper
         {
             if (HttpContext.Current.Session["Login"] == null)
             {
-                HttpContext.Current.Session["Error"] = "Login olmamisiniz!";
+               
                 filterContext.Result = new RedirectResult("~/home/index");
             }
             base.OnActionExecuting(filterContext);

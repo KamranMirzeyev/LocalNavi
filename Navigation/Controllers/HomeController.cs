@@ -43,11 +43,7 @@ namespace Navigation.Controllers
             return View();
         }
 
-        [Auth]
-        public ActionResult AddListing()
-        {
-            return View();
-        }
+       
 
         [Auth]
         public ActionResult Profile()

@@ -75,15 +75,7 @@
                                     </li>
 
                                     <li>
-                                        @if (Session["Error"] != null)
-                                        {
-                                        <div class="alert alert-danger">
-                                            @Session["Error"] 
-                                        </div>
-                                            Session["Error"] = null;
-                                        }
-                                        
-                                        <a href="@Url.Action("AddListing", "Home")" class="btn btn-outline-danger top-btn">
+                                        <a id="AddList" class="btn btn-outline-danger top-btn">
                                             <span class="ti-plus"></span>
                                             Add Listing
                                         </a>
@@ -160,21 +152,22 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="@Url.Action("Register", "Account")" method="post" id="registerForm">
+                            <form action="@Url.Action("Register","Account")" method="post" id="registerForm">
                                 @Html.AntiForgeryToken()
                                 <div class="form-group">
                                     <input type="text" name="FullName" data-validation="required" class="form-control add-listing_form" id="name" placeholder="Your name" data-validation-error-msg="Boş buraxmayın">
-                                    @Html.ValidationMessage("FullName","", new { @class = "text-danger" })
+                                    
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="Email" data-validation="email" class="form-control add-listing_form" id="email" placeholder="Email" data-validation-error-msg="Düzgün email yazın">
-                                    @Html.ValidationMessage("Email","", new { @class = "text-danger" })
+                                    <input type="text" name="Email" data-validation="server" 
+                                           data-validation-url="/Account/EmailControl" data-validation-param-name="Email" class="form-control add-listing_form server-validation" id="email" placeholder="Email" data-validation-error-msg="Boş buraxmayın">
+                                    
                                 </div>
 
                                 <div class="form-group">
                                     <input type="password" name="Password" data-validation="length" class="form-control add-listing_form" id="Password" data-validation-length="min3"
                                            placeholder="Password" data-validation-error-msg="Minimum 3 simvol yazmalısız">
-                                    @Html.ValidationMessage("Password","", new { @class = "text-danger" })
+                                   
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control add-listing_form"
@@ -308,6 +301,8 @@
     <script src="~/Public/js/bootstrap.min.js"></script>
     <script src="~/Public/js/owl.carousel.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>
+    <script src="~/Public/js/gmaps.js"></script>
     <script src="~/Public/js/main.js"></script>
 <script>
     var owl = $('.owl-carousel');
