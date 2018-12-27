@@ -185,6 +185,10 @@
     <Compile Include="Migrations\201812261846292_edit23.Designer.cs">
       <DependentUpon>201812261846292_edit23.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812271503087_hourwork-edit.cs" />
+    <Compile Include="Migrations\201812271503087_hourwork-edit.Designer.cs">
+      <DependentUpon>201812271503087_hourwork-edit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryService.cs" />
@@ -195,6 +199,7 @@
     <Compile Include="Models\Listing.cs" />
     <Compile Include="Models\ListPhoto.cs" />
     <Compile Include="Models\ListService.cs" />
+    <Compile Include="Models\PlaceViewModel.cs" />
     <Compile Include="Models\Reaction.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\User.cs" />
@@ -243,6 +248,7 @@
     <Content Include="Public\js\bootstrap.min.js" />
     <Content Include="Public\js\bParticles.js" />
     <Content Include="Public\js\contact.js" />
+    <Content Include="Public\js\dropzone.js" />
     <Content Include="Public\js\gmaps.js" />
     <Content Include="Public\js\jarallax-video.js" />
     <Content Include="Public\js\jarallax.js" />
@@ -334,6 +340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812261846292_edit23.resx">
       <DependentUpon>201812261846292_edit23.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812271503087_hourwork-edit.resx">
+      <DependentUpon>201812271503087_hourwork-edit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

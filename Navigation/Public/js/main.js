@@ -9,20 +9,20 @@
     });
 
 
-    $("#registerForm").submit(function(ev) {
-        ev.preventDefault();
+    //$("#registerForm").submit(function(ev) {
+    //    ev.preventDefault();
 
-        $.ajax({
-            url: $(this).attr("action"),
-            type: $(this).attr("method"),
-            dataType: "json",
-            data: $(this).serialize(),
-            success: function(responce) {
-                console.log(responce);
-            }
+    //    $.ajax({
+    //        url: $(this).attr("action"),
+    //        type: $(this).attr("method"),
+    //        dataType: "json",
+    //        data: $(this).serialize(),
+    //        success: function(responce) {
+    //            console.log(responce);
+    //        }
 
-    });
-    });
+    //});
+    //});
 
 
     //login omayibsa add Listing gire bilmesin
@@ -134,13 +134,51 @@
     }
 
 
+    //map end
+
+
+
+    //categoriye gore servicelerin gelmesi
+    $("#CategoryId").change(function() {
+        var id = $(this).val();
+
+        $("#servis").text('');
+
+        $.ajax({
+            url: "/Place/CategoryService",
+            type: "get",
+            data: {id:id},
+            dataType: "json",
+            success: function (responce) {
+                
+                $(responce).each(function(index,item) {
+                    $("#servis").append(` <div class="col-md-4 responsive-wrap">
+                                            <div class="md-checkbox">
+                                                <input id="i${item.ServiceId}" name="${item.ServiceId}" type="checkbox">
+                                                <label for="i${item.ServiceId}">${item.Name}</label>
+                                            </div>
+                                        </div>`
+                    );
+                });
+
+
+            },
+            error: function (response) {
+                    console.log(response);
+                }
+
+        });
+
+
+
+   
+    });
 
 
 
 
-
-
-
+    //test checchbox
+    
 });
 
 
