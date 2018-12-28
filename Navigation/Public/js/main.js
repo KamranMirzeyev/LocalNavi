@@ -151,7 +151,7 @@
             dataType: "json",
             success: function (responce) {
                 
-                $(responce).each(function(index,item) {
+                $.each(responce,function(index,item) {
                     $("#servis").append(` <div class="col-md-4 responsive-wrap">
                                             <div class="md-checkbox">
                                                 <input id="i${item.ServiceId}" name="${item.ServiceId}" type="checkbox">
@@ -177,8 +177,34 @@
 
 
 
-    //test checchbox
-    
+    //Categoriyaya gore place servislerin add olunmasi
+    $(document).on("click", "#servis input",function (ev) {
+            ev.preventDefault();
+            console.log($(this).attr("name"));
+
+    });
+
+
+    //Hefte gunlerinin yoxlanilmasi ve add olunmasi
+    function weekDays() {
+        $('input[name="sunday"]').click(function() {
+            if ($(this).prop("checked") == true) {
+                console.log($('input[name="bazar"]').find('option:selected').text());
+            }
+        });
+
+
+        $("select[name='bazar']").change(function() {
+            var week = {
+                time: $(this).find('option:selected').text()
+        }
+            console.log(week);
+        });
+        
+    }
+
+    weekDays();
+
 });
 
 
