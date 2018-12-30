@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using Navigation.DAL;
+using Navigation.Helper;
 using Navigation.Models;
 
 namespace Navigation.Controllers
@@ -27,6 +28,7 @@ namespace Navigation.Controllers
             {
                 if (Crypto.VerifyHashedPassword(u.Password, user.Password))
                 {
+                    Session["user"] = u.Id;
                     Session["Login"] = true;
                     return RedirectToAction("Index", "Home");
                 }
@@ -95,6 +97,7 @@ namespace Navigation.Controllers
         }
 
         [HttpGet]
+       
         public JsonResult AccessLogin()
         {
             if (Session["Login"]==null)

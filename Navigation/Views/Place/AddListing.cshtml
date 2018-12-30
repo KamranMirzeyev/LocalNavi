@@ -27,7 +27,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="listing-wrap">
-                    <form action="@Url.Action("AddListing","Place")" method="post" enctype="multipart/form-data">
+                    <form action="@Url.Action("AddListing","Place")" method="post" enctype="multipart/form-data" id="FormAdd">
                         <!-- General Information -->
                         <div class="listing-title">
                             <span class="ti-files"></span>
@@ -86,7 +86,8 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Phone</label>
-                                    <input type="text" class="form-control add-listing_form">
+                                    <input type="text" name="Phone" class="form-control add-listing_form">
+                                    @Html.ValidationMessageFor(m => Model.Listing.Phone, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -94,8 +95,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>City</label>
-                                    <select class="form-control add-listing_form">
+                                    <label for="CityId">City</label>
+                                    <select class="form-control add-listing_form" name="CityId">
                                         <option>Seçin</option>
                                         @foreach (var city in Model.city)
                                         {
@@ -104,6 +105,13 @@
 
                                     </select>
                                     @Html.ValidationMessageFor(m => Model.Listing.CityId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Facebook</label>
+                                    <input type="text" name="Facebook" class="form-control add-listing_form">
+                                    @Html.ValidationMessageFor(m => Model.Listing.Facebook, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -152,8 +160,8 @@
                                         <i class="ti-gallery"></i>
                                         <span>Drag &amp; Drop To Change Logo</span>
                                     </div>
-                                    <input type="file" name="Photo" paramName="file" class="custom-file-input" multiple id="customFile">
-                                    @Html.ValidationMessageFor(m => Model.Listing.Phone, "", new { @class = "text-danger" })
+                                    <input type="file" name="Photo" id="files" class="custom-file-input" multiple>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -188,41 +196,41 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="bazarertesi" disabled="disabled">
-                                     
-                                        <option value="1:00 AM">1 :00 AM</option>
-                                        <option value="2:00 AM">2 :00 AM</option>
-                                        <option value="3:00 AM">3 :00 AM</option>
-                                        <option value="4:00 AM">4 :00 AM</option>
-                                        <option value="5:00 AM">5 :00 AM</option>
-                                        <option value="6:00 AM">6 :00 AM</option>
-                                        <option value="7:00 AM">7 :00 AM</option>
-                                        <option value="8:00 AM">8 :00 AM</option>
-                                        <option value="9:00 AM">9 :00 AM</option>
-                                        <option value="10:00 AM">10 :00 AM</option>
-                                        <option value="11:00 AM">11 :00 AM</option>
-                                        <option value="12:00 AM">12 :00 AM</option>
-                                        <option value="1:00 PM">1 :00 PM</option>
+                                    <select class="form-control week11" name="bazarertesi" disabled="disabled">
+
+                                        <option value="1:00">1 :00 AM</option>
+                                        <option value="2:00">2 :00 AM</option>
+                                        <option value="3:00">3 :00 AM</option>
+                                        <option value="4:00">4 :00 AM</option>
+                                        <option value="5:00">5 :00 AM</option>
+                                        <option value="6:00">6 :00 AM</option>
+                                        <option value="7:00">7 :00 AM</option>
+                                        <option value="8:00">8 :00 AM</option>
+                                        <option value="9:00">9 :00 AM</option>
+                                        <option value="10:00">10 :00 AM</option>
+                                        <option value="11:00">11 :00 AM</option>
+                                        <option value="12:00">12 :00 AM</option>
+                                      
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="bazarertesi" disabled="disabled">
-                                        
-                                        <option value="1:00 PM">1 :00 PM</option>
-                                        <option value="2:00 PM">2 :00 PM</option>
-                                        <option value="3:00 PM">3 :00 PM</option>
-                                        <option value="4:00 PM">4 :00 PM</option>
-                                        <option value="5:00 PM">5 :00 PM</option>
-                                        <option value="6:00 PM">6 :00 PM</option>
-                                        <option value="7:00 PM">7 :00 PM</option>
-                                        <option value="8:00 PM">8 :00 PM</option>
-                                        <option value="9:00 PM">9 :00 PM</option>
-                                        <option value="10:00 PM">10 :00 PM</option>
-                                        <option value="11:00 PM">11 :00 PM</option>
-                                        <option value="12:00 PM">12 :00 PM</option>
-                                        <option value="1:00 AM">1 :00 AM</option>
+                                    <select class="form-control week12" name="bazarertesi1" disabled="disabled">
+
+                                        <option value="1:00">1 :00 PM</option>
+                                        <option value="2:00">2 :00 PM</option>
+                                        <option value="3:00">3 :00 PM</option>
+                                        <option value="4:00">4 :00 PM</option>
+                                        <option value="5:00">5 :00 PM</option>
+                                        <option value="6:00">6 :00 PM</option>
+                                        <option value="7:00">7 :00 PM</option>
+                                        <option value="8:00">8 :00 PM</option>
+                                        <option value="9:00">9 :00 PM</option>
+                                        <option value="10:00">10 :00 PM</option>
+                                        <option value="11:00">11 :00 PM</option>
+                                        <option value="12:00">12 :00 PM</option>
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -238,41 +246,41 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="cersenbeaxsami" disabled="disabled">
+                                    <select class="form-control week21" name="cersenbeaxsami" disabled="disabled">
+
+                                        <option value="1:00">1 :00 AM</option>
+                                        <option value="2:00">2 :00 AM</option>
+                                        <option value="3:00">3 :00 AM</option>
+                                        <option value="4:00">4 :00 AM</option>
+                                        <option value="5:00">5 :00 AM</option>
+                                        <option value="6:00">6 :00 AM</option>
+                                        <option value="7:00">7 :00 AM</option>
+                                        <option value="8:00">8 :00 AM</option>
+                                        <option value="9:00">9 :00 AM</option>
+                                        <option value="10:00">10 :00 AM</option>
+                                        <option value="11:00">11 :00 AM</option>
+                                        <option value="12:00">12 :00 AM</option>
                                        
-                                        <option value="1:00 AM">1 :00 AM</option>
-                                        <option value="2:00 AM">2 :00 AM</option>
-                                        <option value="3:00 AM">3 :00 AM</option>
-                                        <option value="4:00 AM">4 :00 AM</option>
-                                        <option value="5:00 AM">5 :00 AM</option>
-                                        <option value="6:00 AM">6 :00 AM</option>
-                                        <option value="7:00 AM">7 :00 AM</option>
-                                        <option value="8:00 AM">8 :00 AM</option>
-                                        <option value="9:00 AM">9 :00 AM</option>
-                                        <option value="10:00 AM">10 :00 AM</option>
-                                        <option value="11:00 AM">11 :00 AM</option>
-                                        <option value="12:00 AM">12 :00 AM</option>
-                                        <option value="1:00 PM">1 :00 PM</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="cersenbeaxsami" disabled="disabled">
-                                        
-                                        <option value="1:00 PM">1 :00 PM</option>
-                                        <option value="2:00 PM">2 :00 PM</option>
-                                        <option value="3:00 PM">3 :00 PM</option>
-                                        <option value="4:00 PM">4 :00 PM</option>
-                                        <option value="5:00 PM">5 :00 PM</option>
-                                        <option value="6:00 PM">6 :00 PM</option>
-                                        <option value="7:00 PM">7 :00 PM</option>
-                                        <option value="8:00 PM">8 :00 PM</option>
-                                        <option value="9:00 PM">9 :00 PM</option>
-                                        <option value="10:00 PM">10 :00 PM</option>
-                                        <option value="11:00 PM">11 :00 PM</option>
-                                        <option value="12:00 PM">12 :00 PM</option>
-                                        <option value="1:00 AM">1 :00 AM</option>
+                                    <select class="form-control week22" name="cersenbeaxsami1" disabled="disabled">
+
+                                        <option value="1:00">1 :00 PM</option>
+                                        <option value="2:00">2 :00 PM</option>
+                                        <option value="3:00">3 :00 PM</option>
+                                        <option value="4:00">4 :00 PM</option>
+                                        <option value="5:00">5 :00 PM</option>
+                                        <option value="6:00">6 :00 PM</option>
+                                        <option value="7:00">7 :00 PM</option>
+                                        <option value="8:00">8 :00 PM</option>
+                                        <option value="9:00">9 :00 PM</option>
+                                        <option value="10:00">10 :00 PM</option>
+                                        <option value="11:00">11 :00 PM</option>
+                                        <option value="12:00">12 :00 PM</option>
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -288,41 +296,41 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="cersenbe" disabled="disabled">
+                                    <select class="form-control week31" name="cersenbe" disabled="disabled">
+
+                                        <option value="1:00">1 :00 AM</option>
+                                        <option value="2:00">2 :00 AM</option>
+                                        <option value="3:00">3 :00 AM</option>
+                                        <option value="4:00">4 :00 AM</option>
+                                        <option value="5:00">5 :00 AM</option>
+                                        <option value="6:00">6 :00 AM</option>
+                                        <option value="7:00">7 :00 AM</option>
+                                        <option value="8:00">8 :00 AM</option>
+                                        <option value="9:00">9 :00 AM</option>
+                                        <option value="10:00">10 :00 AM</option>
+                                        <option value="11:00">11 :00 AM</option>
+                                        <option value="12:00">12 :00 AM</option>
                                         
-                                        <option value="1:00 AM">1 :00 AM</option>
-                                        <option value="2:00 AM">2 :00 AM</option>
-                                        <option value="3:00 AM">3 :00 AM</option>
-                                        <option value="4:00 AM">4 :00 AM</option>
-                                        <option value="5:00 AM">5 :00 AM</option>
-                                        <option value="6:00 AM">6 :00 AM</option>
-                                        <option value="7:00 AM">7 :00 AM</option>
-                                        <option value="8:00 AM">8 :00 AM</option>
-                                        <option value="9:00 AM">9 :00 AM</option>
-                                        <option value="10:00 AM">10 :00 AM</option>
-                                        <option value="11:00 AM">11 :00 AM</option>
-                                        <option value="12:00 AM">12 :00 AM</option>
-                                        <option value="1:00 PM">1 :00 PM</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="cersenbe" disabled="disabled">
-                                        
-                                        <option value="1:00 PM">1 :00 PM</option>
-                                        <option value="2:00 PM">2 :00 PM</option>
-                                        <option value="3:00 PM">3 :00 PM</option>
-                                        <option value="4:00 PM">4 :00 PM</option>
-                                        <option value="5:00 PM">5 :00 PM</option>
-                                        <option value="6:00 PM">6 :00 PM</option>
-                                        <option value="7:00 PM">7 :00 PM</option>
-                                        <option value="8:00 PM">8 :00 PM</option>
-                                        <option value="9:00 PM">9 :00 PM</option>
-                                        <option value="10:00 PM">10 :00 PM</option>
-                                        <option value="11:00 PM">11 :00 PM</option>
-                                        <option value="12:00 PM">12 :00 PM</option>
-                                        <option value="1:00 AM">1 :00 AM</option>
+                                    <select class="form-control week32" name="cersenbe1" disabled="disabled">
+
+                                        <option value="1:00">1 :00 PM</option>
+                                        <option value="2:00">2 :00 PM</option>
+                                        <option value="3:00">3 :00 PM</option>
+                                        <option value="4:00">4 :00 PM</option>
+                                        <option value="5:00">5 :00 PM</option>
+                                        <option value="6:00">6 :00 PM</option>
+                                        <option value="7:00">7 :00 PM</option>
+                                        <option value="8:00">8 :00 PM</option>
+                                        <option value="9:00">9 :00 PM</option>
+                                        <option value="10:00">10 :00 PM</option>
+                                        <option value="11:00">11 :00 PM</option>
+                                        <option value="12:00">12 :00 PM</option>
+                                      
                                     </select>
                                 </div>
                             </div>
@@ -338,41 +346,41 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="cumeaxsami" disabled="disabled">
-                                        
-                                        <option value="1:00 AM">1 :00 AM</option>
-                                        <option value="2:00 AM">2 :00 AM</option>
-                                        <option value="3:00 AM">3 :00 AM</option>
-                                        <option value="4:00 AM">4 :00 AM</option>
-                                        <option value="5:00 AM">5 :00 AM</option>
-                                        <option value="6:00 AM">6 :00 AM</option>
-                                        <option value="7:00 AM">7 :00 AM</option>
-                                        <option value="8:00 AM">8 :00 AM</option>
-                                        <option value="9:00 AM">9 :00 AM</option>
-                                        <option value="10:00 AM">10 :00 AM</option>
-                                        <option value="11:00 AM">11 :00 AM</option>
-                                        <option value="12:00 AM">12 :00 AM</option>
-                                        <option value="1:00 PM">1 :00 PM</option>
+                                    <select class="form-control week41" name="cumeaxsami" disabled="disabled">
+
+                                        <option value="1:00">1 :00 AM</option>
+                                        <option value="2:00">2 :00 AM</option>
+                                        <option value="3:00">3 :00 AM</option>
+                                        <option value="4:00">4 :00 AM</option>
+                                        <option value="5:00">5 :00 AM</option>
+                                        <option value="6:00">6 :00 AM</option>
+                                        <option value="7:00">7 :00 AM</option>
+                                        <option value="8:00">8 :00 AM</option>
+                                        <option value="9:00">9 :00 AM</option>
+                                        <option value="10:00">10 :00 AM</option>
+                                        <option value="11:00">11 :00 AM</option>
+                                        <option value="12:00">12 :00 AM</option>
+                                       
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="cumeaxsami" disabled="disabled">
-                                       
-                                        <option value="1:00 PM">1 :00 PM</option>
-                                        <option value="2:00 PM">2 :00 PM</option>
-                                        <option value="3:00 PM">3 :00 PM</option>
-                                        <option value="4:00 PM">4 :00 PM</option>
-                                        <option value="5:00 PM">5 :00 PM</option>
-                                        <option value="6:00 PM">6 :00 PM</option>
-                                        <option value="7:00 PM">7 :00 PM</option>
-                                        <option value="8:00 PM">8 :00 PM</option>
-                                        <option value="9:00 PM">9 :00 PM</option>
-                                        <option value="10:00 PM">10 :00 PM</option>
-                                        <option value="11:00 PM">11 :00 PM</option>
-                                        <option value="12:00 PM">12 :00 PM</option>
-                                        <option value="1:00 AM">1 :00 AM</option>
+                                    <select class="form-control week42" name="cumeaxsami1" disabled="disabled">
+
+                                        <option value="1:00">1 :00 PM</option>
+                                        <option value="2:00">2 :00 PM</option>
+                                        <option value="3:00">3 :00 PM</option>
+                                        <option value="4:00">4 :00 PM</option>
+                                        <option value="5:00">5 :00 PM</option>
+                                        <option value="6:00">6 :00 PM</option>
+                                        <option value="7:00">7 :00 PM</option>
+                                        <option value="8:00">8 :00 PM</option>
+                                        <option value="9:00">9 :00 PM</option>
+                                        <option value="10:00">10 :00 PM</option>
+                                        <option value="11:00">11 :00 PM</option>
+                                        <option value="12:00">12 :00 PM</option>
+                                        
                                     </select>
                                 </div>
                             </div>
@@ -387,41 +395,41 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="cume" disabled="disabled">
-                                        
-                                        <option value="1:00 AM">1 :00 AM</option>
-                                        <option value="2:00 AM">2 :00 AM</option>
-                                        <option value="3:00 AM">3 :00 AM</option>
-                                        <option value="4:00 AM">4 :00 AM</option>
-                                        <option value="5:00 AM">5 :00 AM</option>
-                                        <option value="6:00 AM">6 :00 AM</option>
-                                        <option value="7:00 AM">7 :00 AM</option>
-                                        <option value="8:00 AM">8 :00 AM</option>
-                                        <option value="9:00 AM">9 :00 AM</option>
-                                        <option value="10:00 AM">10 :00 AM</option>
-                                        <option value="11:00 AM">11 :00 AM</option>
-                                        <option value="12:00 AM">12 :00 AM</option>
-                                        <option value="1:00 PM">1 :00 PM</option>
+                                    <select class="form-control week51" name="cume" disabled="disabled">
+
+                                        <option value="1:00">1 :00 AM</option>
+                                        <option value="2:00">2 :00 AM</option>
+                                        <option value="3:00">3 :00 AM</option>
+                                        <option value="4:00">4 :00 AM</option>
+                                        <option value="5:00">5 :00 AM</option>
+                                        <option value="6:00">6 :00 AM</option>
+                                        <option value="7:00">7 :00 AM</option>
+                                        <option value="8:00">8 :00 AM</option>
+                                        <option value="9:00">9 :00 AM</option>
+                                        <option value="10:00">10 :00 AM</option>
+                                        <option value="11:00">11 :00 AM</option>
+                                        <option value="12:00">12 :00 AM</option>
+                                       
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="cume" disabled="disabled">
-                                        
-                                        <option value="1:00 PM">1 :00 PM</option>
-                                        <option value="2:00 PM">2 :00 PM</option>
-                                        <option value="3:00 PM">3 :00 PM</option>
-                                        <option value="4:00 PM">4 :00 PM</option>
-                                        <option value="5:00 PM">5 :00 PM</option>
-                                        <option value="6:00 PM">6 :00 PM</option>
-                                        <option value="7:00 PM">7 :00 PM</option>
-                                        <option value="8:00 PM">8 :00 PM</option>
-                                        <option value="9:00 PM">9 :00 PM</option>
-                                        <option value="10:00 PM">10 :00 PM</option>
-                                        <option value="11:00 PM">11 :00 PM</option>
-                                        <option value="12:00 PM">12 :00 PM</option>
-                                        <option value="1:00 AM">1 :00 AM</option>
+                                    <select class="form-control week52" name="cume1" disabled="disabled">
+
+                                        <option value="1:00">1 :00 PM</option>
+                                        <option value="2:00">2 :00 PM</option>
+                                        <option value="3:00">3 :00 PM</option>
+                                        <option value="4:00">4 :00 PM</option>
+                                        <option value="5:00">5 :00 PM</option>
+                                        <option value="6:00">6 :00 PM</option>
+                                        <option value="7:00">7 :00 PM</option>
+                                        <option value="8:00">8 :00 PM</option>
+                                        <option value="9:00">9 :00 PM</option>
+                                        <option value="10:00">10 :00 PM</option>
+                                        <option value="11:00">11 :00 PM</option>
+                                        <option value="12:00">12 :00 PM</option>
+                                        <option value="1:00">1 :00 AM</option>
                                     </select>
                                 </div>
                             </div>
@@ -437,41 +445,41 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="senbe" disabled="disabled">
-                                        
-                                        <option value="1:00 AM">1 :00 AM</option>
-                                        <option value="2:00 AM">2 :00 AM</option>
-                                        <option value="3:00 AM">3 :00 AM</option>
-                                        <option value="4:00 AM">4 :00 AM</option>
-                                        <option value="5:00 AM">5 :00 AM</option>
-                                        <option value="6:00 AM">6 :00 AM</option>
-                                        <option value="7:00 AM">7 :00 AM</option>
-                                        <option value="8:00 AM">8 :00 AM</option>
-                                        <option value="9:00 AM">9 :00 AM</option>
-                                        <option value="10:00 AM">10 :00 AM</option>
-                                        <option value="11:00 AM">11 :00 AM</option>
-                                        <option value="12:00 AM">12 :00 AM</option>
-                                        <option value="1:00 PM">1 :00 PM</option>
+                                    <select class="form-control week61" name="senbe" disabled="disabled">
+
+                                        <option value="1:00">1 :00 AM</option>
+                                        <option value="2:00">2 :00 AM</option>
+                                        <option value="3:00">3 :00 AM</option>
+                                        <option value="4:00">4 :00 AM</option>
+                                        <option value="5:00">5 :00 AM</option>
+                                        <option value="6:00">6 :00 AM</option>
+                                        <option value="7:00">7 :00 AM</option>
+                                        <option value="8:00">8 :00 AM</option>
+                                        <option value="9:00">9 :00 AM</option>
+                                        <option value="10:00">10 :00 AM</option>
+                                        <option value="11:00">11 :00 AM</option>
+                                        <option value="12:00">12 :00 AM</option>
+                                       
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="senbe" disabled="disabled">
-                                        
-                                        <option value="1:00 PM">1 :00 PM</option>
-                                        <option value="2:00 PM">2 :00 PM</option>
-                                        <option value="3:00 PM">3 :00 PM</option>
-                                        <option value="4:00 PM">4 :00 PM</option>
-                                        <option value="5:00 PM">5 :00 PM</option>
-                                        <option value="6:00 PM">6 :00 PM</option>
-                                        <option value="7:00 PM">7 :00 PM</option>
-                                        <option value="8:00 PM">8 :00 PM</option>
-                                        <option value="9:00 PM">9 :00 PM</option>
-                                        <option value="10:00 PM">10 :00 PM</option>
-                                        <option value="11:00 PM">11 :00 PM</option>
-                                        <option value="12:00 PM">12 :00 PM</option>
-                                        <option value="1:00 AM">1 :00 AM</option>
+                                    <select class="form-control week62" name="senbe1" disabled="disabled">
+
+                                        <option value="1:00">1 :00 PM</option>
+                                        <option value="2:00">2 :00 PM</option>
+                                        <option value="3:00">3 :00 PM</option>
+                                        <option value="4:00">4 :00 PM</option>
+                                        <option value="5:00">5 :00 PM</option>
+                                        <option value="6:00">6 :00 PM</option>
+                                        <option value="7:00">7 :00 PM</option>
+                                        <option value="8:00">8 :00 PM</option>
+                                        <option value="9:00">9 :00 PM</option>
+                                        <option value="10:00">10 :00 PM</option>
+                                        <option value="11:00">11 :00 PM</option>
+                                        <option value="12:00">12 :00 PM</option>
+                                      
                                     </select>
                                 </div>
                             </div>
@@ -487,41 +495,41 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="bazar" disabled="disabled">
+                                    <select class="form-control week71" name="bazar" disabled="disabled">
+                                      
+                                        <option value="1:00">1 :00 AM</option>
+                                        <option value="2:00">2 :00 AM</option>
+                                        <option value="3:00">3 :00 AM</option>
+                                        <option value="4:00">4 :00 AM</option>
+                                        <option value="5:00">5 :00 AM</option>
+                                        <option value="6:00">6 :00 AM</option>
+                                        <option value="7:00">7 :00 AM</option>
+                                        <option value="8:00">8 :00 AM</option>
+                                        <option value="9:00">9 :00 AM</option>
+                                        <option value="10:00">10 :00 AM</option>
+                                        <option value="11:00">11 :00 AM</option>
+                                        <option value="12:00">12 :00 AM</option>
                                        
-                                        <option value="1:00 AM">1 :00 AM</option>
-                                        <option value="2:00 AM">2 :00 AM</option>
-                                        <option value="3:00 AM">3 :00 AM</option>
-                                        <option value="4:00 AM">4 :00 AM</option>
-                                        <option value="5:00 AM">5 :00 AM</option>
-                                        <option value="6:00 AM">6 :00 AM</option>
-                                        <option value="7:00 AM">7 :00 AM</option>
-                                        <option value="8:00 AM">8 :00 AM</option>
-                                        <option value="9:00 AM">9 :00 AM</option>
-                                        <option value="10:00 AM">10 :00 AM</option>
-                                        <option value="11:00 AM">11 :00 AM</option>
-                                        <option value="12:00 AM">12 :00 AM</option>
-                                        <option value="1:00 PM">1 :00 PM</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <select class="form-control" name="bazar" disabled="disabled">
+                                    <select class="form-control week72" name="bazar1"  disabled="disabled">
+                                       
+                                        <option value="1:00">1 :00 PM</option>
+                                        <option value="2:00">2 :00 PM</option>
+                                        <option value="3:00">3 :00 PM</option>
+                                        <option value="4:00">4 :00 PM</option>
+                                        <option value="5:00">5 :00 PM</option>
+                                        <option value="6:00">6 :00 PM</option>
+                                        <option value="7:00">7 :00 PM</option>
+                                        <option value="8:00">8 :00 PM</option>
+                                        <option value="9:00">9 :00 PM</option>
+                                        <option value="10:00">10 :00 PM</option>
+                                        <option value="11:00">11 :00 PM</option>
+                                        <option value="12:00">12 :00 PM</option>
                                         
-                                        <option value="1:00 PM">1 :00 PM</option>
-                                        <option value="2:00 PM">2 :00 PM</option>
-                                        <option value="3:00 PM">3 :00 PM</option>
-                                        <option value="4:00 PM">4 :00 PM</option>
-                                        <option value="5:00 PM">5 :00 PM</option>
-                                        <option value="6:00 PM">6 :00 PM</option>
-                                        <option value="7:00 PM">7 :00 PM</option>
-                                        <option value="8:00 PM">8 :00 PM</option>
-                                        <option value="9:00 PM">9 :00 PM</option>
-                                        <option value="10:00 PM">10 :00 PM</option>
-                                        <option value="11:00 PM">11 :00 PM</option>
-                                        <option value="12:00 PM">12 :00 PM</option>
-                                        <option value="1:00 AM">1 :00 AM</option>
                                     </select>
                                 </div>
                             </div>
@@ -548,67 +556,91 @@
 
     <script>
 
-        $('input[name="monday"]').click(function () {
-            if ($(this).prop("checked") == true) {
+        $('input[name="monday"]').click(function() {
+            if ($(this).prop("checked") === true) {
                 $('select[name=bazarertesi]').removeAttr("disabled");
                 $('select[name=bazarertesi] option[value="open"]').remove();
-                
-                $('select[name=bazarertesi] option[value="9:00 AM"]').attr('selected', 'selected');
-                $('select[name=bazarertesi] option[value="6:00 PM"]').attr('selected', 'selected');
-                               
-            } else {          
+                $('select[name=bazarertesi] option[value="9:00"]').attr('selected', 'selected');
+
+
+                $('select[name=bazarertesi1]').removeAttr("disabled");
+                $('select[name=bazarertesi1] option[value="open"]').remove();
+                $('select[name=bazarertesi1] option[value="6:00"]').attr('selected', 'selected');
+
+            } else {
                 $('select[name=bazarertesi]').attr("disabled", "disabled");
-                $('select[name=bazarertesi] option[value="9:00 AM"]').removeAttr('selected');
-                $('select[name=bazarertesi] option[value="6:00 PM"]').removeAttr('selected');
+                $('select[name=bazarertesi] option[value="9:00"]').removeAttr('selected');
                 $('select[name=bazarertesi]').prepend(`<option value="open" selected="selected">Time</option>`);
+
+                $('select[name=bazarertesi1]').attr("disabled", "disabled");
+                $('select[name=bazarertesi1] option[value="6:00"]').removeAttr('selected');
+                $('select[name=bazarertesi1]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
         });
 
-        $('input[name="tuesday"]').click(function () {
+        $('input[name="tuesday"]').click(function() {
             if ($(this).prop("checked") == true) {
                 $('select[name=cersenbeaxsami]').removeAttr("disabled");
                 $('select[name=cersenbeaxsami] option[value="open"]').remove();
-                
-                $('select[name=cersenbeaxsami] option[value="9:00 AM"]').attr('selected', 'selected');
-                $('select[name=cersenbeaxsami] option[value="6:00 PM"]').attr('selected', 'selected');
-                               
-            } else {           
+                $('select[name=cersenbeaxsami] option[value="9:00"]').attr('selected', 'selected');
+
+
+                $('select[name=cersenbeaxsami1]').removeAttr("disabled");
+                $('select[name=cersenbeaxsami1] option[value="open"]').remove();
+                $('select[name=cersenbeaxsami1] option[value="6:00"]').attr('selected', 'selected');
+
+            } else {
                 $('select[name=cersenbeaxsami]').attr("disabled", "disabled");
-                $('select[name=cersenbeaxsami] option[value="9:00 AM"]').removeAttr('selected');
-                $('select[name=cersenbeaxsami] option[value="6:00 PM"]').removeAttr('selected');
+                $('select[name=cersenbeaxsami] option[value="9:00"]').removeAttr('selected');
                 $('select[name=cersenbeaxsami]').prepend(`<option value="open" selected="selected">Time</option>`);
+
+                $('select[name=cersenbeaxsami1]').attr("disabled", "disabled");
+                $('select[name=cersenbeaxsami1] option[value="6:00"]').removeAttr('selected');
+                $('select[name=cersenbeaxsami1]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
         });
 
-        $('input[name="wednesday"]').click(function () {
+        $('input[name="wednesday"]').click(function() {
             if ($(this).prop("checked") == true) {
                 $('select[name=cersenbe]').removeAttr("disabled");
                 $('select[name=cersenbe] option[value="open"]').remove();
-               
-                $('select[name=cersenbe] option[value="9:00 AM"]').attr('selected', 'selected');
-                $('select[name=cersenbe] option[value="6:00 PM"]').attr('selected', 'selected');
-                               
-            } else {           
+                $('select[name=cersenbe] option[value="9:00"]').attr('selected', 'selected');
+
+
+                $('select[name=cersenbe1]').removeAttr("disabled");
+                $('select[name=cersenbe1] option[value="open"]').remove();
+                $('select[name=cersenbe1] option[value="6:00"]').attr('selected', 'selected');
+
+            } else {
                 $('select[name=cersenbe]').attr("disabled", "disabled");
-                $('select[name=cersenbe] option[value="9:00 AM"]').removeAttr('selected');
-                $('select[name=cersenbe] option[value="6:00 PM"]').removeAttr('selected');
+                $('select[name=cersenbe] option[value="9:00"]').removeAttr('selected');
                 $('select[name=cersenbe]').prepend(`<option value="open" selected="selected">Time</option>`);
+
+                $('select[name=cersenbe1]').attr("disabled", "disabled");
+                $('select[name=cersenbe1] option[value="6:00"]').removeAttr('selected');
+                $('select[name=cersenbe1]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
         });
 
-        $('input[name="thursday"]').click(function () {
+        $('input[name="thursday"]').click(function() {
             if ($(this).prop("checked") == true) {
                 $('select[name=cumeaxsami]').removeAttr("disabled");
                 $('select[name=cumeaxsami] option[value="open"]').remove();
-               
-                $('select[name=cumeaxsami] option[value="9:00 AM"]').attr('selected', 'selected');
-                $('select[name=cumeaxsami] option[value="6:00 PM"]').attr('selected', 'selected');
+                $('select[name=cumeaxsami] option[value="9:00"]').attr('selected', 'selected');
+
+
+                $('select[name=cumeaxsami1]').removeAttr("disabled");
+                $('select[name=cumeaxsami1] option[value="open"]').remove();
+                $('select[name=cumeaxsami1] option[value="6:00"]').attr('selected', 'selected');
 
             } else {
                 $('select[name=cumeaxsami]').attr("disabled", "disabled");
-                $('select[name=cumeaxsami] option[value="9:00 AM"]').removeAttr('selected');
-                $('select[name=cumeaxsami] option[value="6:00 PM"]').removeAttr('selected');
+                $('select[name=cumeaxsami] option[value="9:00"]').removeAttr('selected');
                 $('select[name=cumeaxsami]').prepend(`<option value="open" selected="selected">Time</option>`);
+
+                $('select[name=cumeaxsami1]').attr("disabled", "disabled");
+                $('select[name=cumeaxsami1] option[value="6:00"]').removeAttr('selected');
+                $('select[name=cumeaxsami1]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
         });
 
@@ -616,15 +648,21 @@
             if ($(this).prop("checked") == true) {
                 $('select[name=cume]').removeAttr("disabled");
                 $('select[name=cume] option[value="open"]').remove();
-               
-                $('select[name=cume] option[value="9:00 AM"]').attr('selected', 'selected');
-                $('select[name=cume] option[value="6:00 PM"]').attr('selected', 'selected');
-                               
-            } else {           
+                $('select[name=cume] option[value="9:00"]').attr('selected', 'selected');
+
+
+                $('select[name=cume1]').removeAttr("disabled");
+                $('select[name=cume1] option[value="open"]').remove();
+                $('select[name=cume1] option[value="6:00"]').attr('selected', 'selected');
+
+            } else {
                 $('select[name=cume]').attr("disabled", "disabled");
-                $('select[name=cume] option[value="9:00 AM"]').removeAttr('selected');
-                $('select[name=cume] option[value="6:00 PM"]').removeAttr('selected');
+                $('select[name=cume] option[value="9:00"]').removeAttr('selected');
                 $('select[name=cume]').prepend(`<option value="open" selected="selected">Time</option>`);
+
+                $('select[name=cume1]').attr("disabled", "disabled");
+                $('select[name=cume1] option[value="6:00"]').removeAttr('selected');
+                $('select[name=cume1]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
         });
 
@@ -632,69 +670,97 @@
             if ($(this).prop("checked") == true) {
                 $('select[name=senbe]').removeAttr("disabled");
                 $('select[name=senbe] option[value="open"]').remove();
-              
-                $('select[name=senbe] option[value="9:00 AM"]').attr('selected', 'selected');
-                $('select[name=senbe] option[value="6:00 PM"]').attr('selected', 'selected');
+                $('select[name=senbe] option[value="9:00"]').attr('selected', 'selected');
+
+
+                $('select[name=senbe1]').removeAttr("disabled");
+                $('select[name=senbe1] option[value="open"]').remove();
+                $('select[name=senbe1] option[value="6:00"]').attr('selected', 'selected');
 
             } else {
                 $('select[name=senbe]').attr("disabled", "disabled");
-                $('select[name=senbe] option[value="9:00 AM"]').removeAttr('selected');
-                $('select[name=senbe] option[value="6:00 PM"]').removeAttr('selected');
+                $('select[name=senbe] option[value="9:00"]').removeAttr('selected');
                 $('select[name=senbe]').prepend(`<option value="open" selected="selected">Time</option>`);
-               
+
+                $('select[name=senbe1]').attr("disabled", "disabled");
+                $('select[name=senbe1] option[value="6:00"]').removeAttr('selected');
+                $('select[name=senbe1]').prepend(`<option value="open" selected="selected">Time</option>`);
+
             }
         });
 
         $('input[name="sunday"]').click(function() {
-            if ($(this).prop("checked") == true) {
+            if ($(this).prop("checked") === true) {
                 $('select[name=bazar]').removeAttr("disabled");
                 $('select[name=bazar] option[value="open"]').remove();
-               
-                $('select[name=bazar] option[value="9:00 AM"]').attr('selected', 'selected');
-                $('select[name=bazar] option[value="6:00 PM"]').attr('selected', 'selected');
+                $('select[name=bazar] option[value="9:00"]').attr('selected', 'selected');
+
+
+                $('select[name=bazar1]').removeAttr("disabled");
+                $('select[name=bazar1] option[value="open"]').remove();
+                $('select[name=bazar1] option[value="6:00"]').attr('selected', 'selected');
+
 
             } else {
                 $('select[name=bazar]').attr("disabled", "disabled");
-                $('select[name=bazar] option[value="9:00 AM"]').removeAttr('selected');
-                $('select[name=bazar] option[value="6:00 PM"]').removeAttr('selected');
-
+                $('select[name=bazar] option[value="9:00"]').removeAttr('selected');
                 $('select[name=bazar]').prepend(`<option value="open" selected="selected">Time</option>`);
+
+                $('select[name=bazar1]').attr("disabled", "disabled");
+                $('select[name=bazar1] option[value="6:00"]').removeAttr('selected');
+                $('select[name=bazar1]').prepend(`<option value="open" selected="selected">Time</option>`);
 
             }
         });
 
         function timecheck() {
-            if ($('select[name=bazar]').prop("disabled")==true) {
+            if ($('select[name=bazar]').prop("disabled") === true) {
                 $('select[name=bazar]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
-            if ($('select[name=senbe]').prop("disabled") == true) {
+            if ($('select[name=bazar1]').prop("disabled") === true) {
+                $('select[name=bazar1]').prepend(`<option value="open" selected="selected">Time</option>`);
+            }
+            if ($('select[name=senbe]').prop("disabled") === true) {
                 $('select[name=senbe]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
-            if ($('select[name=cume]').prop("disabled") == true) {
+            if ($('select[name=senbe1]').prop("disabled") === true) {
+                $('select[name=senbe1]').prepend(`<option value="open" selected="selected">Time</option>`);
+            }
+            if ($('select[name=cume]').prop("disabled") === true) {
                 $('select[name=cume]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
-            if ($('select[name=cumeaxsami]').prop("disabled") == true) {
+            if ($('select[name=cume1]').prop("disabled") === true) {
+                $('select[name=cume1]').prepend(`<option value="open" selected="selected">Time</option>`);
+            }
+            if ($('select[name=cumeaxsami]').prop("disabled") === true) {
                 $('select[name=cumeaxsami]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
-            if ($('select[name=cersenbe]').prop("disabled") == true) {
+            if ($('select[name=cumeaxsami1]').prop("disabled") === true) {
+                $('select[name=cumeaxsami1]').prepend(`<option value="open" selected="selected">Time</option>`);
+            }
+            if ($('select[name=cersenbe]').prop("disabled") === true) {
                 $('select[name=cersenbe]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
-            if ($('select[name=cersenbeaxsami]').prop("disabled") == true) {
+            if ($('select[name=cersenbe1]').prop("disabled") === true) {
+                $('select[name=cersenbe1]').prepend(`<option value="open" selected="selected">Time</option>`);
+            }
+            if ($('select[name=cersenbeaxsami]').prop("disabled") === true) {
                 $('select[name=cersenbeaxsami]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
-            if ($('select[name=bazarertesi]').prop("disabled") == true) {
+            if ($('select[name=cersenbeaxsami1]').prop("disabled") === true) {
+                $('select[name=cersenbeaxsami1]').prepend(`<option value="open" selected="selected">Time</option>`);
+            }
+            if ($('select[name=bazarertesi]').prop("disabled") === true) {
                 $('select[name=bazarertesi]').prepend(`<option value="open" selected="selected">Time</option>`);
             }
-
+            if ($('select[name=bazarertesi1]').prop("disabled") === true) {
+                $('select[name=bazarertesi1]').prepend(`<option value="open" selected="selected">Time</option>`);
+            }
         }
 
         timecheck();
 
 
-
-
-
-
-    </script>s
-
+    </script>
+    <script src="~/Public/js/map.js"></script>
 }
