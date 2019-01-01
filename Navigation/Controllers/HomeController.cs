@@ -28,8 +28,6 @@ namespace Navigation.Controllers
 
         public ActionResult Contact()
         {
-           
-
             return View();
         }
 
@@ -38,18 +36,14 @@ namespace Navigation.Controllers
             return View();
         }
 
-        public ActionResult Listing()
-        {
-            return View();
-        }
 
-       
 
-        [Auth]
-        public ActionResult Profile()
+
+        public ActionResult Logout()
         {
-            return View();
-        }
+            Session["Login"] = null;
+            return RedirectToAction("Index", "Home");
+        }       
 
     }
 }

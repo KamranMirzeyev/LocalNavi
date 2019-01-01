@@ -38,15 +38,15 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Title</label>
-                                    <input type="text" name="Title" class="form-control add-listing_form">
+                                    <label>Title <span class="text-danger">*</span></label>
+                                    <input type="text" name="Title" data-validation="required" data-validation-error-msg="Title boş buraxmayın" class="form-control add-listing_form">
                                     @Html.ValidationMessageFor(m => Model.Listing.Title, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Sloqan</label>
-                                    <input type="text" name="Slogan" class="form-control add-listing_form">
+                                    <label>Slogan <span class="text-danger">*</span></label>
+                                    <input type="text" name="Slogan" data-validation="required" data-validation-error-msg="Slogan boş buraxmayın" class="form-control add-listing_form">
                                     @Html.ValidationMessageFor(m => Model.Listing.Slogan, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -55,8 +55,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="CategoryId">Category</label>
-                                    <select name="CategoryId" id="CategoryId" class="form-control add-listing_form">
+                                    <label for="CategoryId">Category <span class="text-danger">*</span></label>
+                                    <select name="CategoryId" id="CategoryId" class="form-control add-listing_form" data-validation="required" data-validation-error-msg="Kateqoriyanı boş buraxmayın">
                                         <option value="0">Seçin</option>
                                         @foreach (var category in Model.category)
                                         {
@@ -68,8 +68,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Website</label>
-                                    <input type="text" name="Website" class="form-control add-listing_form">
+                                    <label>Website <span class="text-danger">*</span></label>
+                                    <input type="text" name="Website" data-validation="required" data-validation-error-msg="Website boş buraxmayın" class="form-control add-listing_form">
                                     @Html.ValidationMessageFor(m => Model.Listing.Website, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -78,15 +78,15 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Address</label>
-                                    <input type="text" name="Address" class="form-control add-listing_form">
+                                    <label>Address <span class="text-danger">*</span></label>
+                                    <input type="text" name="Address" data-validation="required" data-validation-error-msg="Address boş buraxmayın" class="form-control add-listing_form">
                                     @Html.ValidationMessageFor(m => Model.Listing.Address, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Phone</label>
-                                    <input type="text" name="Phone" class="form-control add-listing_form">
+                                    <label>Phone <span class="text-danger">*</span></label>
+                                    <input type="text" name="Phone" data-validation="required" data-validation-error-msg="Nömrəni boş buraxmayın" class="form-control add-listing_form" data-validation-help="Məs: +99450 121 22 35">
                                     @Html.ValidationMessageFor(m => Model.Listing.Phone, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -95,9 +95,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="CityId">City</label>
-                                    <select class="form-control add-listing_form" name="CityId">
-                                        <option>Seçin</option>
+                                    <label for="CityId">City <span class="text-danger">*</span></label>
+                                    <select class="form-control add-listing_form" name="CityId" data-validation="required" data-validation-error-msg="Nömrəni boş buraxmayın">
+                                        <option value="0">Seçin</option>
                                         @foreach (var city in Model.city)
                                         {
                                             <option value="@city.Id">@city.Name</option>
@@ -120,8 +120,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Description</label>
-                                    <textarea class="form-control add-listing_form" name="Description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label for="Description">Description <span class="text-danger">*</span></label>
+                                    <textarea class="form-control add-listing_form" name="Description" id="Description" rows="3" data-validation="required" data-validation-error-msg="Mətni boş buraxmayın"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -130,14 +130,14 @@
                         <!-- Add Location -->
                         <div class="listing-title">
                             <span class="ti-location-pin"></span>
-                            <h4>Add Location</h4>
+                            <h4>Add Location <span class="text-danger">*</span></h4>
 
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="hidden" name="lat">
-                                    <input type="hidden" name="lng">
+                                    <input type="hidden" name="lat" value="">
+                                    <input type="hidden" name="lng" value="">
                                     <div id="map" style="height: 400px"></div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                         <!-- Add Gallery -->
                         <div class="listing-title">
                             <span class="ti-gallery"></span>
-                            <h4>Add Gallery</h4>
+                            <h4>Add Gallery <span class="text-danger">*</span></h4>
                             <p>Write Something General Information About Your Listing</p>
                         </div>
                         <div class="row">
@@ -160,7 +160,14 @@
                                         <i class="ti-gallery"></i>
                                         <span>Drag &amp; Drop To Change Logo</span>
                                     </div>
-                                    <input type="file" name="Photo" id="files" class="custom-file-input" multiple>
+                                    <input type="file" name="Photo" id="files" class="custom-file-input" multiple="multiple"
+                                           data-validation="length mime size"
+                                           data-validation-length="min1"
+                                           data-validation-allowing="jpg, png, gif, jpeg"
+                                           data-validation-max-size="2M"
+                                           data-validation-error-msg-size="2 Mb-dan artıq şəkil yükləməyin"
+                                           data-validation-error-msg-mime="Ancaq .jpeg, .jpg, .png, .gif formatında şəkil yükləyin"
+                                           data-validation-error-msg-length="Ən azı 1 şəkil yükləməlisiniz">
                                    
                                 </div>
                             </div>
@@ -429,7 +436,7 @@
                                         <option value="10:00">10 :00 PM</option>
                                         <option value="11:00">11 :00 PM</option>
                                         <option value="12:00">12 :00 PM</option>
-                                        <option value="1:00">1 :00 AM</option>
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -762,5 +769,5 @@
 
 
     </script>
-    <script src="~/Public/js/map.js"></script>
+   
 }

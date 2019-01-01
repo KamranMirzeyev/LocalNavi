@@ -13,7 +13,7 @@ namespace Navigation.Controllers
     public class AccountController : Controller
     {
       private readonly NaviContext db = new NaviContext();
-
+        //user login olunmasi
         [HttpPost]
         public ActionResult Login(User user)
         {
@@ -37,7 +37,7 @@ namespace Navigation.Controllers
         }
 
 
-
+        //user register olunmasi
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register(User user)
@@ -64,7 +64,7 @@ namespace Navigation.Controllers
                 db.Users.Add(user);
                 db.SaveChanges();
 
-                Session["User"] = user;
+                Session["User"] = user.Id;
                 Session["Login"] = true;
 
                 return RedirectToAction("Index", "Home");
@@ -75,6 +75,8 @@ namespace Navigation.Controllers
             return Redirect("/Home/Index#registered");
         }
 
+
+        //emailin yoxlanisi 
         [HttpPost]
 
         public JsonResult EmailControl(string Email)
@@ -96,6 +98,8 @@ namespace Navigation.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+
+        //add list butonuna girisin olmasi
         [HttpGet]
        
         public JsonResult AccessLogin()
@@ -113,6 +117,23 @@ namespace Navigation.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
            
+        }
+
+        //userin oz profili
+        [Auth]
+        public new ActionResult Profile(int id)
+        {
+            if (id==0)
+            {
+                return HttpNotFound();
+            }
+            Models.User u = db.Users.Find(id);
+            if (u!=null)
+            {
+                var place = db.Listings.Where(x => x.UserId == id).ToList();
+                return View(place);
+            }
+            return RedirectToAction("index","Home");
         }
     }
 }

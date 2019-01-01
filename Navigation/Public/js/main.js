@@ -86,8 +86,6 @@
 
 
 
-
-
     //categoriye gore servicelerin gelmesi
     $("#CategoryId").change(function() {
         var id = $(this).val();
@@ -127,7 +125,7 @@
 
 
     //form add
-    //
+    
     var servis = [];
 
 
@@ -144,64 +142,83 @@
         }
     });
 
+
+    //map
+    var User = {
+        lat: 40.4287711,
+        lng: 49.2481203
+    }
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        map.setCenter({ lat: position.coords.latitude, lng: position.coords.longitude });
+    }
+
+    getLocation();
+
+    var markerAdd = false;
+
+    map = new GMaps({
+        div: '#map',
+        zoom: 14,
+        lat: User.lat,
+        lng: User.lng,
+        click: function (e) {
+            if (!markerAdd) {
+                UpdateLocation(e.latLng.lat(), e.latLng.lng());
+                map.addMarker({
+                    lat: e.latLng.lat(),
+                    lng: e.latLng.lng(),
+                    title: 'Lima',
+                    draggable: true,
+                    dragend: function (e) {
+                        UpdateLocation(e.latLng.lat(), e.latLng.lng());
+                    }
+                });
+                markerAdd = true;
+            }
+        }
+    });
+
+    function UpdateLocation(lat, lng) {
+        $("input[name='lat']").val(lat);
+        $("input[name='lng']").val(lng);
+    }
+
+
+    //Hefte gunlerinin yoxlanilmasi ve add olunmasi
     var WeekArr = [];
     var weekdays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 
    
-    //Hefte gunlerinin yoxlanilmasi ve add olunmasi
-    //function weekDays() {
-    //    $('input[name="sunday"]').click(function () {
-    //        if ($(this).prop("checked") === true) {
-
-    //            week.OpenTime.push($('select[name=week71] option[value="9:00"]').attr("value"));
-    //            week.CloseTime.push($('select[name=week72] option[value="6:00"]').attr("value"));
-    //            week.WeekNo.push(7);
-               
-    //            WeekArr.push(week);
-    //            console.log(WeekArr);
-    //        };
-    //    });
-
-
-    //    $("select[name='week71']").change(function () {
-    //        week.OpenTime = $(this).find('option:selected').val(); console.log(WeekArr);
-    //    });
-
-    //    $("select[name='week72']").change(function () {
-    //        week.CloseTime = $(this).find('option:selected').val();
-    //        console.log(WeekArr);
-    //    });
-
-
-
-    //    //1-ci gun
-    //    $('input[name="monday"]').click(function () {
-    //        if ($(this).prop("checked") === true) {
-
-    //            week.OpenTime.push($('select[name=bazar] option[value="9:00"]').attr("value"));
-    //            week.CloseTime.push($('select[name=bazar1] option[value="6:00"]').attr("value"));
-    //            week.WeekNo.push(1);
-
-    //            WeekArr.push(week);
-    //            console.log(WeekArr);
-    //        };
-    //    });
-    //    $("select[name='bazarertesi']").change(function () {
-    //        week.OpenTime = $(this).find('option:selected').val(); console.log(WeekArr);
-    //    });
-
-    //    $("select[name='bazarertesi1']").change(function () {
-    //        week.CloseTime = $(this).find('option:selected').val();
-    //        console.log(WeekArr);
-    //    });
-    //}
-
-    //weekDays();
+    
     
 
 
     $("#FormAdd").submit(function (ev) {
         ev.preventDefault();
+       //cateqori secmese dayanacaq
+        if ($('select[name="CategoryId"]').val() == 0) {
+            toastr["error"]("Kateqoriya seçməmisiniz!");
+           
+            return false;
+        }
+        //seher secmese dayanacaq
+        if ($('select[name="CityId"]').val() == 0) {
+            toastr["error"]("Şəhər seçməmisiniz!");
+           
+            return false;
+        }
+        
+       
+       
+
         //var service = JSON.stringify(servis);
         var formdata = new FormData(); //FormData object
         var files = $("#files").get(0).files;
@@ -212,7 +229,7 @@
             formdata.append(files[i].name, files[i]);
         }
        
-        formdata.append("servis", servis);
+       
 
         var indexIncr=0;
         $.each(weekdays,
@@ -241,7 +258,7 @@
 
 
             });
-        console.log(WeekArr);
+       
 
        
         $.ajax({
@@ -254,28 +271,35 @@
             contentType: false,
             processData: false,
             success: function (data) {
-                console.log(data.placeId);
+                if (data.status===404) {
+                    toastr["error"](data.message);
+                }
 
                 var postData = {
                     servis: servis,
                     WeekArr: WeekArr,
                     placeId: data.placeId
                 }
+                if (data.status === 200) {
+                    $.ajax({
+                        type: "post",
+                        url: "/place/create",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify(postData),
+                        success: function (data) {
+                           
+                            if (data.status===200) {
+                                toastr["success"](data.message);
+                                setInterval(function () { window.location = data.url; }, 1000);
+                            }
+                           
 
-                $.ajax({
-                    type: "post",
-                    url: "/place/create",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    data: JSON.stringify(postData),
-                    success: function (data) {
-                        console.log(data);
-                        toastr["success"](data.message);
-                        setInterval(function () { window.location = data.url; }, 1000);
 
+                        }
+                    });
+                };
 
-                    }
-                });
 
             },
             error: function (xhr, error, status) {

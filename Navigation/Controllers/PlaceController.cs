@@ -17,7 +17,7 @@ namespace Navigation.Controllers
         private readonly NaviContext db = new NaviContext();
         // GET: Place
         [HttpGet]
-        
+        [Auth]
         public ActionResult AddListing()
         {
             PlaceViewModel model = new PlaceViewModel();
@@ -43,15 +43,20 @@ namespace Navigation.Controllers
 
         }
 
+
+        //place elave olunmasi
         [HttpPost]
         public JsonResult AddListing(Listing place, HttpPostedFileBase[] Photo)
         {
 
-
+            if (Photo==null)
+            {
+                return Json(new { status = 404, message = "Şəkil əlavə etməmisiniz" }, JsonRequestBehavior.AllowGet);
+            }
 
             if (string.IsNullOrEmpty(place.Title) || string.IsNullOrEmpty(place.Address) || string.IsNullOrEmpty(place.Description) || string.IsNullOrEmpty(place.Phone) || string.IsNullOrEmpty(place.Slogan) || string.IsNullOrEmpty(place.Website) || string.IsNullOrEmpty(place.Lat) || string.IsNullOrEmpty(place.Lng))
             {
-                return Json(new { status = 404, message = "Xanaları boş buraxmayın" }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = 404, message = " * ilə qeyd olunmuş xanaları boş buraxmayın" }, JsonRequestBehavior.AllowGet);
             }
 
 
@@ -69,11 +74,11 @@ namespace Navigation.Controllers
                 {
                     if (files.ContentLength > 2097152)
                     {
-                        return Json(new{status=404,message="2Mb-dan artıq fayl yükləməyin"},JsonRequestBehavior.AllowGet);
+                        return Json(new{status=404, message="2Mb-dan artıq fayl yükləməyin"},JsonRequestBehavior.AllowGet);
                     }
                     if (files.ContentType != "image/jpeg" && files.ContentType!="image/png" && files.ContentType!="image/jpg" && files.ContentType!="image/gif")
                     {
-                        return Json(new { status = 404,message="Ancaq .jpg .jpeg .png .gif formatda fayl yükləyin" }, JsonRequestBehavior.AllowGet); 
+                        return Json(new { status = 404, message="Ancaq .jpg .jpeg .png .gif formatda fayl yükləyin" }, JsonRequestBehavior.AllowGet); 
                     }
                     string filename = DateTime.Now.ToString("yyyyMMddHHmmssfff") + files.FileName;
                     string path = Path.Combine(Server.MapPath("~/Public/images/PlacePhoto"), filename);
@@ -90,17 +95,14 @@ namespace Navigation.Controllers
 
                     return Json(new { status = 200, placeId =place.Id  }, JsonRequestBehavior.AllowGet);
                 }
-                else
-                {
-                    return Json(new { status = 404, message = "Şəkil yükləməmisiniz" }, JsonRequestBehavior.AllowGet);
-                }
-
+                
                
             }
 
             return Json(new { status = 404, message = "Xəta baş verdi. Zəhmət olmasa birdə cəhd edin" }, JsonRequestBehavior.AllowGet);
         }
 
+        //place servisleri ve hefte gunlerinin elave olunmasi
         [HttpPost]
         public JsonResult create(int[] servis, List<vwHourWeek> WeekArr, int placeId)
         {
@@ -128,22 +130,15 @@ namespace Navigation.Controllers
                     db.ListServices.Add(ls);
                     db.SaveChanges();
                 }
-                return Json(new
-                {
-                    status = 200,
-                    url = "/home/index",
-                    message = "Place Succefssfully created. After moderator rewiew it will be available at the website."
-                }, JsonRequestBehavior.AllowGet);
+               
             }
-            else
+            return Json(new
             {
-                return Json(new
-                {
-                    status = 401,
-                    message = "Could not get work times,please fill form again"
-                }, JsonRequestBehavior.AllowGet);
+                status = 200,
+                url = "/home/index",
+                message = "Yer əlavə olundu. Moderator təsdiq etdikdən sonra yayımlanacaq."
+            }, JsonRequestBehavior.AllowGet);
 
-            }
         }
     }
 }

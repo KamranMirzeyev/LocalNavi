@@ -136,6 +136,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
+    <Compile Include="Controllers\SearchPlaceController.cs" />
     <Compile Include="DAL\NaviContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -286,7 +287,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Public\images\PlacePhoto\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -308,11 +308,11 @@
     <Content Include="Public\js\swiper.min.js.map" />
     <Content Include="Public\scss\style.scss" />
     <Content Include="Views\Home\Blog.cshtml" />
-    <Content Include="Views\Home\Listing.cshtml" />
     <Content Include="Public\js\jquery-3.3.1.min.js" />
-    <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Place\AddListing.cshtml" />
+    <Content Include="Views\SearchPlace\Places.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812231052140_init1.resx">
