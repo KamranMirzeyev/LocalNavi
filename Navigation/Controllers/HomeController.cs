@@ -19,6 +19,28 @@ namespace Navigation.Controllers
             return View(model);
         }
 
+        //categoriya yazanda cimasi
+        [HttpPost]
+        public JsonResult GetCategories(string Prefix)
+        {
+
+            var category = (from c in db.Categories
+                where c.Name.StartsWith(Prefix)
+                select new { c.Name, c.Id });
+            return Json(category, JsonRequestBehavior.AllowGet);
+        }
+
+        //seherlerin yazanda cixmasi
+        [HttpPost]
+        public JsonResult GetCities(string Prefix)
+        {
+            var category = (from c in db.Cities
+                where c.Name.StartsWith(Prefix)
+                select new { c.Name, c.Id });
+            return Json(category, JsonRequestBehavior.AllowGet);
+        }
+
+        //about index
         public ActionResult About()
         {
            
@@ -26,6 +48,7 @@ namespace Navigation.Controllers
             return View();
         }
 
+        //contact index
         public ActionResult Contact()
         {
             return View();

@@ -10,7 +10,7 @@ namespace Navigation.Models
     {
         public int Id { get; set; }
         public int ListingId { get; set; }
-        public int WeekNo { get; set; }
+        public string WeekNo { get; set; }
 
      
         public TimeSpan OpenHour { get; set; }

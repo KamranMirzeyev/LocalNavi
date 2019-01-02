@@ -45,6 +45,7 @@ namespace Navigation.Models
         public User User { get; set; }
 
         public List<ListPhoto> ListPhotos { get; set; }
+        public List<Photo> Photos { get; set; }
         public List<ListService> ListServices { get; set; }
         public  List<WorkHour> WorkHourses { get; set; }
         public  List<Comment> Comments { get; set; }

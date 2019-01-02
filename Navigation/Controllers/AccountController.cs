@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Helpers;
@@ -130,8 +131,9 @@ namespace Navigation.Controllers
             Models.User u = db.Users.Find(id);
             if (u!=null)
             {
-                var place = db.Listings.Where(x => x.UserId == id).ToList();
+                var place = db.Listings.Include("City").Include("Category").Include(x=>x.Photos).Include(x=>x.WorkHourses).Include(x=>x.Comments).Include(x=>x.ListServices).Where(x => x.UserId == id).ToList();
                 return View(place);
+                
             }
             return RedirectToAction("index","Home");
         }

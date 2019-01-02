@@ -9,6 +9,55 @@
     });
 
 
+    $("#CategorySearch").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/Home/GetCategories",
+                type: "POST",
+                dataType: "json",
+                data: { Prefix: request.term },
+                success: function(data) {
+                    response($.map(data,
+                        function(item) {
+                            return { label: item.Name, value: item.Name };
+                        }));
+
+                }
+            });
+        },
+        messages: {
+            noResults: "",
+            results: function (count) {
+                return count + (count > 1 ? ' results' : ' result ') + ' found';
+            }
+        }
+    });
+
+    $("#CitySearch").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/Home/GetCities",
+                type: "POST",
+                dataType: "json",
+                data: { Prefix: request.term },
+                success: function (data) {
+                    response($.map(data,
+                        function (item) {
+                            return { label: item.Name, value: item.Name };
+                        }));
+
+                }
+            });
+        },
+        messages: {
+            noResults: "",
+            results: function (count) {
+                return count + (count > 1 ? ' results' : ' result ') + ' found';
+            }
+        }
+    });
+
+
     //$("#registerForm").submit(function(ev) {
     //    ev.preventDefault();
 
@@ -143,53 +192,7 @@
     });
 
 
-    //map
-    var User = {
-        lat: 40.4287711,
-        lng: 49.2481203
-    }
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
-    }
 
-    function showPosition(position) {
-        map.setCenter({ lat: position.coords.latitude, lng: position.coords.longitude });
-    }
-
-    getLocation();
-
-    var markerAdd = false;
-
-    map = new GMaps({
-        div: '#map',
-        zoom: 14,
-        lat: User.lat,
-        lng: User.lng,
-        click: function (e) {
-            if (!markerAdd) {
-                UpdateLocation(e.latLng.lat(), e.latLng.lng());
-                map.addMarker({
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng(),
-                    title: 'Lima',
-                    draggable: true,
-                    dragend: function (e) {
-                        UpdateLocation(e.latLng.lat(), e.latLng.lng());
-                    }
-                });
-                markerAdd = true;
-            }
-        }
-    });
-
-    function UpdateLocation(lat, lng) {
-        $("input[name='lat']").val(lat);
-        $("input[name='lng']").val(lng);
-    }
 
 
     //Hefte gunlerinin yoxlanilmasi ve add olunmasi
@@ -228,10 +231,9 @@
            
             formdata.append(files[i].name, files[i]);
         }
-       
-       
 
-        var indexIncr=0;
+
+        var indexIncr = 0;
         $.each(weekdays,
             function (index, item) {
                 indexIncr = index + 1;
@@ -241,17 +243,17 @@
 
                     } else {
                         
-                       
+                        
                         var open = $('.week' + indexIncr + '1 option:selected').attr("value");
                         var close = $('.week' + indexIncr + '2 option:selected').attr("value");
-                        console.log(indexIncr);
-                        var weekno = indexIncr;
+                       
+                        
                         WeekArr.push({
                             OpenHour: open,
                             CloseHour: close,
-                            WeekNo: weekno
+                            WeekNo: item
                         });
-
+                       
                     }
 
                 }
@@ -330,6 +332,24 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
+
+
+    $("#searchPlace").submit(function(ev) {
+        ev.preventDefault();
+
+        $.ajax({
+            url: $(this).attr("action"),
+            type: $(this).attr("method"),
+            dataType: "json",
+            data: $(this).serialize(),
+            success: function(data) {
+                console.log(data);
+            },
+            error: function (xhr, error, status) {
+                console.log(error, status);
+            }
+        });
+    });
 
 
 });

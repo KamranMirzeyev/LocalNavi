@@ -194,6 +194,30 @@
     <Compile Include="Migrations\201812290911123_listing-edit.Designer.cs">
       <DependentUpon>201812290911123_listing-edit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901021213407_update1.cs" />
+    <Compile Include="Migrations\201901021213407_update1.Designer.cs">
+      <DependentUpon>201901021213407_update1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021228449_edit12.cs" />
+    <Compile Include="Migrations\201901021228449_edit12.Designer.cs">
+      <DependentUpon>201901021228449_edit12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021231253_ListPhoto.cs" />
+    <Compile Include="Migrations\201901021231253_ListPhoto.Designer.cs">
+      <DependentUpon>201901021231253_ListPhoto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021710481_weekno.cs" />
+    <Compile Include="Migrations\201901021710481_weekno.Designer.cs">
+      <DependentUpon>201901021710481_weekno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021847294_table.cs" />
+    <Compile Include="Migrations\201901021847294_table.Designer.cs">
+      <DependentUpon>201901021847294_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901021852545_photo-table.cs" />
+    <Compile Include="Migrations\201901021852545_photo-table.Designer.cs">
+      <DependentUpon>201901021852545_photo-table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryService.cs" />
@@ -204,6 +228,7 @@
     <Compile Include="Models\Listing.cs" />
     <Compile Include="Models\ListPhoto.cs" />
     <Compile Include="Models\ListService.cs" />
+    <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PlaceViewModel.cs" />
     <Compile Include="Models\Reaction.cs" />
     <Compile Include="Models\Service.cs" />
@@ -247,6 +272,14 @@
     <Content Include="Public\images\logo.svg" />
     <Content Include="Public\images\nav-icon.png" />
     <Content Include="Public\images\paypal.png" />
+    <Content Include="Public\images\PlacePhoto\201812301721099881.jpg" />
+    <Content Include="Public\images\PlacePhoto\20181230172725657addlist.jpg" />
+    <Content Include="Public\images\PlacePhoto\20181230172857189addlist.jpg" />
+    <Content Include="Public\images\PlacePhoto\20181230173255358addlist.jpg" />
+    <Content Include="Public\images\PlacePhoto\201812301736544521.jpg" />
+    <Content Include="Public\images\PlacePhoto\201812301748183202.png" />
+    <Content Include="Public\images\PlacePhoto\20190101215637051relax.jpg" />
+    <Content Include="Public\images\PlacePhoto\20190101222034970relax.jpg" />
     <Content Include="Public\images\search-listing-icon.svg" />
     <Content Include="Public\js\bootstrap-formhelpers.js" />
     <Content Include="Public\js\bootstrap-formhelpers.min.js" />
@@ -259,6 +292,8 @@
     <Content Include="Public\js\jarallax-video.js" />
     <Content Include="Public\js\jarallax.js" />
     <Content Include="Public\js\jquery-3.2.1.min.js" />
+    <Content Include="Public\css\jquery-ui.min.css" />
+    <Content Include="Public\js\jquery-ui.min.js" />
     <Content Include="Public\js\jquery.magnific-popup.js" />
     <Content Include="Public\js\jquery.min.js" />
     <Content Include="Public\js\main.js" />
@@ -286,7 +321,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Public\images\PlacePhoto\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -353,6 +387,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812290911123_listing-edit.resx">
       <DependentUpon>201812290911123_listing-edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021213407_update1.resx">
+      <DependentUpon>201901021213407_update1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021228449_edit12.resx">
+      <DependentUpon>201901021228449_edit12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021231253_ListPhoto.resx">
+      <DependentUpon>201901021231253_ListPhoto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021710481_weekno.resx">
+      <DependentUpon>201901021710481_weekno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021847294_table.resx">
+      <DependentUpon>201901021847294_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901021852545_photo-table.resx">
+      <DependentUpon>201901021852545_photo-table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

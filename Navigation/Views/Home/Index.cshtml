@@ -14,26 +14,26 @@
 
         <div class="row justify-content-center align-items-center">
             <div class="col-md-12">
-                <form>
+                <form action="@Url.Action("Places","SearchPlace")" method="get" id="searchPlace">
                     <div class="search-box">
                         <div class="row justify-content-center">
                             <div class="col-md-5">
                                 <div class="search-box1">
                                     <div class="search-box-title">
-                                        <input type="text" name="#" class="search-form" placeholder="Ex: Restaurant, Shopping, Coffee. etc">
+                                        <input type="text" name="categoryKey" id="CategorySearch" class="search-form" placeholder="Ex: Restaurant, Shopping, Coffee. etc">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="search-box2">
                                     <div class="search-box-title">
-                                        <input type="text" name="#" class="search-form" placeholder="Ex: In or Around City, State or Zip">
+                                        <input type="text" name="cityKey" id="CitySearch" class="search-form" placeholder="Ex: In or Around City, State or Zip">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="search-button">
-                                    <a href="#" class="btn btn-simple">Search</a>
+                                    <button type="submit" class="btn btn-simple">Search</button>
                                 </div>
                             </div>
                         </div>

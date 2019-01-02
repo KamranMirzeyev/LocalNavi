@@ -83,14 +83,15 @@ namespace Navigation.Controllers
                     string filename = DateTime.Now.ToString("yyyyMMddHHmmssfff") + files.FileName;
                     string path = Path.Combine(Server.MapPath("~/Public/images/PlacePhoto"), filename);
                     files.SaveAs(path);
+                   
+                   
 
-
-                    ListPhoto photo = new ListPhoto()
+                    Photo photo = new Photo()
                     {
-                        Photo = filename,
-                        ListId = place.Id
+                        PlacePhoto = filename,
+                        ListingId = place.Id
                     };
-                    db.ListPhotos.Add(photo);
+                    db.Photos.Add(photo);
                     db.SaveChanges();
 
                     return Json(new { status = 200, placeId =place.Id  }, JsonRequestBehavior.AllowGet);

@@ -9,6 +9,6 @@ namespace Navigation.Models
     {
         public string OpenHour { get; set; }
         public string CloseHour { get; set; }
-        public int WeekNo { get; set; }
+        public string WeekNo { get; set; }
     }
 }
