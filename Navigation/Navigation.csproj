@@ -231,6 +231,7 @@
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PlaceViewModel.cs" />
     <Compile Include="Models\Reaction.cs" />
+    <Compile Include="Models\searchPlace.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\vwHourWeek.cs" />
@@ -347,6 +348,7 @@
     <Content Include="Views\Place\AddListing.cshtml" />
     <Content Include="Views\SearchPlace\Places.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\SearchPlace\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812231052140_init1.resx">

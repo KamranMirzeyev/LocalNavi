@@ -81,3 +81,4 @@ C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.weekno.resources
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.table.resources
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.phototable.resources
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.csprojAssemblyReference.cache

@@ -32,14 +32,17 @@ namespace Navigation.Controllers
         [HttpGet]
         public JsonResult CategoryService(int id)
         {
-
-          var model = db.CategoryServices.Where(x => x.CategoryId == id).Select(x=> new
-          {
-              ServiceId = x.ServiceId,
-              Name=x.Service.Name
-           
-          }).ToList();
-            return Json(model, JsonRequestBehavior.AllowGet);
+            if (id<=0)
+            {
+                return Json(new {status = 404, message = "Kateqoriya seçməmisiniz!"}, JsonRequestBehavior.AllowGet);
+            }
+            var model = db.CategoryServices.Where(x => x.CategoryId == id).Select(x=> new
+              {
+                  ServiceId = x.ServiceId,
+                  Name=x.Service.Name
+               
+              }).ToList();
+                return Json(model, JsonRequestBehavior.AllowGet);
 
         }
 

@@ -19,7 +19,7 @@ namespace Navigation.Controllers
             return View(model);
         }
 
-        //categoriya yazanda cimasi
+        //categoriya yazanda cixmasi
         [HttpPost]
         public JsonResult GetCategories(string Prefix)
         {

@@ -60,8 +60,9 @@ namespace Navigation.Controllers
             if (ModelState.IsValid)
             {
                 user.Status = true;
-                string pass = Crypto.HashPassword(user.Password);
-                user.Password = pass;
+                user.Photo = "avatar.jpg";
+                
+                user.Password = Crypto.HashPassword(user.Password);
                 db.Users.Add(user);
                 db.SaveChanges();
 
@@ -124,7 +125,7 @@ namespace Navigation.Controllers
         [Auth]
         public new ActionResult Profile(int id)
         {
-            if (id==0)
+            if (id<=0)
             {
                 return HttpNotFound();
             }

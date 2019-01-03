@@ -342,8 +342,55 @@
             type: $(this).attr("method"),
             dataType: "json",
             data: $(this).serialize(),
-            success: function(data) {
-                console.log(data);
+            success: function (data) {
+                if (data.status === 404) {
+
+                    toastr["error"](data.message);
+                    return;
+                }
+                if (data.modal.length===0) {
+                    toastr["warning"]("Hec bir məlumat tapılmadı");
+                    return;
+                }
+               
+                if (data.status === 200 && data.modal.length > 0) {
+                     
+                    $.each(data.modal,function(index, item) {
+                        $("#searchResult").html="";
+                        if (item.status === true)
+                          //  location.href = (data.url);
+                                
+                          
+                        $('#searchText').append(`<div class="col-md-6 card-2">
+                        <!-- card-1 -->
+                        <div class="card">
+                            <a href="detail.html"><img class="card-img-top" src="https://via.placeholder.com/998x633.jpg" alt="Card image cap">
+                             </a>
+                            <div class="card-body">
+                                <h5 class="card-title">${item.title}</h5>
+                                <ul class="card-rating  d-flex justify-content-between align-items-center">
+                                    <li>5.0</li>
+                                    <li class="flex-grow-1">46 ratings</li>
+                                    <li class="category"><i class="fa ${item.categoryIcon}"></i> ${item.category}</li>
+                                </ul>
+                                <p class="card-text">${item.slogan}</p>
+                            </div>
+                            <div class="card-bottom">
+                                <p><i class="ti-location-pin"></i>${item.city}</p><span>Closed Now</span>
+                            </div>
+                        </div>
+                    </div>`);
+                          
+
+                    });
+
+
+                    
+
+
+                }
+               
+               
             },
             error: function (xhr, error, status) {
                 console.log(error, status);
