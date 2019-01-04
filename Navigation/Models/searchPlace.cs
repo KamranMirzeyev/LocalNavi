@@ -14,10 +14,11 @@ namespace Navigation.Models
         public string lng { get; set; }
         public string city { get; set; }
         public string category { get; set; }
-        public List<Comment> comment { get; set; }
+        public double? commentRat { get; set; }
         public string categoryIcon { get; set; }
         public List<WorkHour> hours { get; set; }
-        public IEnumerable<Photo> photo { get; set; }
+        public string photo { get; set; }
         public bool  status { get; set; }
+        public int commentCount { get; set; }
     }
 }

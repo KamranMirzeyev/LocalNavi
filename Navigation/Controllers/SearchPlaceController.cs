@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Navigation.DAL;
 using Navigation.Models;
 
+
 namespace Navigation.Controllers
 {
     public class SearchPlaceController : Controller
@@ -36,10 +37,11 @@ namespace Navigation.Controllers
                         slogan = x.Slogan,
                         lat = x.Lat,
                         lng = x.Lng,
-                        comment = x.Comments.ToList(),
+                        commentRat = x.Comments.Average(c=>c.Rating),
                         hours = x.WorkHourses.ToList(),
-                        photo = x.Photos.ToList().Take(1),
-                        status = x.Status
+                        photo = x.Photos.ToList().FirstOrDefault().PlacePhoto,
+                        status = x.Status,
+                        commentCount = x.Comments.Count()
 
                     }).ToList();
 
@@ -47,6 +49,7 @@ namespace Navigation.Controllers
 
             if (!string.IsNullOrEmpty(cityKey))
             {
+                decimal rat = 0;
                 modal = db.Listings.Where(x => x.City.Name.StartsWith(cityKey)).Select(x => new searchPlace
                 {
                     id = x.Id,
@@ -57,16 +60,17 @@ namespace Navigation.Controllers
                     slogan = x.Slogan,
                     lat = x.Lat,
                     lng = x.Lng,
-                    comment = x.Comments.ToList(),
+                    commentRat = x.Comments.Average(c=>c.Rating),
                     hours = x.WorkHourses.ToList(),
-                    photo = x.Photos.ToList().Take(1),
-                    status = x.Status
+                    photo = x.Photos.ToList().FirstOrDefault().PlacePhoto,
+                    status = x.Status,
+                    commentCount = x.Comments.Count()
 
                 }).ToList();
 
 
             }
-            return Json(new { status = 200, modal, url = "/SearchPlace/Places" }, JsonRequestBehavior.AllowGet);
+            return Json(new { status = 200, modal, url = "/SearchPlace/Places",search=categoryKey }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Places()

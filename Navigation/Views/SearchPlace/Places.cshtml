@@ -13,7 +13,7 @@
                 <div class="row detail-filter-wrap">
                     <div class="col-md-4 featured-responsive">
                         <div class="detail-filter-text">
-                            <p id="resultPlace">46 Results For <span>Restaurant</span></p>
+                            <p id="resultPlace"></p>
                         </div>
                     </div>
                     <div class="col-md-8 featured-responsive">
@@ -94,7 +94,7 @@
                 <div class="map-fix">
                     <!-- Google map will appear here! Edit the Latitude, Longitude and Zoom Level below using data-attr-*  -->
                     <a href="javascript:void(0);" class="map-close"><span class="ti-close"></span></a>
-                    <div id="map" data-lat="40.3772181" data-lon="49.8518213" data-zoom="12"></div>
+                    <div id="map"></div>
                 </div>
             </div>
         </div>
@@ -106,9 +106,122 @@
 
 @section scripts{
 
-    <script src="~/Public/js/script.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&amp;key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>
+    @*<script src="~/Public/js/script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=myMap&amp;key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>*@
 
+    <script>
+        $(document).ready(function() {
+
+
+            var data = JSON.parse(window.localStorage.getItem('data'));
+            var search = window.localStorage.getItem('search');
+            if (search == null) {
+                search = "";
+            }
+            var d = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "sunday";
+            weekday[1] = "monday";
+            weekday[2] = "tuesday";
+            weekday[3] = "wednesday";
+            weekday[4] = "thursday";
+            weekday[5] = "friday";
+            weekday[6] = "saturday";
+
+
+            //map center
+            var cen = {
+                lat: 40.4287711,
+                lng: 49.2481203
+            }
+
+           
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: Number(cen.lat), lng: Number(cen.lng)},
+                    zoom: 8
+                });
+		
+               
+            }
+
+            initMap();
+           
+            if (window.localStorage) {
+                
+                $("#resultPlace").append(`${data.length} Results For <span>${search}</span>`);
+
+                $.each(data,
+                    function(index, item) {
+
+                        $("#searchResult").html = "";
+
+
+                        if (item.commentRat == null) {
+                            item.commentRat = 0;
+                        }
+                        if (item.status === true) {
+                            $("#searchResult").append(`<div class="col-md-6 card-2">
+                        <!-- card-1 -->
+                        <div class="card">
+                        
+                            <a href="/SearchPlace/Detail/${item.id
+                                }"><img class="card-img-top" src="/Public/images/PlacePhoto/${item.photo
+                                }" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">${item.title}</h5>
+                                <ul class="card-rating  d-flex justify-content-between align-items-center">
+                                    <li>${item.commentRat}</li>
+                                    <li class="flex-grow-1">${item.commentCount} ratings</li>
+                                    <li class="category"><i class="fa ${item.categoryIcon}"></i> ${item.category}</li>
+                                </ul>
+                                <p class="card-text">${item.slogan}</p>
+                            </div>
+                            <div class="card-bottom">
+                                <p><i class="ti-location-pin"></i>${item.city}</p><span class="timeNow"></span>
+                            </div>
+                        </div>
+                    </div>`);
+
+                        }
+                        //time open now
+                        $.each(item.hours,
+                            function(index,hour) {
+
+
+                                if (hour.WeekNo === weekday[d.getDay()]) {
+                                    if (hour.OpenHour.Hours <= d.getHours() && d.getHours() <= hour.CloseHour.Hours) {
+                                        $(".timeNow").addClass("open-close_green");
+                                        $(".timeNow").text("Open Now");
+                                    } else {
+                                        $(".timeNow").removeClass("open-close_green");
+                                        $(".timeNow").text("Closed Now");
+                                    }
+
+
+                                }
+                            });
+
+                      //map
+                        var marker = new google.maps.Marker({
+                            position: { lat: Number(item.lat), lng: Number(item.lng)},
+                            map: map,
+                            title: item.title,
+                            animation: google.maps.Animation.BOUNCE,
+                            draggable: true
+                        });
+
+                    });
+
+               
+        } else
+        {
+            $("#searchResult").html("<h2 class='text-danger'>Hec bir məlumat tapılmadı</h2>");
+        }
+        });
+    </script>
 
 
 
