@@ -2,44 +2,29 @@
 @{
     ViewBag.Title = "Detail";
 }
-
+@using System.Globalization
+@model Navigation.Models.vwDetails
 <!--============================= BOOKING =============================-->
 
 <div>
     <!-- Swiper -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
+            @foreach (var photo in Model.Listing.Photos)
+            {
+                if (photo != null)
+                {
+                    <div class="swiper-slide">
+                        <a href="/Public/images/PlacePhoto/@photo.PlacePhoto" class="grid image-link">
+                            <img src="/Public/images/PlacePhoto/@photo.PlacePhoto" class="img-fluid" alt="@photo.PlacePhoto">
+                        </a>
+                    </div>
+                }
 
-            <div class="swiper-slide">
-                <a href="https://via.placeholder.com/1500x923.jpg" class="grid image-link">
-                    <img src="https://via.placeholder.com/1500x923.jpg" class="img-fluid" alt="#">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="https://via.placeholder.com/1500x923.jpg" class="grid image-link">
-                    <img src="https://via.placeholder.com/1500x923.jpg" class="img-fluid" alt="#">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="https://via.placeholder.com/1500x923.jpg" class="grid image-link">
-                    <img src="https://via.placeholder.com/1500x923.jpg" class="img-fluid" alt="#">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="https://via.placeholder.com/1500x923.jpg" class="grid image-link">
-                    <img src="https://via.placeholder.com/1500x923.jpg.jpg" class="img-fluid" alt="#">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="https://via.placeholder.com/1500x923.jpg.jpg" class="grid image-link">
-                    <img src="https://via.placeholder.com/1500x923.jpg.jpg" class="img-fluid" alt="#">
-                </a>
-            </div>
-            <div class="swiper-slide">
-                <a href="https://via.placeholder.com/1500x923.jpg.jpg" class="grid image-link">
-                    <img src="https://via.placeholder.com/1500x923.jpg.jpg" class="img-fluid" alt="#">
-                </a>
-            </div>
+
+            }
+
+
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination swiper-pagination-white"></div>
@@ -55,20 +40,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h5>Tasty Hand-Pulled Noodles</h5>
-               
-                <p class="reserve-description">Innovative cooking, paired with fine wines in a modern setting.</p>
+                <h5 style="display: block" id="placeN">@Model.Listing.Title</h5>
+
+                <p class="reserve-description">@Model.Listing.Slogan</p>
             </div>
             <div class="col-md-6">
                 <div class="reserve-seat-block align-items-center">
                     <div class="reserve-rating mx-0 mx-md-3">
-                        <span>9.5</span>
+                        <span>@ViewBag.Rating</span>
                     </div>
-                    <div class="reserve-btn">
-                        <div class="featured-btn-wrap">
-                            <a href="#" class="btn btn-danger">RESERVE A SEAT</a>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -84,41 +65,72 @@
             <div class="col-md-8 responsive-wrap">
                 <div class="booking-checkbox_wrap">
                     <div class="booking-checkbox">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</p>
+                        @Html.Raw(Model.Listing.Description)
                         <hr>
                     </div>
                     <div class="row">
+
+
                         <div class="col-md-4">
-                            <label class="custom-checkbox">
-                                <span class="ti-check-box"></span>
-                                <span class="custom-control-description">Bike Parking</span>
-                            </label>
-                            <label class="custom-checkbox">
-                                <span class="ti-check-box"></span>
-                                <span class="custom-control-description">Wireless Internet  </span>
-                            </label>
+                            @foreach (var item in Model.ListServices.OrderBy(x => x.ServiceId).Take(2))
+                            {
+                                <label class="custom-checkbox">
+                                    <span class="ti-check-box"></span>
+                                    <span class="custom-control-description">@item.Service.Name</span>
+                                </label><br />
+                            }
+
+
                         </div>
                         <div class="col-md-4">
-                            <label class="custom-checkbox">
-                                <span class="ti-check-box"></span>
-                                <span class="custom-control-description">Smoking Allowed  </span>
-                            </label>
-                            <label class="custom-checkbox">
-                                <span class="ti-check-box"></span>
-                                <span class="custom-control-description">Street Parking</span>
-                            </label>
+                            @foreach (var item in Model.ListServices.OrderBy(x => x.ServiceId).Skip(2).Take(2))
+                            {
+                                <label class="custom-checkbox">
+                                    <span class="ti-check-box"></span>
+                                    <span class="custom-control-description">@item.Service.Name</span>
+                                </label><br />
+                            }
+
                         </div>
                         <div class="col-md-4">
-                            <label class="custom-checkbox">
-                                <span class="ti-check-box"></span>
-                                <span class="custom-control-description">Special</span>
-                            </label>
-                            <label class="custom-checkbox">
-                                <span class="ti-check-box"></span>
-                                <span class="custom-control-description">Accepts Credit cards</span>
-                            </label>
+                            @foreach (var item in Model.ListServices.OrderBy(x => x.ServiceId).Skip(4).Take(2))
+                            {
+                                <label class="custom-checkbox">
+                                    <span class="ti-check-box"></span>
+                                    <span class="custom-control-description">@item.Service.Name</span>
+                                </label><br />
+                            }
+
+                        </div>
+                        <div class="col-md-4">
+                            @foreach (var item in Model.ListServices.OrderBy(x => x.ServiceId).Skip(6).Take(2))
+                            {
+                                <label class="custom-checkbox">
+                                    <span class="ti-check-box"></span>
+                                    <span class="custom-control-description">@item.Service.Name</span>
+                                </label><br />
+                            }
+
+                        </div>
+                        <div class="col-md-4">
+                            @foreach (var item in Model.ListServices.OrderBy(x => x.ServiceId).Skip(8).Take(2))
+                            {
+                                <label class="custom-checkbox">
+                                    <span class="ti-check-box"></span>
+                                    <span class="custom-control-description">@item.Service.Name</span>
+                                </label><br />
+                            }
+
+                        </div>
+                        <div class="col-md-4">
+                            @foreach (var item in Model.ListServices.OrderBy(x => x.ServiceId).Skip(10).Take(2))
+                            {
+                                <label class="custom-checkbox">
+                                    <span class="ti-check-box"></span>
+                                    <span class="custom-control-description">@item.Service.Name</span>
+                                </label><br />
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -128,156 +140,208 @@
                     <hr>
                     <div class="customer-review_wrap">
                         <div class="customer-img">
-                            <img src="~/Public/images/avatar.jpg" class="img-fluid" alt="#">
-                        </div>
-                        <div class="customer-content-wrap">
-                            <div class="your-rating-wrap">
-                                <span>Your rating</span>
-                                <div class="customer-review">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span class="round-icon-blank"></span>
-                                </div>
-                            </div>
-                            <div class="your-comment-wrap">
-                                <textarea name="#" class="your-rating-content" placeholder="Enter Your Comments" maxlength="140"></textarea>
-                                <h6 class="your-rating-notify">at least 140 characters</h6>
-                            </div>
+                            @if (Model.Listing.User.Photo == null)
+                            {
+                                <img src="/Public/images/avatar.jpg" class="img-fluid" alt="avatar.jpg">
+                            }
+                            else
+                            {
+                                <img src="/Public/images/UserPhoto/@Model.Listing.User.Photo" class="img-fluid" alt="Model.Listing.User.Photo">
+                            }
 
-                            <div class="row">
-                                <div class="col-md-4 mr-auto">
-                                    <div class="add-photos-link mb-3 mb-md-0">
-                                        <a href="#"><i class="icon-picture"></i>Add Photos</a>
-                                    </div>
+                            <p>@Model.Listing.User.FullName</p>
+                        </div>
+                        <form action="@Url.Action("Comment","SearchPlace")" method="post" enctype="multipart/form-data" id="commentForm">
+                            <div class="customer-content-wrap">
+                                <div class="your-rating-wraps">
+
+                                    <input id="input-1" name="Rating" type="number" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="sm">
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="your-rating-btn">
-                                        <a href="#" class="btn btn-danger btn-block">Publish Review</a>
+                                <div class="your-comment-wrap">
+                                    <textarea name="Text" class="your-rating-content" placeholder="Enter Your Comments" maxlength="140"></textarea>
+                                    <h6 class="your-rating-notify">at least 140 characters</h6>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 mr-auto">
+                                        <div class="add-photos-link mb-3 mb-md-0">
+
+                                            <input type="file" class="icon-picture" multiple="multiple" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="your-rating-btn">
+                                            <button type="submit" class="btn btn-danger btn-block">Publish Review</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
                 <div class="booking-checkbox_wrap my-4">
-                    <h4>143 Reviews</h4>
+                    <h4>Comments</h4>
                     <hr>
-                    <div class="customer-review_wrap">
-                        <div class="customer-img">
-                            <img src="https://via.placeholder.com/256x256.jpg" class="img-fluid" alt="#">
-                            <p>Ankita L</p>
-                            <span>43 Reviews</span>
-                        </div>
-                        <div class="customer-content-wrap">
-                            <div class="customer-content">
-                                <div class="customer-review">
-                                    <h5>Best noodles in the Newyork city</h5>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span class="round-icon-blank"></span>
-                                    <p>Reviewed 4 days ago</p>
-                                </div>
-                                <div class="customer-rating">8.0</div>
+                    @foreach (var item in Model.Comments)
+                    {
+                        <div class="customer-review_wrap">
+                            <div class="customer-img">
+                                @if (@item.User.Photo == null)
+                                {
+                                    <img src="/Public/images/avatar.jpg" class="img-fluid" alt="avatar.jpg">
+                                }
+                                else
+                                {
+                                    <img src="/Public/images/UserPhoto/@item.User.Photo" class="img-fluid" alt="@item.User.Photo">
+                                }
+
+                                <p>@item.User.FullName</p>
+
                             </div>
-                            <p class="customer-text">
-                                I love the noodles here but it is so rare that I get to come here. Tasty Hand-Pulled Noodles is the best type of whole in the wall restaurant. The staff are really nice, and you should be seated quickly. I usually get the
-                                hand pulled noodles in a soup. House Special #1 is amazing and the lamb noodles are also great. If you want your noodles a little chewier, get the knife cut noodles, which are also amazing. Their dumplings are great
-                                dipped in their chili sauce.
-                            </p>
-                            <p class="customer-text">
-                                I love how you can see into the kitchen and watch them make the noodles and you can definitely tell that this is a family run establishment. The prices are are great with one dish maybe being $9. You just have to remember
-                                to bring cash.
-                            </p>
-                            <ul>
-                                <li><img src="https://via.placeholder.com/500x355.jpg" class="img-fluid" alt="#"></li>
-                                <li><img src="https://via.placeholder.com/500x355.jpg" class="img-fluid" alt="#"></li>
-                                <li><img src="https://via.placeholder.com/500x355.jpg" class="img-fluid" alt="#"></li>
-                            </ul>
-                            <span>56 people marked this review as helpful</span>
-                            <a href="#"><span class="icon-like"></span>Helpful</a>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="customer-review_wrap">
-                        <div class="customer-img">
-                            <img src="https://via.placeholder.com/256x256.jpg" class="img-fluid" alt="#">
-                            <p>Saniya G</p>
-                            <span>31 Reviews</span>
-                        </div>
-                        <div class="customer-content-wrap">
-                            <div class="customer-content">
-                                <div class="customer-review">
-                                    <h5>A hole-in-the-wall old school shop.</h5>
-                                    <span class="customer-rating-red"></span>
-                                    <span class="round-icon-blank"></span>
-                                    <span class="round-icon-blank"></span>
-                                    <span class="round-icon-blank"></span>
-                                    <span class="round-icon-blank"></span>
-                                    <p>Reviewed 2 months ago</p>
+                            <div class="customer-content-wrap">
+                                <div class="customer-content">
+                                    <div class="customer-review">
+
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span class="round-icon-blank"></span>
+
+                                        @{ TimeSpan s = DateTime.Now.Subtract(item.Time);}
+                                        @if (item.Time.Day == DateTime.Now.Day)
+                                        {
+                                            <p> @item.Time.ToString("HH:mm:ss")</p>
+
+                                        }
+                                        else if (s.TotalDays >= 1 && s.TotalDays < 2)
+                                        {
+                                            <p>1 gün əvvvəl </p>
+                                        }
+                                        else if (s.TotalDays > 2 && s.TotalDays < 3)
+                                        {
+                                            <p> 2 gün əvvvəl</p>
+                                        }
+                                        else if (s.TotalDays > 3 && s.TotalDays < 4)
+                                        {
+                                            <p> 3 gün əvvvəl</p>
+                                        }
+                                        else
+                                        {
+                                            <p>  @item.Time.ToString("HH:mm:ss dd/MMM/yyyy")</p>
+
+                                        }
+
+                                    </div>
+                                    <div class="customer-rating">@item.Rating</div>
                                 </div>
-                                <div class="customer-rating customer-rating-red">2.0</div>
+                                <p class="customer-text">
+                                    @item.Text
+                                </p>
+                                <ul>
+
+                                    @foreach (var photo in item.CommentPhotos)
+                                    {
+                                        if (photo.Photo != null)
+                                        {
+                                            <li><img src="/Public/images/CommentPhoto/@photo.Photo" class="img-fluid" alt="@photo.Photo"></li>
+                                        }
+
+                                    }
+
+                                </ul>
+                                <span>@item.Reactions.Count() people marked this review as helpful</span>
+                                <button type="button" style="cursor: pointer;border: 0px;padding: 6px; overflow: hidden;border-radius: 5px;" id="like"><span class="icon-like"></span>Helpful</button>
                             </div>
-                            <p class="customer-text">The dumplings were so greasy...the pan-fried shrimp noodles were the same. So much oil and grease it was difficult to eat. The shrimp noodles only come with 3 shrimp (luckily the dish itself is cheap) </p>
-                            <p class="customer-text">
-                                The beef noodle soup was okay. I added black vinegar into the broth to give it some extra flavor. The soup has bok choy which I liked - it's a nice textural element. The shop itself is really unclean (which is the case
-                                in many restaurants in Chinatown) They don't wipe down the tables after customers have eaten. If you peak into the kitchen many of their supplies are on the ground which is unsettling...
-                            </p>
-                            <span>16 people marked this review as helpful</span>
-                            <a href="#"><span class="icon-like"></span>Helpful</a>
                         </div>
-                    </div>
+                        <hr>
+                    }
+
                 </div>
             </div>
             <div class="col-md-4 responsive-wrap">
                 <div class="contact-info">
-                    <img src="https://via.placeholder.com/403x291.png?text=Google+Map" class="img-fluid" alt="#">
+                    <div id="map" style="height: 300px;width: 350px" data-lat="@Model.Listing.Lat" data-lon="@Model.Listing.Lng" data-zoom="13"></div>
                     <div class="address">
                         <span class="icon-location-pin"></span>
-                        <p> LocalNavi St<br> New York, NY 10013<br> b/t Division St. & St. James Pl <br> Chinatown, Civic Center</p>
+                        <p> @Model.Listing.City.Name<br> @Model.Listing.Address<br> </p>
                     </div>
                     <div class="address">
                         <span class="icon-screen-smartphone"></span>
-                        <p> +01 23 4567 8910</p>
+                        <p> @Model.Listing.Phone</p>
                     </div>
                     <div class="address">
                         <span class="icon-link"></span>
-                        <p>https://www.example.com</p>
+                        <a href="@Model.Listing.Website" style="margin-left: 18px">
+                            @Model.Listing.Website
+                        </a>
+
                     </div>
-                    <div class="address">
+                    <div class="address" style="height: 33px">
                         <span class="icon-clock"></span>
-                        <p>Mon - Sun 09:30 am - 05:30 pm </p>
-                        <a href="#" class="featured-open">OPEN NOW</a>
+                        @foreach (var hour in Model.Listing.WorkHourses.ToList())
+                        {
+
+                            DateTime dt1 = DateTime.ParseExact(@hour.OpenHour.ToString(), "HH:mm:ss", new DateTimeFormatInfo());
+                            DateTime dt2 = DateTime.ParseExact(@hour.CloseHour.ToString(), "HH:mm:ss", new DateTimeFormatInfo());
+
+
+
+                            if (@hour.WeekNo == DayOfWeek.Wednesday.ToString().ToLower())
+                            {
+                                if (@dt1.TimeOfDay < DateTime.Now.TimeOfDay && DateTime.Now.TimeOfDay < dt2.TimeOfDay)
+                                {
+                                    <span class="open-close_green" style="font-size: 15px;margin-left: 18px">Open Now </span>
+
+                                }
+                                else
+                                {
+                                    <span style="font-size: 15px;margin-left: 18px"> Closed Now </span>
+
+                                }
+                            }
+
+
+
+
+
+                        }
+
                     </div>
-                   
+
                 </div>
-                
+
             </div>
         </div>
     </div>
 </section>
 
 <!--//END BOOKING DETAILS -->
+@section css{
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    <!-- Star Rating Icon -->
+    <link href="~/Public/css/star-rating.min.css" rel="stylesheet" />
+    <link href="~/Public/css/theme.min.css" rel="stylesheet" />
+}
 
 @section scripts{
     <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 3,
-            slidesPerGroup: 3,
-            loop: true,
-            loopFillGroupWithBlank: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
+        var swiper = new Swiper('.swiper-container',
+            {
+                slidesPerView: 3,
+                slidesPerGroup: 3,
+                loop: true,
+                loopFillGroupWithBlank: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
     </script>
     <script>
         if ($('.image-link').length) {
@@ -297,4 +361,75 @@
             });
         }
     </script>
+
+
+    <script>
+        $(document).ready(function () {
+            var maplat = $('#map').data('lat');
+            var maplon = $('#map').data('lon');
+            var mapzoom = $('#map').data('zoom');
+            var title = $("#placeN").text();
+
+
+            var map;
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'),
+                    {
+                        center: { lat: maplat, lng: maplon },
+                        zoom: mapzoom
+                    });
+
+
+            }
+
+            initMap();
+            mark();
+
+            function mark() {
+                var marker = new google.maps.Marker({
+                    position: { lat: maplat, lng: maplon },
+                    title: title,
+                    animation: google.maps.Animation.DROP,
+                    draggable: false,
+                    map: map
+                });
+            }
+
+
+            console.log($("#input-1").text());
+            $("#commentForm").submit(function (ev) {
+                ev.preventDefault();
+                $.ajax({
+                    url: $(this).attr("action"),
+                    type: $(this).attr("method"),
+                    dataType: "json",
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function () {
+
+                    }
+                });
+            });
+
+        });
+
+        $(document).on('ready',
+            function () {
+                $('#input-1').rating();
+            });
+        $(document).on('ready', function () {
+            $("#input-1").rating().on("rating:clear", function () {
+                alert("Your rating is reset");
+            }).on("rating:change", function (event, value, caption) {
+                alert("You rated: " + value + " = " + $(caption).text());
+            });
+        });
+
+    </script>
+
+
+
 }

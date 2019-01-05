@@ -49,6 +49,8 @@ namespace Navigation.Controllers
 
         //place elave olunmasi
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public JsonResult AddListing(Listing place, HttpPostedFileBase[] Photo)
         {
 

@@ -27,530 +27,531 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="listing-wrap">
-                    <form action="@Url.Action("AddListing","Place")" method="post" enctype="multipart/form-data" id="FormAdd">
-                        <!-- General Information -->
-                        <div class="listing-title">
-                            <span class="ti-files"></span>
-                            <h4>General Information</h4>
-                            <p>Write Something General Information About Your Listing</p>
+                <form action="@Url.Action("AddListing", "Place")" method="post" enctype="multipart/form-data" id="FormAdd">
+                   @Html.AntiForgeryToken()
+                <!-- General Information -->
+                <div class="listing-title">
+                    <span class="ti-files"></span>
+                    <h4>General Information</h4>
+                    <p>Write Something General Information About Your Listing</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Title <span class="text-danger">*</span></label>
+                            <input type="text" name="Title" data-validation="required" data-validation-error-msg="Title boş buraxmayın" class="form-control add-listing_form">
+                            @Html.ValidationMessageFor(m => Model.Listing.Title, "", new {@class = "text-danger"})
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Title <span class="text-danger">*</span></label>
-                                    <input type="text" name="Title" data-validation="required" data-validation-error-msg="Title boş buraxmayın" class="form-control add-listing_form">
-                                    @Html.ValidationMessageFor(m => Model.Listing.Title, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Slogan <span class="text-danger">*</span></label>
-                                    <input type="text" name="Slogan" data-validation="required" data-validation-error-msg="Slogan boş buraxmayın" class="form-control add-listing_form">
-                                    @Html.ValidationMessageFor(m => Model.Listing.Slogan, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Slogan <span class="text-danger">*</span></label>
+                            <input type="text" name="Slogan" data-validation="required" data-validation-error-msg="Slogan boş buraxmayın" class="form-control add-listing_form">
+                            @Html.ValidationMessageFor(m => Model.Listing.Slogan, "", new {@class = "text-danger"})
                         </div>
+                    </div>
+                </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="CategoryId">Category <span class="text-danger">*</span></label>
-                                    <select name="CategoryId" id="CategoryId" class="form-control add-listing_form" data-validation="required" data-validation-error-msg="Kateqoriyanı boş buraxmayın">
-                                        <option value="0">Seçin</option>
-                                        @foreach (var category in Model.category)
-                                        {
-                                            <option value="@category.Id">@category.Name</option>
-                                        }
-                                    </select>
-                                    @Html.ValidationMessageFor(m => Model.Listing.CategoryId, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Website <span class="text-danger">*</span></label>
-                                    <input type="text" name="Website" data-validation="required" data-validation-error-msg="Website boş buraxmayın" class="form-control add-listing_form">
-                                    @Html.ValidationMessageFor(m => Model.Listing.Website, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="CategoryId">Category <span class="text-danger">*</span></label>
+                            <select name="CategoryId" id="CategoryId" class="form-control add-listing_form" data-validation="required" data-validation-error-msg="Kateqoriyanı boş buraxmayın">
+                                <option value="0">Seçin</option>
+                                @foreach (var category in Model.category)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(m => Model.Listing.CategoryId, "", new {@class = "text-danger"})
                         </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Website <span class="text-danger">*</span></label>
+                            <input type="text" name="Website" data-validation="required" data-validation-error-msg="Website boş buraxmayın" class="form-control add-listing_form">
+                            @Html.ValidationMessageFor(m => Model.Listing.Website, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Address <span class="text-danger">*</span></label>
-                                    <input type="text" name="Address" data-validation="required" data-validation-error-msg="Address boş buraxmayın" class="form-control add-listing_form">
-                                    @Html.ValidationMessageFor(m => Model.Listing.Address, "", new { @class = "text-danger" })
-                                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Address <span class="text-danger">*</span></label>
+                            <input type="text" name="Address" data-validation="required" data-validation-error-msg="Address boş buraxmayın" class="form-control add-listing_form">
+                            @Html.ValidationMessageFor(m => Model.Listing.Address, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Phone <span class="text-danger">*</span></label>
+                            <input type="text" name="Phone" data-validation="required" data-validation-error-msg="Nömrəni boş buraxmayın" class="form-control add-listing_form" data-validation-help="Məs: +99450 121 22 35">
+                            @Html.ValidationMessageFor(m => Model.Listing.Phone, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="CityId">City <span class="text-danger">*</span></label>
+                            <select class="form-control add-listing_form" name="CityId" data-validation="required" data-validation-error-msg="Nömrəni boş buraxmayın">
+                                <option value="0">Seçin</option>
+                                @foreach (var city in Model.city)
+                                {
+                                    <option value="@city.Id">@city.Name</option>
+                                }
+
+                            </select>
+                            @Html.ValidationMessageFor(m => Model.Listing.CityId, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Facebook</label>
+                            <input type="text" name="Facebook" class="form-control add-listing_form">
+                            @Html.ValidationMessageFor(m => Model.Listing.Facebook, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="Description">Description <span class="text-danger">*</span></label>
+                            <textarea class="form-control add-listing_form" name="Description" id="Description" rows="3" data-validation="required" data-validation-error-msg="Mətni boş buraxmayın"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!--//End Full Details -->
+                <!--//End General Information -->
+                <!-- Add Location -->
+                <div class="listing-title">
+                    <span class="ti-location-pin"></span>
+                    <h4>Add Location <span class="text-danger">*</span></h4>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="hidden" name="lat" value="">
+                            <input type="hidden" name="lng" value="">
+                            <div id="map" style="height: 400px"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- Add Gallery -->
+                <div class="listing-title">
+                    <span class="ti-gallery"></span>
+                    <h4>Add Gallery <span class="text-danger">*</span></h4>
+                    <p>Write Something General Information About Your Listing</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="custom-file" id="myid">
+                            <div class="add-gallery-text">
+                                <i class="ti-gallery"></i>
+                                <span>Drag &amp; Drop To Change Logo</span>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Phone <span class="text-danger">*</span></label>
-                                    <input type="text" name="Phone" data-validation="required" data-validation-error-msg="Nömrəni boş buraxmayın" class="form-control add-listing_form" data-validation-help="Məs: +99450 121 22 35">
-                                    @Html.ValidationMessageFor(m => Model.Listing.Phone, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="CityId">City <span class="text-danger">*</span></label>
-                                    <select class="form-control add-listing_form" name="CityId" data-validation="required" data-validation-error-msg="Nömrəni boş buraxmayın">
-                                        <option value="0">Seçin</option>
-                                        @foreach (var city in Model.city)
-                                        {
-                                            <option value="@city.Id">@city.Name</option>
-                                        }
-
-                                    </select>
-                                    @Html.ValidationMessageFor(m => Model.Listing.CityId, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Facebook</label>
-                                    <input type="text" name="Facebook" class="form-control add-listing_form">
-                                    @Html.ValidationMessageFor(m => Model.Listing.Facebook, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="Description">Description <span class="text-danger">*</span></label>
-                                    <textarea class="form-control add-listing_form" name="Description" id="Description" rows="3" data-validation="required" data-validation-error-msg="Mətni boş buraxmayın"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <!--//End Full Details -->
-                        <!--//End General Information -->
-                        <!-- Add Location -->
-                        <div class="listing-title">
-                            <span class="ti-location-pin"></span>
-                            <h4>Add Location <span class="text-danger">*</span></h4>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="hidden" name="lat" value="">
-                                    <input type="hidden" name="lng" value="">
-                                    <div id="map" style="height: 400px"></div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-                        <!-- Add Gallery -->
-                        <div class="listing-title">
-                            <span class="ti-gallery"></span>
-                            <h4>Add Gallery <span class="text-danger">*</span></h4>
-                            <p>Write Something General Information About Your Listing</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="custom-file" id="myid">
-                                    <div class="add-gallery-text">
-                                        <i class="ti-gallery"></i>
-                                        <span>Drag &amp; Drop To Change Logo</span>
-                                    </div>
-                                    <input type="file" name="Photo" id="files" class="custom-file-input" multiple="multiple"
-                                           data-validation="length mime size"
-                                           data-validation-length="min1"
-                                           data-validation-allowing="jpg, png, gif, jpeg"
-                                           data-validation-max-size="2M"
-                                           data-validation-error-msg-size="2 Mb-dan artıq şəkil yükləməyin"
-                                           data-validation-error-msg-mime="Ancaq .jpeg, .jpg, .png, .gif formatında şəkil yükləyin"
-                                           data-validation-error-msg-length="Ən azı 1 şəkil yükləməlisiniz">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!--//End Add Gallery -->
-                        <!-- Amenities -->
-                        <div class="listing-title">
-                            <span class="ti-gift"></span>
-                            <h4>Amenities</h4>
-                            <p>Write Something General Information About Your Listing</p>
-                        </div>
-                        <div class="row" id="servis">
+                            <input type="file" name="Photo" id="files" class="custom-file-input" multiple="multiple"
+                                   data-validation="length mime size"
+                                   data-validation-length="min3"
+                                   data-validation-allowing="jpg, png, gif, jpeg"
+                                   data-validation-max-size="2M"
+                                   data-validation-error-msg-size="2 Mb-dan artıq şəkil yükləməyin"
+                                   data-validation-error-msg-mime="Ancaq .jpeg, .jpg, .png, .gif formatında şəkil yükləyin"
+                                   data-validation-error-msg-length="Ən azı 1 şəkil yükləməlisiniz">
 
                         </div>
+                    </div>
+                </div>
+                <!--//End Add Gallery -->
+                <!-- Amenities -->
+                <div class="listing-title">
+                    <span class="ti-gift"></span>
+                    <h4>Amenities</h4>
+                    <p>Write Something General Information About Your Listing</p>
+                </div>
+                <div class="row" id="servis">
+
+                </div>
 
 
 
-                        <!--//End Amenities -->
-                        <!-- Opening Hours -->
-                        <div class="listing-title">
-                            <span class="ti-time"></span>
-                            <h4>Opening Hours</h4>
-                            <p>Write Something General Information About Your Listing</p>
+                <!--//End Amenities -->
+                <!-- Opening Hours -->
+                <div class="listing-title">
+                    <span class="ti-time"></span>
+                    <h4>Opening Hours</h4>
+                    <p>Write Something General Information About Your Listing</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 timediv">
+                        <div class="md-checkbox">
+                            <input id="i51" type="checkbox" name="monday"/>
+                            <label for="i51" class="timeweek">Bazarertəsi</label>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-3 timediv">
-                                <div class="md-checkbox">
-                                    <input id="i51" type="checkbox" name="monday" />
-                                    <label for="i51" class="timeweek">Bazarertəsi</label>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week11" name="bazarertesi" disabled="disabled">
+                                <option value="0:00">00 :00 AM</option>
+                                <option value="1:00">1 :00 AM</option>
+                                <option value="2:00">2 :00 AM</option>
+                                <option value="3:00">3 :00 AM</option>
+                                <option value="4:00">4 :00 AM</option>
+                                <option value="5:00">5 :00 AM</option>
+                                <option value="6:00">6 :00 AM</option>
+                                <option value="7:00">7 :00 AM</option>
+                                <option value="8:00">8 :00 AM</option>
+                                <option value="9:00">9 :00 AM</option>
+                                <option value="10:00">10 :00 AM</option>
+                                <option value="11:00">11 :00 AM</option>
 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week11" name="bazarertesi" disabled="disabled">
-                                        <option value="0:00">00 :00 AM</option>
-                                        <option value="1:00">1 :00 AM</option>
-                                        <option value="2:00">2 :00 AM</option>
-                                        <option value="3:00">3 :00 AM</option>
-                                        <option value="4:00">4 :00 AM</option>
-                                        <option value="5:00">5 :00 AM</option>
-                                        <option value="6:00">6 :00 AM</option>
-                                        <option value="7:00">7 :00 AM</option>
-                                        <option value="8:00">8 :00 AM</option>
-                                        <option value="9:00">9 :00 AM</option>
-                                        <option value="10:00">10 :00 AM</option>
-                                        <option value="11:00">11 :00 AM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week12" name="bazarertesi1" disabled="disabled">
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week12" name="bazarertesi1" disabled="disabled">
+                                <option value="12:00">12 :00 PM</option>
+                                <option value="13:00">13 :00 PM</option>
+                                <option value="14:00">14 :00 PM</option>
+                                <option value="15:00">15 :00 PM</option>
+                                <option value="16:00">16 :00 PM</option>
+                                <option value="17:00">17 :00 PM</option>
+                                <option value="18:00">18 :00 PM</option>
+                                <option value="19:00">19 :00 PM</option>
+                                <option value="20:00">20 :00 PM</option>
+                                <option value="21:00">21 :00 PM</option>
+                                <option value="22:00">22 :00 PM</option>
+                                <option value="23:00">23 :00 PM</option>
 
-                                        <option value="12:00">12 :00 PM</option>
-                                        <option value="13:00">13 :00 PM</option>
-                                        <option value="14:00">14 :00 PM</option>
-                                        <option value="15:00">15 :00 PM</option>
-                                        <option value="16:00">16 :00 PM</option>
-                                        <option value="17:00">17 :00 PM</option>
-                                        <option value="18:00">18 :00 PM</option>
-                                        <option value="19:00">19 :00 PM</option>
-                                        <option value="20:00">20 :00 PM</option>
-                                        <option value="21:00">21 :00 PM</option>
-                                        <option value="22:00">22 :00 PM</option>
-                                        <option value="23:00">23 :00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-                                    </select>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-md-3 timediv">
+                        <div class="md-checkbox">
+                            <input id="i52" type="checkbox" name="tuesday"/>
+                            <label for="i52" class="timeweek">Cərşəmbə axşamı</label>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-3 timediv">
-                                <div class="md-checkbox">
-                                    <input id="i52" type="checkbox" name="tuesday" />
-                                    <label for="i52" class="timeweek">Cərşəmbə axşamı</label>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week21" name="cersenbeaxsami" disabled="disabled">
 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week21" name="cersenbeaxsami" disabled="disabled">
+                                <option value="0:00">00 :00 AM</option>
+                                <option value="1:00">1 :00 AM</option>
+                                <option value="2:00">2 :00 AM</option>
+                                <option value="3:00">3 :00 AM</option>
+                                <option value="4:00">4 :00 AM</option>
+                                <option value="5:00">5 :00 AM</option>
+                                <option value="6:00">6 :00 AM</option>
+                                <option value="7:00">7 :00 AM</option>
+                                <option value="8:00">8 :00 AM</option>
+                                <option value="9:00">9 :00 AM</option>
+                                <option value="10:00">10 :00 AM</option>
+                                <option value="11:00">11 :00 AM</option>
 
-                                        <option value="0:00">00 :00 AM</option>
-                                        <option value="1:00">1 :00 AM</option>
-                                        <option value="2:00">2 :00 AM</option>
-                                        <option value="3:00">3 :00 AM</option>
-                                        <option value="4:00">4 :00 AM</option>
-                                        <option value="5:00">5 :00 AM</option>
-                                        <option value="6:00">6 :00 AM</option>
-                                        <option value="7:00">7 :00 AM</option>
-                                        <option value="8:00">8 :00 AM</option>
-                                        <option value="9:00">9 :00 AM</option>
-                                        <option value="10:00">10 :00 AM</option>
-                                        <option value="11:00">11 :00 AM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week22" name="cersenbeaxsami1" disabled="disabled">
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week22" name="cersenbeaxsami1" disabled="disabled">
+                                <option value="12:00">12 :00 PM</option>
+                                <option value="13:00">13 :00 PM</option>
+                                <option value="14:00">14 :00 PM</option>
+                                <option value="15:00">15 :00 PM</option>
+                                <option value="16:00">16 :00 PM</option>
+                                <option value="17:00">17 :00 PM</option>
+                                <option value="18:00">18 :00 PM</option>
+                                <option value="19:00">19 :00 PM</option>
+                                <option value="20:00">20 :00 PM</option>
+                                <option value="21:00">21 :00 PM</option>
+                                <option value="22:00">22 :00 PM</option>
+                                <option value="23:00">23 :00 PM</option>
 
-                                        <option value="12:00">12 :00 PM</option>
-                                        <option value="13:00">13 :00 PM</option>
-                                        <option value="14:00">14 :00 PM</option>
-                                        <option value="15:00">15 :00 PM</option>
-                                        <option value="16:00">16 :00 PM</option>
-                                        <option value="17:00">17 :00 PM</option>
-                                        <option value="18:00">18 :00 PM</option>
-                                        <option value="19:00">19 :00 PM</option>
-                                        <option value="20:00">20 :00 PM</option>
-                                        <option value="21:00">21 :00 PM</option>
-                                        <option value="22:00">22 :00 PM</option>
-                                        <option value="23:00">23 :00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-                                    </select>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-md-3 timediv">
+                        <div class="md-checkbox">
+                            <input id="i53" type="checkbox" name="wednesday"/>
+                            <label for="i53" class="timeweek">Cərşəmbə</label>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-3 timediv">
-                                <div class="md-checkbox">
-                                    <input id="i53" type="checkbox" name="wednesday" />
-                                    <label for="i53" class="timeweek">Cərşəmbə</label>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week31" name="cersenbe" disabled="disabled">
 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week31" name="cersenbe" disabled="disabled">
+                                <option value="0:00">00 :00 AM</option>
+                                <option value="1:00">1 :00 AM</option>
+                                <option value="2:00">2 :00 AM</option>
+                                <option value="3:00">3 :00 AM</option>
+                                <option value="4:00">4 :00 AM</option>
+                                <option value="5:00">5 :00 AM</option>
+                                <option value="6:00">6 :00 AM</option>
+                                <option value="7:00">7 :00 AM</option>
+                                <option value="8:00">8 :00 AM</option>
+                                <option value="9:00">9 :00 AM</option>
+                                <option value="10:00">10 :00 AM</option>
+                                <option value="11:00">11 :00 AM</option>
 
-                                        <option value="0:00">00 :00 AM</option>
-                                        <option value="1:00">1 :00 AM</option>
-                                        <option value="2:00">2 :00 AM</option>
-                                        <option value="3:00">3 :00 AM</option>
-                                        <option value="4:00">4 :00 AM</option>
-                                        <option value="5:00">5 :00 AM</option>
-                                        <option value="6:00">6 :00 AM</option>
-                                        <option value="7:00">7 :00 AM</option>
-                                        <option value="8:00">8 :00 AM</option>
-                                        <option value="9:00">9 :00 AM</option>
-                                        <option value="10:00">10 :00 AM</option>
-                                        <option value="11:00">11 :00 AM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week32" name="cersenbe1" disabled="disabled">
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week32" name="cersenbe1" disabled="disabled">
+                                <option value="12:00">12 :00 PM</option>
+                                <option value="13:00">13 :00 PM</option>
+                                <option value="14:00">14 :00 PM</option>
+                                <option value="15:00">15 :00 PM</option>
+                                <option value="16:00">16 :00 PM</option>
+                                <option value="17:00">17 :00 PM</option>
+                                <option value="18:00">18 :00 PM</option>
+                                <option value="19:00">19 :00 PM</option>
+                                <option value="20:00">20 :00 PM</option>
+                                <option value="21:00">21 :00 PM</option>
+                                <option value="22:00">22 :00 PM</option>
+                                <option value="23:00">23 :00 PM</option>
 
-                                        <option value="12:00">12 :00 PM</option>
-                                        <option value="13:00">13 :00 PM</option>
-                                        <option value="14:00">14 :00 PM</option>
-                                        <option value="15:00">15 :00 PM</option>
-                                        <option value="16:00">16 :00 PM</option>
-                                        <option value="17:00">17 :00 PM</option>
-                                        <option value="18:00">18 :00 PM</option>
-                                        <option value="19:00">19 :00 PM</option>
-                                        <option value="20:00">20 :00 PM</option>
-                                        <option value="21:00">21 :00 PM</option>
-                                        <option value="22:00">22 :00 PM</option>
-                                        <option value="23:00">23 :00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-                                    </select>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-md-3 timediv">
+                        <div class="md-checkbox">
+                            <input id="i54" type="checkbox" name="thursday"/>
+                            <label for="i54" class="timeweek">Cumə axşamı</label>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-3 timediv">
-                                <div class="md-checkbox">
-                                    <input id="i54" type="checkbox" name="thursday" />
-                                    <label for="i54" class="timeweek">Cumə axşamı</label>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week41" name="cumeaxsami" disabled="disabled">
 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week41" name="cumeaxsami" disabled="disabled">
+                                <option value="0:00">00 :00 AM</option>
+                                <option value="1:00">1 :00 AM</option>
+                                <option value="2:00">2 :00 AM</option>
+                                <option value="3:00">3 :00 AM</option>
+                                <option value="4:00">4 :00 AM</option>
+                                <option value="5:00">5 :00 AM</option>
+                                <option value="6:00">6 :00 AM</option>
+                                <option value="7:00">7 :00 AM</option>
+                                <option value="8:00">8 :00 AM</option>
+                                <option value="9:00">9 :00 AM</option>
+                                <option value="10:00">10 :00 AM</option>
+                                <option value="11:00">11 :00 AM</option>
 
-                                        <option value="0:00">00 :00 AM</option>
-                                        <option value="1:00">1 :00 AM</option>
-                                        <option value="2:00">2 :00 AM</option>
-                                        <option value="3:00">3 :00 AM</option>
-                                        <option value="4:00">4 :00 AM</option>
-                                        <option value="5:00">5 :00 AM</option>
-                                        <option value="6:00">6 :00 AM</option>
-                                        <option value="7:00">7 :00 AM</option>
-                                        <option value="8:00">8 :00 AM</option>
-                                        <option value="9:00">9 :00 AM</option>
-                                        <option value="10:00">10 :00 AM</option>
-                                        <option value="11:00">11 :00 AM</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week42" name="cumeaxsami1" disabled="disabled">
-
-                                        <option value="12:00">12 :00 PM</option>
-                                        <option value="13:00">13 :00 PM</option>
-                                        <option value="14:00">14 :00 PM</option>
-                                        <option value="15:00">15 :00 PM</option>
-                                        <option value="16:00">16 :00 PM</option>
-                                        <option value="17:00">17 :00 PM</option>
-                                        <option value="18:00">18 :00 PM</option>
-                                        <option value="19:00">19 :00 PM</option>
-                                        <option value="20:00">20 :00 PM</option>
-                                        <option value="21:00">21 :00 PM</option>
-                                        <option value="22:00">22 :00 PM</option>
-                                        <option value="23:00">23 :00 PM</option>
-
-                                    </select>
-                                </div>
-                            </div>
+                            </select>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3 timediv">
-                                <div class="md-checkbox">
-                                    <input id="i55" type="checkbox" name="friday" />
-                                    <label for="i55" class="timeweek">Cumə</label>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week42" name="cumeaxsami1" disabled="disabled">
 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week51" name="cume" disabled="disabled">
+                                <option value="12:00">12 :00 PM</option>
+                                <option value="13:00">13 :00 PM</option>
+                                <option value="14:00">14 :00 PM</option>
+                                <option value="15:00">15 :00 PM</option>
+                                <option value="16:00">16 :00 PM</option>
+                                <option value="17:00">17 :00 PM</option>
+                                <option value="18:00">18 :00 PM</option>
+                                <option value="19:00">19 :00 PM</option>
+                                <option value="20:00">20 :00 PM</option>
+                                <option value="21:00">21 :00 PM</option>
+                                <option value="22:00">22 :00 PM</option>
+                                <option value="23:00">23 :00 PM</option>
 
-                                        <option value="0:00">00 :00 AM</option>
-                                        <option value="1:00">1 :00 AM</option>
-                                        <option value="2:00">2 :00 AM</option>
-                                        <option value="3:00">3 :00 AM</option>
-                                        <option value="4:00">4 :00 AM</option>
-                                        <option value="5:00">5 :00 AM</option>
-                                        <option value="6:00">6 :00 AM</option>
-                                        <option value="7:00">7 :00 AM</option>
-                                        <option value="8:00">8 :00 AM</option>
-                                        <option value="9:00">9 :00 AM</option>
-                                        <option value="10:00">10 :00 AM</option>
-                                        <option value="11:00">11 :00 AM</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week52" name="cume1" disabled="disabled">
-
-                                        <option value="12:00">12 :00 PM</option>
-                                        <option value="13:00">13 :00 PM</option>
-                                        <option value="14:00">14 :00 PM</option>
-                                        <option value="15:00">15 :00 PM</option>
-                                        <option value="16:00">16 :00 PM</option>
-                                        <option value="17:00">17 :00 PM</option>
-                                        <option value="18:00">18 :00 PM</option>
-                                        <option value="19:00">19 :00 PM</option>
-                                        <option value="20:00">20 :00 PM</option>
-                                        <option value="21:00">21 :00 PM</option>
-                                        <option value="22:00">22 :00 PM</option>
-                                        <option value="23:00">23 :00 PM</option>
-
-                                    </select>
-                                </div>
-                            </div>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 timediv">
+                        <div class="md-checkbox">
+                            <input id="i55" type="checkbox" name="friday"/>
+                            <label for="i55" class="timeweek">Cumə</label>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-3 timediv">
-                                <div class="md-checkbox">
-                                    <input id="i56" type="checkbox" name="saturday" />
-                                    <label for="i56" class="timeweek">Şənbə</label>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week51" name="cume" disabled="disabled">
 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week61" name="senbe" disabled="disabled">
+                                <option value="0:00">00 :00 AM</option>
+                                <option value="1:00">1 :00 AM</option>
+                                <option value="2:00">2 :00 AM</option>
+                                <option value="3:00">3 :00 AM</option>
+                                <option value="4:00">4 :00 AM</option>
+                                <option value="5:00">5 :00 AM</option>
+                                <option value="6:00">6 :00 AM</option>
+                                <option value="7:00">7 :00 AM</option>
+                                <option value="8:00">8 :00 AM</option>
+                                <option value="9:00">9 :00 AM</option>
+                                <option value="10:00">10 :00 AM</option>
+                                <option value="11:00">11 :00 AM</option>
 
-                                        <option value="0:00">00 :00 AM</option>
-                                        <option value="1:00">1 :00 AM</option>
-                                        <option value="2:00">2 :00 AM</option>
-                                        <option value="3:00">3 :00 AM</option>
-                                        <option value="4:00">4 :00 AM</option>
-                                        <option value="5:00">5 :00 AM</option>
-                                        <option value="6:00">6 :00 AM</option>
-                                        <option value="7:00">7 :00 AM</option>
-                                        <option value="8:00">8 :00 AM</option>
-                                        <option value="9:00">9 :00 AM</option>
-                                        <option value="10:00">10 :00 AM</option>
-                                        <option value="11:00">11 :00 AM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week52" name="cume1" disabled="disabled">
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week62" name="senbe1" disabled="disabled">
+                                <option value="12:00">12 :00 PM</option>
+                                <option value="13:00">13 :00 PM</option>
+                                <option value="14:00">14 :00 PM</option>
+                                <option value="15:00">15 :00 PM</option>
+                                <option value="16:00">16 :00 PM</option>
+                                <option value="17:00">17 :00 PM</option>
+                                <option value="18:00">18 :00 PM</option>
+                                <option value="19:00">19 :00 PM</option>
+                                <option value="20:00">20 :00 PM</option>
+                                <option value="21:00">21 :00 PM</option>
+                                <option value="22:00">22 :00 PM</option>
+                                <option value="23:00">23 :00 PM</option>
 
-                                        <option value="12:00">12 :00 PM</option>
-                                        <option value="13:00">13 :00 PM</option>
-                                        <option value="14:00">14 :00 PM</option>
-                                        <option value="15:00">15 :00 PM</option>
-                                        <option value="16:00">16 :00 PM</option>
-                                        <option value="17:00">17 :00 PM</option>
-                                        <option value="18:00">18 :00 PM</option>
-                                        <option value="19:00">19 :00 PM</option>
-                                        <option value="20:00">20 :00 PM</option>
-                                        <option value="21:00">21 :00 PM</option>
-                                        <option value="22:00">22 :00 PM</option>
-                                        <option value="23:00">23 :00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-                                    </select>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-md-3 timediv">
+                        <div class="md-checkbox">
+                            <input id="i56" type="checkbox" name="saturday"/>
+                            <label for="i56" class="timeweek">Şənbə</label>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-3 timediv">
-                                <div class="md-checkbox">
-                                    <input id="i57" type="checkbox" name="sunday" />
-                                    <label for="i57" class="timeweek">Bazar</label>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week61" name="senbe" disabled="disabled">
 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week71" name="bazar" disabled="disabled">
+                                <option value="0:00">00 :00 AM</option>
+                                <option value="1:00">1 :00 AM</option>
+                                <option value="2:00">2 :00 AM</option>
+                                <option value="3:00">3 :00 AM</option>
+                                <option value="4:00">4 :00 AM</option>
+                                <option value="5:00">5 :00 AM</option>
+                                <option value="6:00">6 :00 AM</option>
+                                <option value="7:00">7 :00 AM</option>
+                                <option value="8:00">8 :00 AM</option>
+                                <option value="9:00">9 :00 AM</option>
+                                <option value="10:00">10 :00 AM</option>
+                                <option value="11:00">11 :00 AM</option>
 
-                                        <option value="0:00">00 :00 AM</option>
-                                        <option value="1:00">1 :00 AM</option>
-                                        <option value="2:00">2 :00 AM</option>
-                                        <option value="3:00">3 :00 AM</option>
-                                        <option value="4:00">4 :00 AM</option>
-                                        <option value="5:00">5 :00 AM</option>
-                                        <option value="6:00">6 :00 AM</option>
-                                        <option value="7:00">7 :00 AM</option>
-                                        <option value="8:00">8 :00 AM</option>
-                                        <option value="9:00">9 :00 AM</option>
-                                        <option value="10:00">10 :00 AM</option>
-                                        <option value="11:00">11 :00 AM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week62" name="senbe1" disabled="disabled">
 
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <select class="form-control week72" name="bazar1" disabled="disabled">
+                                <option value="12:00">12 :00 PM</option>
+                                <option value="13:00">13 :00 PM</option>
+                                <option value="14:00">14 :00 PM</option>
+                                <option value="15:00">15 :00 PM</option>
+                                <option value="16:00">16 :00 PM</option>
+                                <option value="17:00">17 :00 PM</option>
+                                <option value="18:00">18 :00 PM</option>
+                                <option value="19:00">19 :00 PM</option>
+                                <option value="20:00">20 :00 PM</option>
+                                <option value="21:00">21 :00 PM</option>
+                                <option value="22:00">22 :00 PM</option>
+                                <option value="23:00">23 :00 PM</option>
 
-                                        <option value="12:00">12 :00 PM</option>
-                                        <option value="13:00">13 :00 PM</option>
-                                        <option value="14:00">14 :00 PM</option>
-                                        <option value="15:00">15 :00 PM</option>
-                                        <option value="16:00">16 :00 PM</option>
-                                        <option value="17:00">17 :00 PM</option>
-                                        <option value="18:00">18 :00 PM</option>
-                                        <option value="19:00">19 :00 PM</option>
-                                        <option value="20:00">20 :00 PM</option>
-                                        <option value="21:00">21 :00 PM</option>
-                                        <option value="22:00">22 :00 PM</option>
-                                        <option value="23:00">23 :00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-                                    </select>
-                                </div>
-                            </div>
+                <div class="row">
+                    <div class="col-md-3 timediv">
+                        <div class="md-checkbox">
+                            <input id="i57" type="checkbox" name="sunday"/>
+                            <label for="i57" class="timeweek">Bazar</label>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="btn-wrap btn-wrap2">
-                                    <button type="submit" class="btn btn-simple">SUBMIT LISTING</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--//End Opening Hours -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week71" name="bazar" disabled="disabled">
 
-                    </form>
+                                <option value="0:00">00 :00 AM</option>
+                                <option value="1:00">1 :00 AM</option>
+                                <option value="2:00">2 :00 AM</option>
+                                <option value="3:00">3 :00 AM</option>
+                                <option value="4:00">4 :00 AM</option>
+                                <option value="5:00">5 :00 AM</option>
+                                <option value="6:00">6 :00 AM</option>
+                                <option value="7:00">7 :00 AM</option>
+                                <option value="8:00">8 :00 AM</option>
+                                <option value="9:00">9 :00 AM</option>
+                                <option value="10:00">10 :00 AM</option>
+                                <option value="11:00">11 :00 AM</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control week72" name="bazar1" disabled="disabled">
+
+                                <option value="12:00">12 :00 PM</option>
+                                <option value="13:00">13 :00 PM</option>
+                                <option value="14:00">14 :00 PM</option>
+                                <option value="15:00">15 :00 PM</option>
+                                <option value="16:00">16 :00 PM</option>
+                                <option value="17:00">17 :00 PM</option>
+                                <option value="18:00">18 :00 PM</option>
+                                <option value="19:00">19 :00 PM</option>
+                                <option value="20:00">20 :00 PM</option>
+                                <option value="21:00">21 :00 PM</option>
+                                <option value="22:00">22 :00 PM</option>
+                                <option value="23:00">23 :00 PM</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="btn-wrap btn-wrap2">
+                            <button type="submit" class="btn btn-simple">SUBMIT LISTING</button>
+                        </div>
+                    </div>
+                </div>
+                <!--//End Opening Hours -->
+
+                </form>
                 </div>
             </div>
         </div>

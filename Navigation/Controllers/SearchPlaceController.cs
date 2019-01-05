@@ -49,7 +49,7 @@ namespace Navigation.Controllers
 
             if (!string.IsNullOrEmpty(cityKey))
             {
-                decimal rat = 0;
+                
                 modal = db.Listings.Where(x => x.City.Name.StartsWith(cityKey)).Select(x => new searchPlace
                 {
                     id = x.Id,
@@ -81,7 +81,27 @@ namespace Navigation.Controllers
         [HttpGet]
         public ActionResult Detail(int id)
         {
-            return View();
+          vwDetails model = new vwDetails();
+            model.Listing = db.Listings.Include("Comments").Include("Photos").Include("City").Include("User").Include("WorkHourses").Include("ListServices").Include("Category").FirstOrDefault(x=>x.Id==id);
+            if (model.Listing==null)
+            {
+
+                return HttpNotFound();
+            }
+
+            model.ListServices = db.ListServices.Include("Service").Where(x => x.ListingId == id).ToList();
+            model.Comments = db.Comments.Include("CommentPhotos").Include("Reactions").Include("User").Where(x=>x.ListingId==id).ToList();
+
+            ViewBag.Rating= model.Listing.Comments.Average(z => z.Rating);
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public JsonResult Comment(string Rating, string Text, HttpPostedFileBase[] Photo)
+        {
+            return Json("ok", JsonRequestBehavior.AllowGet);
         }
     }
 }

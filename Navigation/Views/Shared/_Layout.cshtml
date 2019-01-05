@@ -16,13 +16,15 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/Public/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Toastr CSS-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet" />
     <!-- Jquery Ui CSS -->
     <link href="~/Public/css/jquery-ui.min.css" rel="stylesheet" />
-
+   
     <!-- Themify Icon -->
     <link rel="stylesheet" href="~/Public/css/themify-icons.css">
 
@@ -42,7 +44,7 @@
 
     <!-- Hover Effects -->
     <link href="~/Public/css/set1.css" rel="stylesheet">
-
+    @RenderSection("css",false)
     <!-- Main CSS -->
     <link rel="stylesheet" href="~/Public/css/style.css">
 
@@ -325,6 +327,8 @@
     <script src="~/Public/js/swiper.min.js"></script>
     <script src="~/Public/js/gmaps.js"></script>
     <script src="~/Public/js/dropzone.js"></script>
+    <script src="~/Public/js/star-rating.min.js"></script>
+    <script src="~/Public/js/theme.min.js"></script>
     <script src="~/Public/js/main.js"></script>
 <script>
     var owl = $('.owl-carousel');

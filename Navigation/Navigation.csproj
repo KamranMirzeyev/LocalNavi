@@ -230,11 +230,14 @@
     <Compile Include="Models\ListService.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PlaceViewModel.cs" />
+    <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Reaction.cs" />
     <Compile Include="Models\searchPlace.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\vwDetails.cs" />
     <Compile Include="Models\vwHourWeek.cs" />
+    <Compile Include="Models\vwService.cs" />
     <Compile Include="Models\WorkHour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -250,8 +253,10 @@
     <Content Include="Public\css\owl.theme.default.min.css" />
     <Content Include="Public\css\set1.css" />
     <Content Include="Public\css\simple-line-icons.css" />
+    <Content Include="Public\css\star-rating.min.css" />
     <Content Include="Public\css\style.css" />
     <Content Include="Public\css\swiper.min.css" />
+    <Content Include="Public\css\theme.min.css" />
     <Content Include="Public\css\themify-icons.css" />
     <Content Include="Public\fonts\fontawesome-webfont.svg" />
     <Content Include="Public\fonts\Simple-Line-Icons.svg" />
@@ -269,6 +274,7 @@
     <Content Include="Public\images\flags\us.svg" />
     <Content Include="Public\images\howit-bg.png" />
     <Content Include="Public\images\illus.png" />
+    <Content Include="Public\img\loading.gif" />
     <Content Include="Public\images\logo.png" />
     <Content Include="Public\images\logo.svg" />
     <Content Include="Public\images\nav-icon.png" />
@@ -301,7 +307,9 @@
     <Content Include="Public\js\owl.carousel.js" />
     <Content Include="Public\js\popper.min.js" />
     <Content Include="Public\js\script.js" />
+    <Content Include="Public\js\star-rating.min.js" />
     <Content Include="Public\js\swiper.min.js" />
+    <Content Include="Public\js\theme.min.js" />
     <Content Include="Public\js\validate.js" />
     <Content Include="Public\js\map.js" />
     <Content Include="Public\video\home.mp4" />
@@ -322,6 +330,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Public\images\CommentPhoto\" />
+    <Folder Include="Public\images\UserPhoto\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

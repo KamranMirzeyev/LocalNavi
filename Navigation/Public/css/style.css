@@ -2151,7 +2151,7 @@ hr {
 
 .address {
   color: #737882;
-  padding: 18px 0 0 16px;
+  padding: 12px 0 0 16px;
 }
   .address span {
     font-size: 18px;
@@ -3101,3 +3101,7 @@ select.form-control:not([size]):not([multiple]) {
 .timediv {
     padding-top: 10px !important;
 }
+.glyphicon-star {
+    color: yellow;
+}
+

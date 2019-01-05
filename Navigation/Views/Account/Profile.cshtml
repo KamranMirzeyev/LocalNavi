@@ -19,23 +19,29 @@
         <div class="row">
             @foreach (var item in Model)
             {
+               // var r = Model.Select(t => t.Comments.Average(p => p.Rating));
                 
                 <div class="col-md-4 card-1">
                     <div class="card">
                         @foreach (var photo in @item.Photos.ToList().Take(1))
                         {
+                            
                             <a href="@Url.Action("detail", "SearchPlace", new {id = @item.Id})">
                                 <img class="card-img-top" src="~/Public/images/PlacePhoto/@photo.PlacePhoto" alt="Card image cap">
                             </a>
-                            
+
                         }
-                           
+
                         <div class="card-body">
                             <h5 class="card-title">@item.Title <span style="float: right"><i class="fa @(item.Status? "fa-check-circle-o text-success":"fa-times-circle-o text-danger")"></i></span></h5>
                             <ul class="card-rating d-flex justify-content-between align-items-center">
-                                <li class="card-rating-green">4.5</li>
-                                <li class="flex-grow-1">51 ratings</li>
-                                <li class="category"><i class="fa fa-coffee"></i> @item.Category.Name</li>
+
+
+                                <li class="card-rating-green">@*@(item.Comments.Average(q => q.Rating))*@</li>
+
+
+                                <li class="flex-grow-1">@item.Comments.Count() ratings</li>
+                                <li class="category"><i class="fa @item.Category.Icon"></i> @item.Category.Name</li>
                             </ul>
                             <p class="card-text">
                                 @item.Slogan
@@ -45,14 +51,14 @@
                             <p><i class="ti-location-pin"></i>@item.City.Name</p>
                             @foreach (var hour in item.WorkHourses.ToList())
                             {
-                                
+
                                 DateTime dt1 = DateTime.ParseExact(@hour.OpenHour.ToString(), "HH:mm:ss", new DateTimeFormatInfo());
                                 DateTime dt2 = DateTime.ParseExact(@hour.CloseHour.ToString(), "HH:mm:ss", new DateTimeFormatInfo());
 
-                              
-                                
+
+
                                 if (@hour.WeekNo == DayOfWeek.Wednesday.ToString().ToLower())
-                                {   
+                                {
                                     if (@dt1.TimeOfDay < DateTime.Now.TimeOfDay && DateTime.Now.TimeOfDay < dt2.TimeOfDay)
                                     {
                                         <span class="open-close_green">Open Now </span>
@@ -65,11 +71,11 @@
                                     }
                                 }
 
-                               
 
-                            
 
-                             }
+
+
+                            }
 
                         </div>
                     </div>

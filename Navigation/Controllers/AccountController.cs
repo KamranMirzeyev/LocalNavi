@@ -133,6 +133,14 @@ namespace Navigation.Controllers
             if (u!=null)
             {
                 var place = db.Listings.Include("City").Include("Category").Include(x=>x.Photos).Include(x=>x.WorkHourses).Include(x=>x.Comments).Include(x=>x.ListServices).Where(x => x.UserId == id).ToList();
+
+               
+                var p= place.Where(x=>x.Id==id).Select(t => new 
+                {
+                  rat = (double)t.Comments.Average(x=>x.Rating)
+                    
+                }).ToList();
+                ViewBag.Rating = p;
                 return View(place);
                 
             }
