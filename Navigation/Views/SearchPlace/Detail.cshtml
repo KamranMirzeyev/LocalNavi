@@ -47,7 +47,17 @@
             <div class="col-md-6">
                 <div class="reserve-seat-block align-items-center">
                     <div class="reserve-rating mx-0 mx-md-3">
-                        <span>@ViewBag.Rating</span>
+                      
+                            @if (ViewBag.Rating == null)
+                            {
+                             <span>0</span>   
+                            }
+                            else
+                            {
+                             <span>@ViewBag.Rating.ToString("F1")</span>
+                            }
+                            
+                       
                     </div>
 
                 </div>
@@ -148,17 +158,23 @@
                             {
                                 <img src="/Public/images/UserPhoto/@Model.Listing.User.Photo" class="img-fluid" alt="Model.Listing.User.Photo">
                             }
+                           @if (Session["userName"]!=null)
+                           {
+                               <p>@Session["userName"]</p>
+                           }
+                          
 
-                            <p>@Model.Listing.User.FullName</p>
+                           
                         </div>
-                        <form action="@Url.Action("Comment","SearchPlace")" method="post" enctype="multipart/form-data" id="commentForm">
+                        <form action="@Url.Action("Commet", "SearchPlace")" method="post" enctype="multipart/form-data" id="commentForm">
+                            <input type="hidden" value="@Model.Listing.Id" name="id"/>
                             <div class="customer-content-wrap">
                                 <div class="your-rating-wraps">
 
                                     <input id="input-1" name="Rating" type="number" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="sm">
                                 </div>
                                 <div class="your-comment-wrap">
-                                    <textarea name="Text" class="your-rating-content" placeholder="Enter Your Comments" maxlength="140"></textarea>
+                                    <textarea name="Text" class="your-rating-content" placeholder="Enter Your Comments" maxlength="140"  data-validation="length" data-validation-length="max140" data-validation-error-msg-length="140 simvoldan artıq istifadə etməyin" data-validation="required" data-validation-error-msg="Comment bildirin!"></textarea>
                                     <h6 class="your-rating-notify">at least 140 characters</h6>
                                 </div>
 
@@ -166,12 +182,19 @@
                                     <div class="col-md-4 mr-auto">
                                         <div class="add-photos-link mb-3 mb-md-0">
 
-                                            <input type="file" class="icon-picture" multiple="multiple" />
+                                            <input type="file" name="Photo" multiple="multiple" id="filePhoto"
+                                       data-validation="mime size"
+                                       
+                                       data-validation-allowing="jpg, png, gif, jpeg"
+                                       data-validation-max-size="2M"
+                                       data-validation-error-msg-size="2 Mb-dan artıq şəkil yükləməyin"
+                                       data-validation-error-msg-mime="Ancaq .jpeg, .jpg, .png, .gif formatında şəkil yükləyin" />
+
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="your-rating-btn">
-                                            <button type="submit" class="btn btn-danger btn-block">Publish Review</button>
+                                            <button type="submit" id="commentButton" class="btn btn-danger btn-block">Publish Review</button>
                                         </div>
                                     </div>
                                 </div>
@@ -202,12 +225,16 @@
                             <div class="customer-content-wrap">
                                 <div class="customer-content">
                                     <div class="customer-review">
+                                        @for (int i = 0; i < @item.Rating / 2; i++)
+                                        {
+                                            <span></span>
+                                        }
+                                        @*@if (item.Rating / 2 != 5)
+                {
+                    <span class="round-icon-blank"></span>
+                }*@
 
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <span class="round-icon-blank"></span>
+
 
                                         @{ TimeSpan s = DateTime.Now.Subtract(item.Time);}
                                         @if (item.Time.Day == DateTime.Now.Day)
@@ -251,8 +278,36 @@
                                     }
 
                                 </ul>
-                                <span>@item.Reactions.Count() people marked this review as helpful</span>
-                                <button type="button" style="cursor: pointer;border: 0px;padding: 6px; overflow: hidden;border-radius: 5px;" id="like"><span class="icon-like"></span>Helpful</button>
+                                <p>@item.Reactions.Where(x=>x.CommentId==item.Id&&x.Like==1).Count() people rewiew as helpful</p>
+                                <p>@item.Reactions.Where(x => x.CommentId == item.Id && x.Like == 2).Count() people rewiew as bullshit</p>
+                               
+                                <button type="button" id="helpful" class="helpful @if (Session["user"]!=null)
+                                                                                  {
+                                                                                      if (item.Reactions.Where(x => x.UserId == (int)Session["user"]).FirstOrDefault()!=null)
+                                                                                      {
+                                                                                          if (item.Reactions.Where(x => x.UserId == (int)Session["user"]).FirstOrDefault().Like==1)
+                                                                                          {
+                                                                                              @:hgreen
+                                                                                          }
+
+                                                                                      }
+                                                                                  }   " data-id="@item.Id">
+                                    <span class="icon-like"></span>Helpful
+                                </button>
+                                <button type="button" id="unhelpful" class="unhelpful @if (Session["user"]!=null)
+                                                                                      {
+                                                                                          if (item.Reactions.Where(x => x.UserId == (int)Session["user"]).FirstOrDefault()!=null)
+                                                                                          {
+                                                                                              if (item.Reactions.Where(x => x.UserId == (int)Session["user"]).FirstOrDefault().Like==2)
+                                                                                              {
+                                                                                                  @:uhred
+                                                                                              }
+
+                                                                                          }
+                                                                                      }" data-id="@item.Id">
+                                    <span class="icon-like"></span>Unhelpful
+                                </button>
+                               
                             </div>
                         </div>
                         <hr>
@@ -323,6 +378,11 @@
     <!-- Star Rating Icon -->
     <link href="~/Public/css/star-rating.min.css" rel="stylesheet" />
     <link href="~/Public/css/theme.min.css" rel="stylesheet" />
+    <style>
+        .navbar-collapse.collapse {
+            display: flex !important;
+        }
+    </style>
 }
 
 @section scripts{
@@ -365,6 +425,8 @@
 
     <script>
         $(document).ready(function () {
+
+            //map
             var maplat = $('#map').data('lat');
             var maplon = $('#map').data('lon');
             var mapzoom = $('#map').data('zoom');
@@ -397,25 +459,217 @@
             }
 
 
-            console.log($("#input-1").text());
-            $("#commentForm").submit(function (ev) {
+
+            //like
+
+            $(document).on("click", "#helpful", function () {
+
+                var CommentId = Number($(this).data("id"));
+                console.log(CommentId);
+
+                var IsAdd;
+
+                if (!$(this).hasClass("hgreen")) {
+                    $(this).siblings().each(function () {
+                        if ($(this).hasClass("unhelpful")) {
+                            $(this).removeClass("uhred");
+                        }
+                    });
+
+                    IsAdd = true;
+                    $(this).addClass("hgreen");
+                    $.ajax({
+                        url: "/SearchPlace/Hcomment",
+                        type: 'post',
+                        dataType: 'json',
+                        data: { CommentId, IsAdd },
+
+                        success: function(data) {
+                            console.log(data.message);
+                        }
+
+
+                    });
+                }
+
+                else {
+                    $(this).removeClass("hgreen");
+                    $(this).siblings().each(function () {
+                        if ($(this).hasClass("unhelpful")) {
+                            $(this).removeClass("uhred");
+                        }
+                    });
+                    $(".unhelpful").each(function (index, item) {
+                        if ($(".unhelpful").data("id") == $(this).data("id")) {
+                            console.log(index);
+                            $('.unhelpful:eq(' + index + ')').removeClass("uhred");
+                        }
+                    });
+                    console.log("here");
+                    IsAdd = false;
+                    $.ajax({
+                        url: "/SearchPlace/Hcomment",
+                        type: 'post',
+                        dataType: 'json',
+                        data: { CommentId, IsAdd },
+
+                        success: function(data) {
+                            console.log(data.message);
+                            console.log("#sildimblet");
+                        }
+
+
+                    });
+
+
+                }
+            });
+            $(document).on("click", "#unhelpful", function () {
+
+                var CommentId = Number($(this).data("id"));
+                console.log(CommentId);
+
+                var IsAdd;
+
+                if (!$(this).hasClass("uhred")) {
+                    $(this).siblings().each(function () {
+                        if ($(this).hasClass("helpful")) {
+                            $(this).removeClass("hgreen");
+                        }
+                    });
+                    $(".helpful").each(function (index, item) {
+                        if ($(".helpful").data("id") == $(this).data("id")) {
+                            console.log(index);
+                            $(this).removeClass("hgreen");
+                        }
+                    });
+                    IsAdd = true;
+                    $(this).addClass("uhred");
+                    $.ajax({
+                        url: "/SearchPlace/Uhcomment",
+                        type: 'post',
+                        dataType: 'json',
+                        data: { CommentId, IsAdd },
+
+                        success: function(data) {
+                            console.log(data.message);
+                        }
+
+
+                    });
+                }
+
+                else {
+                    $(this).siblings().each(function () {
+                        if ($(this).hasClass("helpful")) {
+                            $(this).removeClass("hgreen");
+                        }
+                    });
+                    $(this).removeClass("uhred");
+                    $(".helpful").each(function (index, item) {
+                        if ($(".helpful").data("id") == $(this).data("id")) {
+                            console.log(index);
+                            $(this).removeClass("hgreen");
+                        }
+                    });
+                    console.log("here");
+                    IsAdd = false;
+                    $.ajax({
+                        url: "/SearchPlace/Uhcomment",
+                        type: 'post',
+                        dataType: 'json',
+                        data: { CommentId, IsAdd },
+
+                        success: function(data) {
+                            console.log(data.message);
+                            console.log("#sildimblet");
+                        }
+
+
+                    });
+
+
+                }
+            });
+
+
+
+
+            //comment add
+
+            $("#commentForm").submit(function push(ev) {
                 ev.preventDefault();
+
+                //from ajax submit
+
+                var formdata = new FormData(); //FormData object
+                var files = $("#filePhoto").get(0).files;
+                //Iterating through each files selected in fileInput
+                for (var i = 0; i < files.length; i++) {
+                    //Appending each file to FormData object
+
+                    formdata.append(files[i].name, files[i]);
+                }
+
                 $.ajax({
                     url: $(this).attr("action"),
                     type: $(this).attr("method"),
+                    data: new FormData(this),
+                    traditional: true,
                     dataType: "json",
-                    data: $(this).serialize(),
+                    cache: false,
+                    contentType: false,
+                    processData: false,
                     success: function (response) {
                         console.log(response);
-                    },
-                    error: function () {
+                        if (response.status === 401) {
+                            toastr["warning"](response.message);
+                            setInterval(function () { $('#ModalLogReg').modal('show'); }, 1000);
+                            
+                        }
+                        if (response.status === 404) {
+                            toastr["warning"](response.message);
+                        }
+                        if (response.status === 200) {
 
+                            toastr["success"](response.message);
+                            setInterval(function () { window.location = response.url; }, 1000);
+                        }
+
+                    },
+                    error: function (xhr, error, status) {
+                        console.log(error, status);
+                        toastr["error"]("Rating və ya comment yazmamısınız");
                     }
                 });
+
+
+
+
             });
 
-        });
 
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "500",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+        });
+        //rating
         $(document).on('ready',
             function () {
                 $('#input-1').rating();

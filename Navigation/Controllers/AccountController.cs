@@ -18,6 +18,10 @@ namespace Navigation.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
+            
+            string action = ControllerContext.RouteData.Values["action"].ToString();
+            string controller = ControllerContext.RouteData.Values["controller"].ToString();
+
             if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password))
             {
                 return HttpNotFound();
@@ -31,10 +35,10 @@ namespace Navigation.Controllers
                 {
                     Session["user"] = u.Id;
                     Session["Login"] = true;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("index", "Home");
                 }
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction(action,controller);
         }
 
 
@@ -106,6 +110,8 @@ namespace Navigation.Controllers
        
         public JsonResult AccessLogin()
         {
+            
+
             if (Session["Login"]==null)
             {
                 return Json(new{status=404}, JsonRequestBehavior.AllowGet);
@@ -123,7 +129,7 @@ namespace Navigation.Controllers
 
         //userin oz profili
         [Auth]
-        public new ActionResult Profile(int id)
+        public  ActionResult Profile(int id)
         {
             if (id<=0)
             {

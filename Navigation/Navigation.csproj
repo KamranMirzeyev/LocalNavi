@@ -218,6 +218,10 @@
     <Compile Include="Migrations\201901021852545_photo-table.Designer.cs">
       <DependentUpon>201901021852545_photo-table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901061315509_like.cs" />
+    <Compile Include="Migrations\201901061315509_like.Designer.cs">
+      <DependentUpon>201901061315509_like.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryService.cs" />
@@ -417,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901021852545_photo-table.resx">
       <DependentUpon>201901021852545_photo-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901061315509_like.resx">
+      <DependentUpon>201901061315509_like.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

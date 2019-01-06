@@ -14,7 +14,7 @@ namespace Navigation.Models
         [Required]
         public int UserId { get; set; }
         public int CommentId { get; set; }
-        public bool Like { get; set; }
+        public byte Like { get; set; }
 
         public User User { get; set; }
         public Comment Comment { get; set; }

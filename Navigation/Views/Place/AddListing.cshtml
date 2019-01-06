@@ -122,7 +122,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="Description">Description <span class="text-danger">*</span></label>
-                            <textarea class="form-control add-listing_form" name="Description" id="Description" rows="3" data-validation="required" data-validation-error-msg="Mətni boş buraxmayın"></textarea>
+                            <textarea class="form-control add-listing_form" name="Description" id="Description" rows="5" data-validation="required" data-validation-error-msg="Mətni boş buraxmayın"></textarea>
                         </div>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                                    data-validation-max-size="2M"
                                    data-validation-error-msg-size="2 Mb-dan artıq şəkil yükləməyin"
                                    data-validation-error-msg-mime="Ancaq .jpeg, .jpg, .png, .gif formatında şəkil yükləyin"
-                                   data-validation-error-msg-length="Ən azı 1 şəkil yükləməlisiniz">
+                                   data-validation-error-msg-length="Ən azı 3 şəkil yükləməlisiniz">
 
                         </div>
                     </div>
@@ -766,6 +766,12 @@
         }
 
         timecheck();
+
+        ClassicEditor
+            .create(document.querySelector( '#Description' ) )
+            .catch( error => {
+                console.error( error );
+            } );
 
 
     </script>
