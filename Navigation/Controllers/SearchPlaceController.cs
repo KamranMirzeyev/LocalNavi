@@ -72,13 +72,75 @@ namespace Navigation.Controllers
 
 
             }
-            return Json(new { status = 200, modal, url = "/SearchPlace/Places",search=categoryKey }, JsonRequestBehavior.AllowGet);
+            return Json(new { status = 200, modal, url = "/SearchPlace/Places",search=categoryKey,searchcity=cityKey }, JsonRequestBehavior.AllowGet);
         }
 
         //place index
         public ActionResult Places()
         {
-            return View();
+            vwPlace model = new vwPlace();
+            model.Categories = db.Categories.ToList();
+            model.Cities = db.Cities.ToList();
+            return View(model);
+        }
+
+        //filter
+        [HttpGet]
+        public JsonResult Filter(string categoryKey,string cityKey)
+        {
+            if (string.IsNullOrEmpty(categoryKey) && string.IsNullOrEmpty(cityKey))
+            {
+                return Json(new { status = 404, message = "Boş axtarış vermə!" }, JsonRequestBehavior.AllowGet);
+            }
+
+            List<searchPlace> modal = new List<searchPlace>();
+            if (!string.IsNullOrEmpty(categoryKey))
+            {
+                modal = db.Listings.Where(x => x.Category.Name.StartsWith(categoryKey)).
+                    Select(x => new searchPlace
+                    {
+                        id = x.Id,
+                        title = x.Title,
+                        category = x.Category.Name,
+                        categoryIcon = x.Category.Icon,
+                        city = x.City.Name,
+                        slogan = x.Slogan,
+                        lat = x.Lat,
+                        lng = x.Lng,
+                        commentRat = x.Comments.Average(c => c.Rating),
+                        hours = x.WorkHourses.ToList(),
+                        photo = x.Photos.ToList().FirstOrDefault().PlacePhoto,
+                        status = x.Status,
+                        commentCount = x.Comments.Count()
+
+                    }).ToList();
+
+            }
+
+            if (!string.IsNullOrEmpty(cityKey))
+            {
+
+                modal = db.Listings.Where(x => x.City.Name.StartsWith(cityKey)).Select(x => new searchPlace
+                {
+                    id = x.Id,
+                    title = x.Title,
+                    category = x.Category.Name,
+                    categoryIcon = x.Category.Icon,
+                    city = x.City.Name,
+                    slogan = x.Slogan,
+                    lat = x.Lat,
+                    lng = x.Lng,
+                    commentRat = x.Comments.Average(c => c.Rating),
+                    hours = x.WorkHourses.ToList(),
+                    photo = x.Photos.ToList().FirstOrDefault().PlacePhoto,
+                    status = x.Status,
+                    commentCount = x.Comments.Count()
+
+                }).ToList();
+
+
+            }
+            return Json(new { status = 200, modal, search = categoryKey, searchcity = cityKey }, JsonRequestBehavior.AllowGet);
         }
 
         //palce details 
@@ -111,8 +173,17 @@ namespace Navigation.Controllers
 
         //place add comment
         [HttpPost]
-        public JsonResult Commet(int Rating, string Text, HttpPostedFileBase[] Photo,int id)
+        public JsonResult Commet(double Rating, string Text, HttpPostedFileBase[] Photo,int id)
         {
+            if (Rating==6)
+            {
+                Rating = Rating - 1;
+            }
+
+            if (Rating==5.5)
+            {
+                Rating = Rating - 0.5;
+            }
             if (Session["Login"]==null)
             {
                 return Json(new { status = 401, message = "Sistemə giriş etməmisiniz", }, JsonRequestBehavior.AllowGet);
@@ -183,8 +254,12 @@ namespace Navigation.Controllers
         [Auth]
         public JsonResult Hcomment(int CommentId, bool IsAdd)
         {
+            if (Session["Login"] == null)
+            {
+                return Json(new { status = 401, message = "Sistemə giriş etməmisiniz", }, JsonRequestBehavior.AllowGet);
+            }
 
-            if (CommentId != 0)
+            if (CommentId > 0)
             {
                 Reaction reaction = db.Reactions.Where(x => x.CommentId == CommentId).FirstOrDefault();
                 if (reaction == null)
@@ -220,10 +295,12 @@ namespace Navigation.Controllers
 
 
                 }
+                var url = "/SearchPlace/Detail/" + CommentId;
                 return Json(new
 
 
                 {
+                    url,
                     message = "ok",
                     status = 200,
                 }, JsonRequestBehavior.AllowGet);
@@ -240,8 +317,12 @@ namespace Navigation.Controllers
         [Auth]
         public JsonResult Uhcomment(int CommentId, bool IsAdd)
         {
+            if (Session["Login"] == null)
+            {
+                return Json(new { status = 401, message = "Sistemə giriş etməmisiniz", }, JsonRequestBehavior.AllowGet);
+            }
 
-            if (CommentId != 0)
+            if (CommentId > 0)
             {
                 Reaction reaction = db.Reactions.Where(x => x.CommentId == CommentId).FirstOrDefault();
                 if (reaction == null)
@@ -277,10 +358,14 @@ namespace Navigation.Controllers
 
 
                 }
+
+                var url = "/SearchPlace/Detail/" + CommentId;
+
                 return Json(new
 
 
                 {
+                    url,
                     message = "ok",
                     status = 200,
                 }, JsonRequestBehavior.AllowGet);
@@ -289,9 +374,25 @@ namespace Navigation.Controllers
 
             return Json(new
             {
-                message = "Xiyarxiyar sehvler cixir",
+                message = "Xeta baş verdi",
                 status = 404
             }, JsonRequestBehavior.AllowGet);
         }
+
+
+
+        //yoxlamaq ucun Session nulldisa
+        [HttpGet]
+       
+        public JsonResult CanLike()
+        {
+            if (Session["Login"]==null)
+            {
+                return Json(new {status=401,message="Sistemə giriş etməmisiniz!" }, JsonRequestBehavior.AllowGet);
+            }
+           
+            return Json(new {status = 200}, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

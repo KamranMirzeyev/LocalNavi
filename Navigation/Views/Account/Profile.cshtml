@@ -27,7 +27,7 @@
                         {
                             
                             <a href="@Url.Action("detail", "SearchPlace", new {id = @item.Id})">
-                                <img class="card-img-top" src="~/Public/images/PlacePhoto/@photo.PlacePhoto" alt="Card image cap">
+                                <img class="card-img-top" style="height: 170px" src="~/Public/images/PlacePhoto/@photo.PlacePhoto" alt="Card image cap">
                             </a>
 
                         }
@@ -36,8 +36,11 @@
                             <h5 class="card-title">@item.Title <span style="float: right"><i class="fa @(item.Status? "fa-check-circle-o text-success":"fa-times-circle-o text-danger")"></i></span></h5>
                             <ul class="card-rating d-flex justify-content-between align-items-center">
 
+                                @if (item.Comments != null)
+                                {
+                                    <li class="card-rating-green">@(item.Comments.FirstOrDefault().Rating)</li>
+                                }
 
-                                <li class="card-rating-green">@*@(item.Comments.Average(q => q.Rating))*@</li>
 
 
                                 <li class="flex-grow-1">@item.Comments.Count() ratings</li>

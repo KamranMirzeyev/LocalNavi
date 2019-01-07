@@ -132,6 +132,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Control\ControlAreaRegistration.cs" />
+    <Compile Include="Areas\Control\Controllers\BlogsController.cs" />
+    <Compile Include="Areas\Control\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Control\Controllers\LoginController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -142,6 +146,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\Auth.cs" />
+    <Compile Include="Helper\AuthAdmin.cs" />
     <Compile Include="Migrations\201812231052140_init1.cs" />
     <Compile Include="Migrations\201812231052140_init1.Designer.cs">
       <DependentUpon>201812231052140_init1.cs</DependentUpon>
@@ -222,7 +227,13 @@
     <Compile Include="Migrations\201901061315509_like.Designer.cs">
       <DependentUpon>201901061315509_like.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901071255171_admin-blog-model.cs" />
+    <Compile Include="Migrations\201901071255171_admin-blog-model.Designer.cs">
+      <DependentUpon>201901071255171_admin-blog-model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryService.cs" />
     <Compile Include="Models\City.cs" />
@@ -241,11 +252,109 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\vwDetails.cs" />
     <Compile Include="Models\vwHourWeek.cs" />
+    <Compile Include="Models\vwPlace.cs" />
     <Compile Include="Models\vwService.cs" />
     <Compile Include="Models\WorkHour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Control\Public\data\flot-data.js" />
+    <Content Include="Areas\Control\Public\data\morris-data.js" />
+    <Content Include="Areas\Control\Public\dist\css\sb-admin-2.css" />
+    <Content Include="Areas\Control\Public\dist\css\sb-admin-2.min.css" />
+    <Content Include="Areas\Control\Public\dist\js\sb-admin-2.js" />
+    <Content Include="Areas\Control\Public\dist\js\sb-admin-2.min.js" />
+    <Content Include="Areas\Control\Public\js\sb-admin-2.js" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap-social\bootstrap-social.css" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables-plugins\dataTables.bootstrap.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables-plugins\dataTables.bootstrap.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables-plugins\dataTables.bootstrap.min.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables-plugins\index.html" />
+    <Content Include="Areas\Control\Public\vendor\datatables-responsive\dataTables.responsive.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables-responsive\dataTables.responsive.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.bootstrap.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.bootstrap4.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.foundation.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.foundation.min.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.jqueryui.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.material.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.material.min.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.semanticui.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.semanticui.min.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.uikit.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\dataTables.uikit.min.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\jquery.dataTables.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\jquery.dataTables.min.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Areas\Control\Public\vendor\datatables\images\favicon.ico" />
+    <Content Include="Areas\Control\Public\vendor\datatables\images\sort_asc.png" />
+    <Content Include="Areas\Control\Public\vendor\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Areas\Control\Public\vendor\datatables\images\sort_both.png" />
+    <Content Include="Areas\Control\Public\vendor\datatables\images\sort_desc.png" />
+    <Content Include="Areas\Control\Public\vendor\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.bootstrap.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.bootstrap.min.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.bootstrap4.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.foundation.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.foundation.min.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.jqueryui.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.jqueryui.min.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.material.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.material.min.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.semanticui.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.semanticui.min.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.uikit.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\dataTables.uikit.min.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\jquery.dataTables.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="Areas\Control\Public\vendor\datatables\js\jquery.js" />
+    <Content Include="Areas\Control\Public\vendor\flot-tooltip\jquery.flot.tooltip.js" />
+    <Content Include="Areas\Control\Public\vendor\flot-tooltip\jquery.flot.tooltip.min.js" />
+    <Content Include="Areas\Control\Public\vendor\flot-tooltip\jquery.flot.tooltip.source.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\excanvas.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\excanvas.min.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.colorhelpers.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.canvas.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.categories.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.crosshair.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.errorbars.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.image.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.navigate.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.pie.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.resize.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.selection.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.stack.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.symbol.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.threshold.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.flot.time.js" />
+    <Content Include="Areas\Control\Public\vendor\flot\jquery.js" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Areas\Control\Public\vendor\jquery\jquery.js" />
+    <Content Include="Areas\Control\Public\vendor\jquery\jquery.min.js" />
+    <Content Include="Areas\Control\Public\vendor\metisMenu\metisMenu.css" />
+    <Content Include="Areas\Control\Public\vendor\metisMenu\metisMenu.js" />
+    <Content Include="Areas\Control\Public\vendor\metisMenu\metisMenu.min.css" />
+    <Content Include="Areas\Control\Public\vendor\metisMenu\metisMenu.min.js" />
+    <Content Include="Areas\Control\Public\vendor\morrisjs\morris.css" />
+    <Content Include="Areas\Control\Public\vendor\morrisjs\morris.js" />
+    <Content Include="Areas\Control\Public\vendor\morrisjs\morris.min.js" />
+    <Content Include="Areas\Control\Public\vendor\raphael\raphael.js" />
+    <Content Include="Areas\Control\Public\vendor\raphael\raphael.min.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Public\css\bootstrap-formhelpers.css" />
@@ -268,6 +377,10 @@
     <Content Include="Public\fonts\themify.svg" />
     <Content Include="Public\images\addlist.jpg" />
     <Content Include="Public\images\avatar.jpg" />
+    <Content Include="Public\images\Blog\img1.jpg" />
+    <Content Include="Public\images\Blog\img2.jpg" />
+    <Content Include="Public\images\Blog\img3.jpg" />
+    <Content Include="Public\images\Blog\img4.jpg" />
     <Content Include="Public\images\bootstrap-formhelpers-countries.flags.png" />
     <Content Include="Public\images\bootstrap-formhelpers-currencies.flags.png" />
     <Content Include="Public\images\bootstrap-formhelpers-googlefonts.png" />
@@ -278,6 +391,7 @@
     <Content Include="Public\images\flags\us.svg" />
     <Content Include="Public\images\howit-bg.png" />
     <Content Include="Public\images\illus.png" />
+    <Content Include="Public\images\prayer.jpg" />
     <Content Include="Public\img\loading.gif" />
     <Content Include="Public\images\logo.png" />
     <Content Include="Public\images\logo.svg" />
@@ -310,6 +424,7 @@
     <Content Include="Public\js\main.js" />
     <Content Include="Public\js\owl.carousel.js" />
     <Content Include="Public\js\popper.min.js" />
+    <Content Include="Public\js\rating.js" />
     <Content Include="Public\js\script.js" />
     <Content Include="Public\js\star-rating.min.js" />
     <Content Include="Public\js\swiper.min.js" />
@@ -334,10 +449,67 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Control\Models\" />
     <Folder Include="Public\images\CommentPhoto\" />
     <Folder Include="Public\images\UserPhoto\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Control\Views\web.config" />
+    <Content Include="Areas\Control\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Control\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Control\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Control\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap-social\bootstrap-social.less" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap-social\bootstrap-social.scss" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Control\Public\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Control\Public\vendor\datatables-responsive\dataTables.responsive.scss" />
+    <Content Include="Areas\Control\Public\vendor\datatables\images\Sorting icons.psd" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\animated.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\core.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\extras.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\fixed-width.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\font-awesome.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\icons.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\larger.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\list.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\mixins.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\path.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\screen-reader.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\spinning.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\stacked.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\less\variables.less" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_animated.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_core.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_extras.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_icons.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_larger.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_list.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_mixins.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_path.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_spinning.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_stacked.scss" />
+    <Content Include="Areas\Control\Public\vendor\font-awesome\scss\_variables.scss" />
+    <Content Include="Areas\Control\Views\Blogs\Create.cshtml" />
+    <Content Include="Areas\Control\Views\Blogs\Delete.cshtml" />
+    <Content Include="Areas\Control\Views\Blogs\Details.cshtml" />
+    <Content Include="Areas\Control\Views\Blogs\Edit.cshtml" />
+    <Content Include="Areas\Control\Views\Blogs\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Public\fonts\fontawesome-webfont.eot" />
     <Content Include="Public\fonts\fontawesome-webfont.ttf" />
@@ -424,6 +596,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901061315509_like.resx">
       <DependentUpon>201901061315509_like.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901071255171_admin-blog-model.resx">
+      <DependentUpon>201901071255171_admin-blog-model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

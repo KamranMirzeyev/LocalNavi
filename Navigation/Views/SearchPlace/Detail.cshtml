@@ -47,17 +47,17 @@
             <div class="col-md-6">
                 <div class="reserve-seat-block align-items-center">
                     <div class="reserve-rating mx-0 mx-md-3">
-                      
-                            @if (ViewBag.Rating == null)
-                            {
-                             <span>0</span>   
-                            }
-                            else
-                            {
-                             <span>@ViewBag.Rating.ToString("F1")</span>
-                            }
-                            
-                       
+
+                        @if (ViewBag.Rating == null)
+                        {
+                            <span>0</span>
+                        }
+                        else
+                        {
+                            <span>@ViewBag.Rating.ToString("F1")</span>
+                        }
+
+
                     </div>
 
                 </div>
@@ -158,23 +158,31 @@
                             {
                                 <img src="/Public/images/UserPhoto/@Model.Listing.User.Photo" class="img-fluid" alt="Model.Listing.User.Photo">
                             }
-                           @if (Session["userName"]!=null)
-                           {
-                               <p>@Session["userName"]</p>
-                           }
-                          
+                            @if (Session["userName"] != null)
+                            {
+                                <p>@Session["userName"]</p>
+                            }
 
-                           
+
+
                         </div>
                         <form action="@Url.Action("Commet", "SearchPlace")" method="post" enctype="multipart/form-data" id="commentForm">
-                            <input type="hidden" value="@Model.Listing.Id" name="id"/>
+                            <input type="hidden" value="@Model.Listing.Id" name="id" />
                             <div class="customer-content-wrap">
                                 <div class="your-rating-wraps">
 
-                                    <input id="input-1" name="Rating" type="number" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="sm">
+                                    <div class="your-rating-wrap">
+                                        <span>Your rating</span>
+                                        <div class="customer-review">
+                                            <div class="my-rating" id="rating">
+
+                                            </div>
+                                            <input type="hidden" id="rateval" name="Rating" value="" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="your-comment-wrap">
-                                    <textarea name="Text" class="your-rating-content" placeholder="Enter Your Comments" maxlength="140"  data-validation="length" data-validation-length="max140" data-validation-error-msg-length="140 simvoldan artıq istifadə etməyin" data-validation="required" data-validation-error-msg="Comment bildirin!"></textarea>
+                                    <textarea name="Text" class="your-rating-content" placeholder="Enter Your Comments" maxlength="140" data-validation="length" data-validation-length="max140" data-validation-error-msg-length="140 simvoldan artıq istifadə etməyin" data-validation="required" data-validation-error-msg="Comment bildirin!"></textarea>
                                     <h6 class="your-rating-notify">at least 140 characters</h6>
                                 </div>
 
@@ -183,12 +191,11 @@
                                         <div class="add-photos-link mb-3 mb-md-0">
 
                                             <input type="file" name="Photo" multiple="multiple" id="filePhoto"
-                                       data-validation="mime size"
-                                       
-                                       data-validation-allowing="jpg, png, gif, jpeg"
-                                       data-validation-max-size="2M"
-                                       data-validation-error-msg-size="2 Mb-dan artıq şəkil yükləməyin"
-                                       data-validation-error-msg-mime="Ancaq .jpeg, .jpg, .png, .gif formatında şəkil yükləyin" />
+                                                   data-validation="mime size"
+                                                   data-validation-allowing="jpg, png, gif, jpeg"
+                                                   data-validation-max-size="2M"
+                                                   data-validation-error-msg-size="2 Mb-dan artıq şəkil yükləməyin"
+                                                   data-validation-error-msg-mime="Ancaq .jpeg, .jpg, .png, .gif formatında şəkil yükləyin" />
 
                                         </div>
                                     </div>
@@ -237,20 +244,20 @@
 
 
                                         @{ TimeSpan s = DateTime.Now.Subtract(item.Time);}
-                                        @if (item.Time.Day == DateTime.Now.Day)
+                                        @if (s.TotalDays < 1 && item.Time.Year == DateTime.Now.Year && item.Time.Month == DateTime.Now.Month)
                                         {
                                             <p> @item.Time.ToString("HH:mm:ss")</p>
 
                                         }
-                                        else if (s.TotalDays >= 1 && s.TotalDays < 2)
+                                        else if (s.TotalDays >= 1 && s.TotalDays < 2 && item.Time.Year == DateTime.Now.Year && item.Time.Month == DateTime.Now.Month)
                                         {
                                             <p>1 gün əvvvəl </p>
                                         }
-                                        else if (s.TotalDays > 2 && s.TotalDays < 3)
+                                        else if (s.TotalDays > 2 && s.TotalDays < 3 && item.Time.Year == DateTime.Now.Year && item.Time.Month == DateTime.Now.Month)
                                         {
                                             <p> 2 gün əvvvəl</p>
                                         }
-                                        else if (s.TotalDays > 3 && s.TotalDays < 4)
+                                        else if (s.TotalDays > 3 && s.TotalDays < 4 && item.Time.Year == DateTime.Now.Year && item.Time.Month == DateTime.Now.Month)
                                         {
                                             <p> 3 gün əvvvəl</p>
                                         }
@@ -278,23 +285,27 @@
                                     }
 
                                 </ul>
-                                <p>@item.Reactions.Where(x=>x.CommentId==item.Id&&x.Like==1).Count() people rewiew as helpful</p>
-                                <p>@item.Reactions.Where(x => x.CommentId == item.Id && x.Like == 2).Count() people rewiew as bullshit</p>
-                               
-                                <button type="button" id="helpful" class="helpful @if (Session["user"]!=null)
-                                                                                  {
-                                                                                      if (item.Reactions.Where(x => x.UserId == (int)Session["user"]).FirstOrDefault()!=null)
+                                @if (Session["Login"] != null)
+                                {
+                                    //start
+
+                                    <p>@item.Reactions.Where(x => x.CommentId == item.Id && x.Like == 1).Count() people rewiew as helpful</p>
+                                    <p>@item.Reactions.Where(x => x.CommentId == item.Id && x.Like == 2).Count() people rewiew as bullshit</p>
+
+                                    <button type="button" id="helpful" class="helpful @if (Session["user"]!=null)
+                                                                         {
+                                      if (item.Reactions.Where(x => x.UserId == (int)Session["user"]).FirstOrDefault()!=null)
                                                                                       {
-                                                                                          if (item.Reactions.Where(x => x.UserId == (int)Session["user"]).FirstOrDefault().Like==1)
+                                      if (item.Reactions.Where(x => x.UserId == (int)Session["user"]).FirstOrDefault().Like==1)
                                                                                           {
                                                                                               @:hgreen
                                                                                           }
 
                                                                                       }
                                                                                   }   " data-id="@item.Id">
-                                    <span class="icon-like"></span>Helpful
-                                </button>
-                                <button type="button" id="unhelpful" class="unhelpful @if (Session["user"]!=null)
+                                        <span class="icon-like"></span>Helpful
+                                    </button>
+                                    <button type="button" id="unhelpful" class="unhelpful @if (Session["user"]!=null)
                                                                                       {
                                                                                           if (item.Reactions.Where(x => x.UserId == (int)Session["user"]).FirstOrDefault()!=null)
                                                                                           {
@@ -305,9 +316,13 @@
 
                                                                                           }
                                                                                       }" data-id="@item.Id">
-                                    <span class="icon-like"></span>Unhelpful
-                                </button>
-                               
+                                        <span class="icon-like"></span>Unhelpful
+                                    </button>
+
+                                    //end
+                                }
+
+
                             </div>
                         </div>
                         <hr>
@@ -374,7 +389,7 @@
 
 <!--//END BOOKING DETAILS -->
 @section css{
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    @*<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">*@
     <!-- Star Rating Icon -->
     <link href="~/Public/css/star-rating.min.css" rel="stylesheet" />
     <link href="~/Public/css/theme.min.css" rel="stylesheet" />
@@ -382,11 +397,53 @@
         .navbar-collapse.collapse {
             display: flex !important;
         }
+
+        .jq-stars {
+            display: inline-block;
+        }
+
+        .jq-rating-label {
+            font-size: 22px;
+            display: inline-block;
+            position: relative;
+            vertical-align: top;
+            font-family: helvetica, arial, verdana;
+        }
+
+        .jq-star {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .jq-star-svg {
+            padding-left: 3px;
+            width: 100%;
+            height: 100% ;
+        }
+
+        .jq-star:hover .fs-star-svg path {
+        }
+
+        .jq-star-svg path {
+            /* stroke: #000; */
+            stroke-linejoin: round;
+        }
+
+        /* un-used */
+        .jq-shadow {
+            -webkit-filter: drop-shadow( -2px -2px 2px #888 );
+            filter: drop-shadow( -2px -2px 2px #888 );
+        }
     </style>
 }
 
+
 @section scripts{
     <script>
+      
+
         var swiper = new Swiper('.swiper-container',
             {
                 slidesPerView: 3,
@@ -426,6 +483,30 @@
     <script>
         $(document).ready(function () {
 
+            //rating
+            $(".my-rating").starRating({
+                //useFullStars: true,
+                totalStars: 5,
+                setRating: 4,
+                minRating: 0,
+                disableAfterRate: false,
+                initialRating: 0,
+                strokeColor: '#894A00',
+                hoverColor:'#46cd38',
+                ratedColor: '#ff4b00',
+                strokeWidth: 10,
+                starSize: 30,
+                useGradient: true,
+               
+                callback: function (currentRating, $el) {
+                    $("#rateval").val(currentRating);
+                    console.log($("#rateval").val());
+                }
+            });
+
+
+
+
             //map
             var maplat = $('#map').data('lat');
             var maplon = $('#map').data('lon');
@@ -463,11 +544,14 @@
             //like
 
             $(document).on("click", "#helpful", function () {
-
                 var CommentId = Number($(this).data("id"));
-                console.log(CommentId);
+
 
                 var IsAdd;
+
+                //start
+
+
 
                 if (!$(this).hasClass("hgreen")) {
                     $(this).siblings().each(function () {
@@ -484,8 +568,11 @@
                         dataType: 'json',
                         data: { CommentId, IsAdd },
 
-                        success: function(data) {
-                            console.log(data.message);
+                        success: function (data) {
+                            if (data.status === 401) {
+                                toastr["warning"](data.message);
+                            }
+
                         }
 
 
@@ -494,6 +581,7 @@
 
                 else {
                     $(this).removeClass("hgreen");
+
                     $(this).siblings().each(function () {
                         if ($(this).hasClass("unhelpful")) {
                             $(this).removeClass("uhred");
@@ -501,7 +589,7 @@
                     });
                     $(".unhelpful").each(function (index, item) {
                         if ($(".unhelpful").data("id") == $(this).data("id")) {
-                            console.log(index);
+
                             $('.unhelpful:eq(' + index + ')').removeClass("uhred");
                         }
                     });
@@ -513,9 +601,10 @@
                         dataType: 'json',
                         data: { CommentId, IsAdd },
 
-                        success: function(data) {
-                            console.log(data.message);
-                            console.log("#sildimblet");
+                        success: function (data) {
+                            if (data.status === 401) {
+                                toastr["warning"](data.message);
+                            }
                         }
 
 
@@ -523,14 +612,30 @@
 
 
                 }
+
+
+                location.reload();
+
+
+                //end
+
+
+
+
+
+
+
+
+
             });
             $(document).on("click", "#unhelpful", function () {
-
                 var CommentId = Number($(this).data("id"));
-                console.log(CommentId);
+
 
                 var IsAdd;
 
+
+                //start
                 if (!$(this).hasClass("uhred")) {
                     $(this).siblings().each(function () {
                         if ($(this).hasClass("helpful")) {
@@ -551,8 +656,10 @@
                         dataType: 'json',
                         data: { CommentId, IsAdd },
 
-                        success: function(data) {
-                            console.log(data.message);
+                        success: function (data) {
+                            if (data.status === 401) {
+                                toastr["warning"](data.message);
+                            }
                         }
 
 
@@ -568,11 +675,11 @@
                     $(this).removeClass("uhred");
                     $(".helpful").each(function (index, item) {
                         if ($(".helpful").data("id") == $(this).data("id")) {
-                            console.log(index);
+
                             $(this).removeClass("hgreen");
                         }
                     });
-                    console.log("here");
+
                     IsAdd = false;
                     $.ajax({
                         url: "/SearchPlace/Uhcomment",
@@ -580,9 +687,10 @@
                         dataType: 'json',
                         data: { CommentId, IsAdd },
 
-                        success: function(data) {
-                            console.log(data.message);
-                            console.log("#sildimblet");
+                        success: function (data) {
+                            if (data.status === 401) {
+                                toastr["warning"](data.message);
+                            }
                         }
 
 
@@ -590,6 +698,15 @@
 
 
                 }
+
+
+                location.reload();
+                //end
+
+
+
+
+
             });
 
 
@@ -625,7 +742,7 @@
                         if (response.status === 401) {
                             toastr["warning"](response.message);
                             setInterval(function () { $('#ModalLogReg').modal('show'); }, 1000);
-                            
+
                         }
                         if (response.status === 404) {
                             toastr["warning"](response.message);

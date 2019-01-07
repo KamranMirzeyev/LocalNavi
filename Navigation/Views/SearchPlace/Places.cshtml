@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Places";
 }
-
+@model Navigation.Models.vwPlace
 
 <!--============================= FEATURED LISTING =============================-->
 
@@ -20,19 +20,23 @@
                         <div class="detail-filter">
                             <p>Filter by</p>
                             <form class="filter-dropdown">
-                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-                                    <option selected>Best Match</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="ciKey">
+                                    <option selected>City</option>
+                                    @foreach (var city in Model.Cities)
+                                    {
+                                        <option value="@city.Name">@city.Name</option>
+                                    }
+                                   
                                 </select>
                             </form>
                             <form class="filter-dropdown">
-                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect1">
-                                    <option selected>Restaurants</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="catKey">
+                                    <option selected>Category</option>
+                                    @foreach (var cat in Model.Categories)
+                                    {
+                                        <option value="@cat.Name">@cat.Name</option>
+                                    }
+                                    
                                 </select>
                             </form>
 
@@ -44,47 +48,7 @@
                 <div class="map-responsive-wrap">
                     <a class="map-icon btn btn-block" href="#"><i class="icon-location-pin"></i> <small>OPEN LISTING IN MAP</small></a>
                 </div>
-                <div class="row detail-checkbox-wrap">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="detail-checkbox">
-                            <div class="md-checkbox">
-                                <input id="i20" type="checkbox">
-                                <label for="i20">Bike Parking</label>
-                            </div>
-                            <div class="md-checkbox">
-                                <input id="i21" type="checkbox">
-                                <label for="i21">Wireless Internet</label>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="detail-checkbox">
-                            <div class="md-checkbox">
-                                <input id="i22" type="checkbox">
-                                <label for="i22">Smoking Allowed</label>
-                            </div>
-                            <div class="md-checkbox">
-                                <input id="i23" type="checkbox">
-                                <label for="i23">Street Parking</label>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="detail-checkbox">
-                            <div class="md-checkbox">
-                                <input id="i24" type="checkbox">
-                                <label for="i24">Special</label>
-                            </div>
-                            <div class="md-checkbox">
-                                <input id="i25" type="checkbox">
-                                <label for="i25">Accepts Credit cards</label>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+              
                 <div class="row" id="searchResult">
                    
                 </div>
@@ -115,8 +79,9 @@
 
             var data = JSON.parse(window.localStorage.getItem('data'));
             var search = window.localStorage.getItem('search');
-            if (search == null) {
-                search = "";
+            if (search == null && data == null) {
+                $("#searchResult").html("<h2 class'text-danger'> Hec bir məlumat tapılmadı</h2>");
+
             }
             var d = new Date();
             var weekday = new Array(7);
@@ -135,28 +100,47 @@
                 lng: 49.2481203
             }
 
-           
+
             var map;
+            var markers = [];
+
             function initMap() {
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: Number(cen.lat), lng: Number(cen.lng)},
-                    zoom: 8
-                });
-		
-               
+                map = new google.maps.Map(document.getElementById('map'),
+                    {
+                        center: { lat: Number(cen.lat), lng: Number(cen.lng) },
+                        zoom: 8
+                    });
+
+
             }
 
             initMap();
-           
-            if (window.localStorage) {
-                
-                $("#resultPlace").append(`${data.length} Results For <span>${search}</span>`);
 
+            function setMapOnAll(map) {
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(map);
+                }
+            }
+
+
+            //local strogage
+            if (window.localStorage) {
+                if (data !== null) {
+                    $("#resultPlace").append(`${data.length} Results For <span>${search}</span>`);
+                }
+
+                $("#searchResult").text("");
                 $.each(data,
                     function(index, item) {
-
-                        $("#searchResult").html = "";
-
+                       
+                        var yerlat = Number(item.lat);
+                        var yerlng = Number(item.lng);
+                        var yer = {
+                            Lat: yerlat,
+                            Lng: yerlng
+                        };
+                        markers.push(yer);
+                        console.log(markers);
 
                         if (item.commentRat == null) {
                             item.commentRat = 0;
@@ -165,9 +149,10 @@
                             $("#searchResult").append(`<div class="col-md-6 card-2">
                         <!-- card-1 -->
                         <div class="card">
-                        
+
                             <a href="/SearchPlace/Detail/${item.id
-                                }"><img class="card-img-top" src="/Public/images/PlacePhoto/${item.photo
+                                }"><img class="card-img-top" style="height: 170px" src="/Public/images/PlacePhoto/${item
+                                .photo
                                 }" alt="Card image cap">
                             </a>
                             <div class="card-body">
@@ -188,7 +173,7 @@
                         }
                         //time open now
                         $.each(item.hours,
-                            function(index,hour) {
+                            function(index, hour) {
 
 
                                 if (hour.WeekNo === weekday[d.getDay()]) {
@@ -204,22 +189,244 @@
                                 }
                             });
 
-                      //map
-                        var marker = new google.maps.Marker({
-                            position: { lat: Number(item.lat), lng: Number(item.lng)},
-                            map: map,
-                            title: item.title,
-                            animation: google.maps.Animation.DROP,
-                            draggable: false
-                        });
+
+                        //map
+                        //var marker = new google.maps.Marker({
+                        //    position: { lat: Number(item.lat), lng: Number(item.lng) },
+                        //    map: map,
+                        //    title: item.title,
+                        //    animation: google.maps.Animation.DROP,
+                        //    draggable: false
+                        //});
 
                     });
 
+
+                //
+                setMapOnAll(map);
+                function setMapOnAll(map) {
+                  
+                    $.each(markers,
+                        function (index, item) {
+                        
+                            var marker = new google.maps.Marker({
+                                position: { lat: Number(item.Lat), lng: Number(item.Lng) },
+                                map: map,
+                                // title: item.title,
+                                animation: google.maps.Animation.DROP,
+                                draggable: false
+                            });
+
+                        });
+                }
                
-        } else
-        {
-            $("#searchResult").html("<h2 class='text-danger'>Hec bir məlumat tapılmadı</h2>");
-        }
+
+              
+
+               
+
+            };
+
+           
+
+            //filter city
+            $("select[name='ciKey']").change(function(ev) {
+                ev.preventDefault();
+
+                setMapOnAll(null);
+
+                $.ajax({
+                    url: "/SearchPlace/Filter",
+                    type: "get",
+                    dataType: "json",
+                    data: { cityKey: $(this).val(), categoryKey: "" },
+                    success: function(data) {
+
+
+                        if (data.status === 200) {
+                            if (data.modal !== null) {
+                                $("#resultPlace").text("");
+
+                                $("#resultPlace")
+                                    .append(`${data.modal.length} Results For <span>${data.searchcity}</span>`);
+
+
+                            }
+
+                            $("#searchResult").text("");
+
+                            $.each(data.modal,
+                                function(index, item) {
+
+                                    var yerlat = Number(item.lat);
+                                    var yerlng = Number(item.lng);
+                                    var yer = yerlat + "," + yerlng;
+                                    markers.push(yer);
+
+                                    console.log(markers);
+                                    if (item.commentRat == null) {
+                                        item.commentRat = 0;
+                                    }
+                                    if (item.status === true) {
+                                        $("#searchResult").append(`<div class="col-md-6 card-2">
+                        <!-- card-1 -->
+                        <div class="card">
+
+                            <a href="/SearchPlace/Detail/${item.id
+                                            }"><img class="card-img-top" style="height: 170px" src="/Public/images/PlacePhoto/${
+                                            item.photo
+                                            }" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">${item.title}</h5>
+                                <ul class="card-rating  d-flex justify-content-between align-items-center">
+                                    <li>${item.commentRat.toFixed(1)}</li>
+                                    <li class="flex-grow-1">${item.commentCount} ratings</li>
+                                    <li class="category"><i class="fa ${item.categoryIcon}"></i> ${item.category}</li>
+                                </ul>
+                                <p class="card-text">${item.slogan}</p>
+                            </div>
+                            <div class="card-bottom">
+                                <p><i class="ti-location-pin"></i>${item.city}</p><span class="timeNow"></span>
+                            </div>
+                        </div>
+                    </div>`);
+
+                                    }
+                                    //time open now
+                                    $.each(item.hours,
+                                        function(index, hour) {
+
+
+                                            if (hour.WeekNo === weekday[d.getDay()]) {
+                                                if (hour.OpenHour.Hours <= d.getHours() &&
+                                                    d.getHours() <= hour.CloseHour.Hours) {
+                                                    $(".timeNow").addClass("open-close_green");
+                                                    $(".timeNow").text("Open Now");
+                                                } else {
+                                                    $(".timeNow").removeClass("open-close_green");
+                                                    $(".timeNow").text("Closed Now");
+                                                }
+
+
+                                            }
+                                        });
+
+                                    //map
+
+
+                                    var marker = new google.maps.Marker({
+                                        position: { lat: Number(item.lat), lng: Number(item.lng) },
+                                        map: map,
+                                        title: item.title,
+                                        animation: google.maps.Animation.DROP,
+                                        draggable: false
+                                    });
+
+                                });
+                        }
+
+
+                    }
+                });
+            });
+
+
+            //filter category
+            $("select[name='catKey']").change(function(ev) {
+                ev.preventDefault();
+
+
+                $.ajax({
+                    url: "/SearchPlace/Filter",
+                    type: "get",
+                    dataType: "json",
+                    data: { cityKey: "", categoryKey: $(this).val() },
+                    success: function(data) {
+
+
+                        if (data.status === 200) {
+                            if (data.modal !== null) {
+                                $("#resultPlace").text("");
+
+                                $("#resultPlace")
+                                    .append(`${data.modal.length} Results For <span>${data.search}</span>`);
+
+
+                            }
+
+                            $("#searchResult").text("");
+
+                            $.each(data.modal,
+                                function(index, item) {
+
+
+                                    if (item.commentRat == null) {
+                                        item.commentRat = 0;
+                                    }
+                                    if (item.status === true) {
+                                        $("#searchResult").append(`<div class="col-md-6 card-2">
+                        <!-- card-1 -->
+                        <div class="card">
+
+                            <a href="/SearchPlace/Detail/${item.id
+                                            }"><img class="card-img-top" style="height: 170px" src="/Public/images/PlacePhoto/${
+                                            item.photo
+                                            }" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">${item.title}</h5>
+                                <ul class="card-rating  d-flex justify-content-between align-items-center">
+                                    <li>${item.commentRat.toFixed(1)}</li>
+                                    <li class="flex-grow-1">${item.commentCount} ratings</li>
+                                    <li class="category"><i class="fa ${item.categoryIcon}"></i> ${item.category}</li>
+                                </ul>
+                                <p class="card-text">${item.slogan}</p>
+                            </div>
+                            <div class="card-bottom">
+                                <p><i class="ti-location-pin"></i>${item.city}</p><span class="timeNow"></span>
+                            </div>
+                        </div>
+                    </div>`);
+
+                                    }
+                                    //time open now
+                                    $.each(item.hours,
+                                        function(index, hour) {
+
+
+                                            if (hour.WeekNo === weekday[d.getDay()]) {
+                                                if (hour.OpenHour.Hours <= d.getHours() &&
+                                                    d.getHours() <= hour.CloseHour.Hours) {
+                                                    $(".timeNow").addClass("open-close_green");
+                                                    $(".timeNow").text("Open Now");
+                                                } else {
+                                                    $(".timeNow").removeClass("open-close_green");
+                                                    $(".timeNow").text("Closed Now");
+                                                }
+
+
+                                            }
+                                        });
+
+                                    //map
+
+                                    var marker = new google.maps.Marker({
+                                        position: { lat: Number(item.lat), lng: Number(item.lng) },
+                                        map: map,
+                                        title: item.title,
+                                        animation: google.maps.Animation.DROP,
+                                        draggable: false
+                                    });
+
+                                });
+                        }
+
+
+                    }
+                });
+            });
+
         });
     </script>
 

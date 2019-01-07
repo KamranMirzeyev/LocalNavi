@@ -1,0 +1,74 @@
+﻿@model Navigation.Models.Blog
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Blog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Orderby)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Orderby)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BigPhoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BigPhoto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SmallPhoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SmallPhoto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlogType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlogType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Info)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Info)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
