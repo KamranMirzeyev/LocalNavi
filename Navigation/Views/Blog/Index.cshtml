@@ -1,0 +1,50 @@
+﻿@model List<Navigation.Models.Blog>
+@{
+    ViewBag.Title = "Blog";
+}
+
+
+
+<!--============================= SUBPAGE HEADER BG =============================-->
+
+<section class="subpage-bg">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="title-block title-block_subpage">
+                    <h2>Our Official Blog</h2>
+                    <p><a href="@Url.Action("Index","Home")"> Home</a> / Blog</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--// SUBPAGE HEADER BG -->
+<!--============================= BLOG 2 =============================-->
+
+<section class="main-block">
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-3 article-first">
+                    <div class="news-block">
+                        <img src="~/Public/images/Blog/@item.SmallPhoto" alt="@item.SmallPhoto" class="img-fluid">
+                        <div class="news-title">
+                            <p>@item.CreateAt.ToString("dd/MMM/yyyy") • @item.BlogType</p>
+                            <h5>@item.Title</h5>
+                            
+
+                            <a href="@Url.Action("Details","Blog",new {id=@item.Id})" class="blog2-link">Read More ➝</a>
+                        </div>
+                    </div>
+                </div>
+            }
+           
+        </div>
+       
+    </div>
+</section>
+
+<!--//END BLOG -->

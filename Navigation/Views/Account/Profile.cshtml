@@ -1,5 +1,5 @@
 ﻿@using System.Globalization
-@model List<Navigation.Models.Listing>
+@model List<Navigation.Models.searchPlace>
 @{
     ViewBag.Title = "Profile";
 }
@@ -19,40 +19,47 @@
         <div class="row">
             @foreach (var item in Model)
             {
-               // var r = Model.Select(t => t.Comments.Average(p => p.Rating));
+               
                 
                 <div class="col-md-4 card-1">
                     <div class="card">
-                        @foreach (var photo in @item.Photos.ToList().Take(1))
-                        {
+                       
                             
-                            <a href="@Url.Action("detail", "SearchPlace", new {id = @item.Id})">
-                                <img class="card-img-top" style="height: 170px" src="~/Public/images/PlacePhoto/@photo.PlacePhoto" alt="Card image cap">
+                            <a href="@Url.Action("detail", "SearchPlace", new {id = @item.id})">
+                                <img class="card-img-top" style="height: 170px" src="~/Public/images/PlacePhoto/@item.photo" alt="Card image cap">
                             </a>
 
-                        }
+                      
 
                         <div class="card-body">
-                            <h5 class="card-title">@item.Title <span style="float: right"><i class="fa @(item.Status? "fa-check-circle-o text-success":"fa-times-circle-o text-danger")"></i></span></h5>
+                            <h5 class="card-title">@item.title <span style="float: right"><i class="fa @(item.status? "fa-check-circle-o text-success":"fa-times-circle-o text-danger")"></i></span></h5>
                             <ul class="card-rating d-flex justify-content-between align-items-center">
 
-                                @if (item.Comments != null)
+                                @if (item.commentRat != null)
+
                                 {
-                                    <li class="card-rating-green">@(item.Comments.FirstOrDefault().Rating)</li>
+
+                                    <li class="card-rating-green">@item.commentRat</li>
+
+
+                                }
+                                else
+                                {
+                                    <li class="card-rating-green">0</li>
                                 }
 
 
 
-                                <li class="flex-grow-1">@item.Comments.Count() ratings</li>
-                                <li class="category"><i class="fa @item.Category.Icon"></i> @item.Category.Name</li>
+                                <li class="flex-grow-1">@item.commentCount ratings</li>
+                                <li class="category"><i class="fa @item.categoryIcon"></i> @item.category</li>
                             </ul>
                             <p class="card-text">
-                                @item.Slogan
+                                @item.slogan
                             </p>
                         </div>
                         <div class="card-bottom">
-                            <p><i class="ti-location-pin"></i>@item.City.Name</p>
-                            @foreach (var hour in item.WorkHourses.ToList())
+                            <p><i class="ti-location-pin"></i>@item.city</p>
+                            @foreach (var hour in item.hours.ToList())
                             {
 
                                 DateTime dt1 = DateTime.ParseExact(@hour.OpenHour.ToString(), "HH:mm:ss", new DateTimeFormatInfo());

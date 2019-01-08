@@ -110,6 +110,7 @@ namespace Navigation.Controllers
 
         //place servisleri ve hefte gunlerinin elave olunmasi
         [HttpPost]
+        [Auth]
         public JsonResult create(int[] servis, List<vwHourWeek> WeekArr, int placeId)
         {
             if (WeekArr != null && servis.Count()>0)

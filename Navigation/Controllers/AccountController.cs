@@ -129,25 +129,40 @@ namespace Navigation.Controllers
 
         //userin oz profili
         [Auth]
-        public  ActionResult Profile(int id)
+        public  ActionResult Profile()
         {
-            if (id<=0)
-            {
-                return HttpNotFound();
-            }
+            int id = (int)Session["user"];
+           
+
+           
+            
             Models.User u = db.Users.Find(id);
             if (u!=null)
             {
-                var place = db.Listings.Include("City").Include("Category").Include(x=>x.Photos).Include(x=>x.WorkHourses).Include(x=>x.Comments).Include(x=>x.ListServices).Where(x => x.UserId == id).ToList();
-
                
-                var p= place.Where(x=>x.Id==id).Select(t => new 
-                {
-                  rat = (double)t.Comments.Average(x=>x.Rating)
-                    
-                }).ToList();
-                ViewBag.Rating = p;
-                return View(place);
+                List<searchPlace> modal = new List<searchPlace>();
+
+                modal = db.Listings.Where(x =>x.UserId==id ).
+                    Select(x => new searchPlace
+                    {
+                        id = x.Id,
+                        title = x.Title,
+                        category = x.Category.Name,
+                        categoryIcon = x.Category.Icon,
+                        city = x.City.Name,
+                        slogan = x.Slogan,
+                        lat = x.Lat,
+                        lng = x.Lng,
+                        commentRat = x.Comments.Average(c => c.Rating),
+                        hours = x.WorkHourses.ToList(),
+                        photo = x.Photos.ToList().FirstOrDefault().PlacePhoto,
+                        status = x.Status,
+                        commentCount = x.Comments.Count()
+
+                    }).ToList();
+
+                
+                return View(modal);
                 
             }
             return RedirectToAction("index","Home");

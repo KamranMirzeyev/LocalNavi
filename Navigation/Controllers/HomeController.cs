@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Navigation.DAL;
@@ -54,14 +56,48 @@ namespace Navigation.Controllers
             return View();
         }
 
-        public ActionResult Blog()
+       
+
+
+        //contact mail gonderme
+        public ActionResult Send(string Fullname,string Email,string Subject,string Message)
         {
-            return View();
+            if (string.IsNullOrEmpty(Fullname) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Message))
+            {
+                Session["Error"] = "Boş boş  vaxtımı alma";
+                return RedirectToAction("Index");
+            }
+
+            var body = "<p>Fullname: {0} <br> Email: {1}<br>Subject: {2}<br/> Message: {3}</p>";
+            var message = new MailMessage();
+            message.To.Add(new MailAddress("ruslan.berz@gmail.com")); // replace with valid value 
+            message.From = new MailAddress(Email); // replace with valid value
+            message.Subject = "Contact Message";
+            message.Body = string.Format(body, Fullname, Email,Subject, Message);
+            message.IsBodyHtml = true;
+
+
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "ruslan.aspnet@gmail.com", // replace with valid value
+                    Password = "xxxyyyzzz123@@@123" // replace with valid value
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                smtp.Send(message);
+                return RedirectToAction("index");
+            }
+        
+           
+
         }
+        
 
-
-
-
+        //sistemden cixma
         public ActionResult Logout()
         {
             Session["Login"] = null;

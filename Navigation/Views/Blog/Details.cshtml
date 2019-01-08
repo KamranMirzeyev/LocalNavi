@@ -1,0 +1,39 @@
+﻿@model Navigation.Models.Blog
+    @{
+        ViewBag.Title = "Details";
+    }
+
+
+
+    <!--============================= BLOG DETAIL =============================-->
+
+    <section class="main-block">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-8 responsive-wrap">
+                    <div class="full-blog ">
+                        <figure class="img-holder">
+                            <a href="#"><img src="~/Public/images/Blog/@Model.BigPhoto" class="img-fluid" alt="@Model.BigPhoto"></a>
+                            <div class="blog-post-date">@Model.CreateAt.ToString("dd MMMM yyyy")</div>
+                        </figure>
+
+                        <div class="blog-content">
+                           
+                            <div class="blog-text">
+                               @Html.Raw(Model.Info)
+
+                            </div>
+                        </div>
+                        <ul class="social-icons blog-share">
+                            <li><a href="https://twitter.com/"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--//END BLOG DETAIL -->

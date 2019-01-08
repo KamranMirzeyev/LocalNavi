@@ -137,6 +137,7 @@
     <Compile Include="Areas\Control\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Control\Controllers\LoginController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlaceController.cs" />
@@ -375,6 +376,7 @@
     <Content Include="Public\fonts\Simple-Line-Icons.svg" />
     <Content Include="Public\fonts\slick.svg" />
     <Content Include="Public\fonts\themify.svg" />
+    <Content Include="Public\images\about.jpg" />
     <Content Include="Public\images\addlist.jpg" />
     <Content Include="Public\images\avatar.jpg" />
     <Content Include="Public\images\Blog\img1.jpg" />
@@ -388,10 +390,21 @@
     <Content Include="Public\images\credit.png" />
     <Content Include="Public\images\enjoy-icon.svg" />
     <Content Include="Public\images\favicon.png" />
+    <Content Include="Public\images\flags\flag-1.png" />
+    <Content Include="Public\images\flags\flag-2.png" />
+    <Content Include="Public\images\flags\flag-3.png" />
+    <Content Include="Public\images\flags\flag-4.png" />
+    <Content Include="Public\images\flags\flag-5.png" />
     <Content Include="Public\images\flags\us.svg" />
     <Content Include="Public\images\howit-bg.png" />
     <Content Include="Public\images\illus.png" />
     <Content Include="Public\images\prayer.jpg" />
+    <Content Include="Public\images\team\author-1.jpg" />
+    <Content Include="Public\images\team\author-2.jpg" />
+    <Content Include="Public\images\team\author-3.jpg" />
+    <Content Include="Public\images\team\author-4.jpg" />
+    <Content Include="Public\images\team\author-5.jpg" />
+    <Content Include="Public\images\team\author-6.jpg" />
     <Content Include="Public\img\loading.gif" />
     <Content Include="Public\images\logo.png" />
     <Content Include="Public\images\logo.svg" />
@@ -528,13 +541,14 @@
     <Content Include="Public\fonts\themify.woff" />
     <Content Include="Public\js\swiper.min.js.map" />
     <Content Include="Public\scss\style.scss" />
-    <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Public\js\jquery-3.3.1.min.js" />
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Place\AddListing.cshtml" />
     <Content Include="Views\SearchPlace\Places.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\SearchPlace\Detail.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812231052140_init1.resx">

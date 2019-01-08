@@ -8,10 +8,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Navigation.DAL;
+using Navigation.Helper;
 using Navigation.Models;
 
 namespace Navigation.Areas.Control.Controllers
 {
+    [AuthAdmin]
     public class BlogsController : Controller
     {
         private NaviContext db = new NaviContext();
