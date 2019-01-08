@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
+@using System.Globalization
 @model Navigation.Models.HomeViewModel
 
 <section class="hero-wrap d-flex align-items-center home-one-hero">
@@ -8,7 +9,7 @@
         <div class="row d-flex justify-content-center">
             <div class="hero-title">
                 <h1>What’s your plan today?</h1>
-                <h3>Find out perfect place to hangout in your city from over 2581 listings </h3>
+                <h3>Find out perfect place to hangout in your city </h3>
             </div>
         </div>
 
@@ -100,7 +101,7 @@
         <div class="single-info row mt-40">
             <div class="col-lg-6 col-md-12 mt-100 text-center no-padding info-left">
                 <div class="info-thumb">
-                    <img src="https://via.placeholder.com/555x650.jpg" class="img-fluid" alt="">
+                    <img src="~/Public/images/prayer.jpg" class="img-fluid" alt="">
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 no-padding info-rigth">
@@ -141,71 +142,83 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 card-1">
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/1920x1080.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Kerla Coffee House</h5>
-                        <ul class="card-rating d-flex justify-content-between align-items-center">
-                            <li class="card-rating-green">4.5</li>
-                            <li class="flex-grow-1">51 ratings</li>
-                            <li class="category"><i class="fa fa-coffee"></i> Cafe</li>
-                        </ul>
-                        <p class="card-text">
-                            Sed ut perspiciatis unde omnis iste natus error sit vento volupt
-                            accusantium doloremque laudantium, totam rem aperiam, eaque dicta sunt explicabo.
-                        </p>
-                    </div>
-                    <div class="card-bottom">
-                        <p><i class="ti-location-pin"></i>INDIA</p>
-                        <span class="open-close_green">Open Now</span>
-                    </div>
-                </div>
-            </div>
+            @foreach (var item in Model.Places)
+            {
 
-            <div class="col-md-4 card-2">
-                <div class="card">
-                    <img class="card-img-top" src="https://via.placeholder.com/1920x1080.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">LeFesto Hotel</h5>
-                        <ul class="card-rating d-flex justify-content-between align-items-center">
-                            <li class="card-rating-green">4.2</li>
-                            <li class="flex-grow-1">72 ratings</li>
-                            <li class="category"><i class="fa fa-hotel"></i> Hotel</li>
-                        </ul>
-                        <p class="card-text">
-                            Sed ut perspiciatis unde omnis iste natus error sit vento volupt
-                            accusantium doloremque laudantium, totam rem aperiam, eaque dicta sunt explicabo.
-                        </p>
-                    </div>
-                    <div class="card-bottom">
-                        <p><i class="ti-location-pin"></i>SINGAPORE</p>
-                        <span class="open-close_green">Open Now</span>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-4 card-2">
-                <div class="card card-last">
-                    <img class="card-img-top" src="https://via.placeholder.com/1920x1080.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Golden Band</h5>
-                        <ul class="card-rating d-flex justify-content-between align-items-center">
-                            <li class="card-rating-yellow">3.5</li>
-                            <li class="flex-grow-1">46 ratings</li>
-                            <li class="category"><i class="fa fa-music"></i> Music</li>
-                        </ul>
-                        <p class="card-text">
-                            Sed ut perspiciatis unde omnis iste natus error sit vento volupt
-                            accusantium doloremque laudantium, totam rem aperiam, eaque dicta sunt explicabo.
-                        </p>
-                    </div>
-                    <div class="card-bottom">
-                        <p><i class="ti-location-pin"></i>UNITED STATES</p>
-                        <span>Closed Now</span>
+                <div class="col-md-4 card-1">
+                    <div class="card">
+
+
+                        <a href="@Url.Action("detail", "SearchPlace", new {id = @item.id})">
+                            <img class="card-img-top" style="height: 170px" src="~/Public/images/PlacePhoto/@item.photo" alt="Card image cap">
+                        </a>
+
+
+
+                        <div class="card-body">
+                            <h5 class="card-title">@item.title <span style="float: right"><i class="fa @(item.status? "fa-check-circle-o text-success":"fa-times-circle-o text-danger")"></i></span></h5>
+                            <ul class="card-rating d-flex justify-content-between align-items-center">
+
+                                @if (item.commentRat != null)
+
+                                {
+
+                                    <li class="card-rating-green">@item.commentRat</li>
+
+
+                                }
+                                else
+                                {
+                                    <li class="card-rating-green">0</li>
+                                }
+
+
+
+                                <li class="flex-grow-1">@item.commentCount ratings</li>
+                                <li class="category"><i class="fa @item.categoryIcon"></i> @item.category</li>
+                            </ul>
+                            <p class="card-text">
+                                @item.slogan
+                            </p>
+                        </div>
+                        <div class="card-bottom">
+                            <p><i class="ti-location-pin"></i>@item.city</p>
+                            @foreach (var hour in item.hours.ToList())
+                            {
+
+                                DateTime dt1 = DateTime.ParseExact(@hour.OpenHour.ToString(), "HH:mm:ss", new DateTimeFormatInfo());
+                                DateTime dt2 = DateTime.ParseExact(@hour.CloseHour.ToString(), "HH:mm:ss", new DateTimeFormatInfo());
+
+
+
+                                if (@hour.WeekNo == DayOfWeek.Wednesday.ToString().ToLower())
+                                {
+                                    if (@dt1.TimeOfDay < DateTime.Now.TimeOfDay && DateTime.Now.TimeOfDay < dt2.TimeOfDay)
+                                    {
+                                        <span class="open-close_green">Open Now </span>
+
+                                    }
+                                    else
+                                    {
+                                        <span> Closed Now </span>
+
+                                    }
+                                }
+
+
+
+
+
+                            }
+
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+
+
+
 
         </div>
     </div>
@@ -228,11 +241,19 @@
             <div class="col-md-6">
                 <a href="#">
                     <div class="grid">
-                        <img src="https://via.placeholder.com/1334x1280.jpg" alt="#" class="img-fluid">
+                        @foreach (var c in Model.Listings.Take(1))
+                        {
+                            <img src="~/Public/images/city/gal1.jpg" alt="#" class="img-fluid">
+                            <div class="effect-caption-wrap">
+                                <h3>@c.Name</h3>
+                                <p class="listing">@c.ListCount</p>
+                            </div>
+                        }
+                        @*<img src="https://via.placeholder.com/1334x1280.jpg" alt="#" class="img-fluid">
                         <div class="effect-caption-wrap">
                             <h3>India</h3>
                             <p class="listing">2400+ Listings</p>
-                        </div>
+                        </div>*@
                     </div>
                 </a>
             </div>
@@ -348,59 +369,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-3 article-first">
-                <div class="news-block">
-                    <img src="https://via.placeholder.com/960x1028.jpg" alt="#" class="img-fluid">
-                    <div class="news-title">
-                        <p>Nov 18, 2018 - Restaurants</p>
-                        <a href="#">
-                            <h5>Lorem ipsum dolor sit amet consectetur adipiscing</h5>
-                        </a>
-                        <p>By <a href="#">Ruchika Megh</a></p>
+            @foreach (var item in Model.Blogs)
+            {
+                <div class="col-md-6 col-lg-3 article-first">
+                    <div class="news-block">
+                        <img src="~/Public/images/Blog/@item.SmallPhoto" alt="@item.SmallPhoto" class="img-fluid">
+                        <div class="news-title">
+                            <p>@item.CreateAt.ToString("dd/MMM/yyyy") • @item.BlogType</p>
+                            <h5>@item.Title</h5>
+                            
+
+                            <a href="@Url.Action("Details","Blog",new {id=@item.Id})" class="blog2-link">Read More ➝</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3 article-first">
-                <div class="news-block">
-                    <img src="https://via.placeholder.com/960x1028.jpg" alt="#" class="img-fluid">
-                    <div class="news-title">
-                        <p>Nov 18, 2018 - Travelling</p>
-                        <a href="">
-                            <h5>Lorem ipsum dolor sit amet consectetur adipiscing</h5>
-                        </a>
-                        <p>By <a href="#">Allen Martin</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 article-first">
-                <div class="news-block">
-                    <img src="https://via.placeholder.com/960x1028.jpg" alt="#" class="img-fluid">
-                    <div class="news-title">
-                        <p>Nov 18, 2018 - Culture</p>
-                        <a href="">
-                            <h5>Lorem ipsum dolor sit amet consectetur adipiscing</h5>
-                        </a>
-                        <p>By <a href="#">David Truce</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 article-first">
-                <div class="news-block">
-                    <img src="https://via.placeholder.com/960x1028.jpg" alt="#" class="img-fluid">
-                    <div class="news-title">
-                        <p>Nov 18, 2018 - Events</p>
-                        <a href="">
-                            <h5>Lorem ipsum dolor sit amet consectetur adipiscing</h5>
-                        </a>
-                        <p>By <a href="#">Charles S</a></p>
-                    </div>
-                </div>
-            </div>
+            }
+           
         </div>
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="btn-wrap">
-                    <a href="@Url.Action("Blog","Home")" class="btn btn-simple">Visit our Blog →</a>
+                    <a href="@Url.Action("Index","Blog")" class="btn btn-simple">Visit our Blog →</a>
                 </div>
             </div>
         </div>
@@ -419,7 +408,7 @@
                     <p>Add your business infront of millions and earn 3x profits from our tool</p>
                 </div>
                 <div class="btn-wrap btn-wrap2">
-                    <a href="add-listing.html" class="btn btn-simple">Add your Listing →</a>
+                    <a href="@Url.Action("AddListing","Place")" class="btn btn-simple">Add your Listing →</a>
                 </div>
             </div>
         </div>

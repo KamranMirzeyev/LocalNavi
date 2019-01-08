@@ -75,6 +75,8 @@ namespace Navigation.Areas.Control.Controllers
             }
             if (ModelState.IsValid)
             {
+                blog.CreateAt=DateTime.Now;
+                
                 db.Blogs.Add(blog);
                 db.SaveChanges();
 

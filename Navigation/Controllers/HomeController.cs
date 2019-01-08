@@ -18,6 +18,30 @@ namespace Navigation.Controllers
         {
            HomeViewModel model = new HomeViewModel();
             model.category = db.Categories.ToList();
+            model.Blogs = db.Blogs.OrderBy(b => b.Orderby).ToList();
+            model.Places = db.Listings.Select(l => new searchPlace
+            {
+                id = l.Id,
+                title = l.Title,
+                category = l.Category.Name,
+                categoryIcon = l.Category.Icon,
+                city = l.City.Name,
+                slogan = l.Slogan,
+                lat = l.Lat,
+                lng = l.Lng,
+                commentRat = l.Comments.Average(c => c.Rating),
+                hours = l.WorkHourses.ToList(),
+                photo = l.Photos.ToList().FirstOrDefault().PlacePhoto,
+                status = l.Status,
+                commentCount = l.Comments.Count()
+            }).OrderByDescending(r=>r.commentRat).Take(3).ToList();
+
+            model.Listings = db.Listings.Include("City").Select(c=>new vwCity
+            {
+                CityPhoto = c.City.Photo,
+                Name = c.City.Name,
+                ListCount = c.CityId
+            }).ToList();
             return View(model);
         }
 

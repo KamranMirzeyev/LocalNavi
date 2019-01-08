@@ -251,6 +251,7 @@
     <Compile Include="Models\searchPlace.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\vwCity.cs" />
     <Compile Include="Models\vwDetails.cs" />
     <Compile Include="Models\vwHourWeek.cs" />
     <Compile Include="Models\vwPlace.cs" />
@@ -387,6 +388,7 @@
     <Content Include="Public\images\bootstrap-formhelpers-currencies.flags.png" />
     <Content Include="Public\images\bootstrap-formhelpers-googlefonts.png" />
     <Content Include="Public\images\business-icon.svg" />
+    <Content Include="Public\images\city\gal1.jpg" />
     <Content Include="Public\images\credit.png" />
     <Content Include="Public\images\enjoy-icon.svg" />
     <Content Include="Public\images\favicon.png" />
