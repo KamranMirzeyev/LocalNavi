@@ -134,7 +134,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Control\ControlAreaRegistration.cs" />
     <Compile Include="Areas\Control\Controllers\BlogsController.cs" />
+    <Compile Include="Areas\Control\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Control\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Control\Controllers\ListingsController.cs" />
     <Compile Include="Areas\Control\Controllers\LoginController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -231,6 +233,10 @@
     <Compile Include="Migrations\201901071255171_admin-blog-model.cs" />
     <Compile Include="Migrations\201901071255171_admin-blog-model.Designer.cs">
       <DependentUpon>201901071255171_admin-blog-model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901091020542_update3.cs" />
+    <Compile Include="Migrations\201901091020542_update3.Designer.cs">
+      <DependentUpon>201901091020542_update3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -525,6 +531,13 @@
     <Content Include="Areas\Control\Views\Blogs\Details.cshtml" />
     <Content Include="Areas\Control\Views\Blogs\Edit.cshtml" />
     <Content Include="Areas\Control\Views\Blogs\Index.cshtml" />
+    <Content Include="Areas\Control\Views\Comments\Delete.cshtml" />
+    <Content Include="Areas\Control\Views\Comments\Details.cshtml" />
+    <Content Include="Areas\Control\Views\Comments\Index.cshtml" />
+    <Content Include="Areas\Control\Views\Listings\Delete.cshtml" />
+    <Content Include="Areas\Control\Views\Listings\Details.cshtml" />
+    <Content Include="Areas\Control\Views\Listings\Edit.cshtml" />
+    <Content Include="Areas\Control\Views\Listings\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="Public\fonts\fontawesome-webfont.eot" />
     <Content Include="Public\fonts\fontawesome-webfont.ttf" />
@@ -615,6 +628,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901071255171_admin-blog-model.resx">
       <DependentUpon>201901071255171_admin-blog-model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901091020542_update3.resx">
+      <DependentUpon>201901091020542_update3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

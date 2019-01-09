@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Navigation.Models.Blog>
+﻿@model IEnumerable<Navigation.Models.Listing>
 
 @{
     ViewBag.Title = "Index";
@@ -6,29 +6,31 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Orderby)
+            Category Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BigPhoto)
+            City Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SmallPhoto)
+            User Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreateAt)
+            @Html.DisplayNameFor(model => model.Slogan)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BlogType)
+            @Html.DisplayNameFor(model => model.Website)
         </th>
+        
        
         <th></th>
     </tr>
@@ -36,26 +38,27 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Orderby)
+            @Html.DisplayFor(modelItem => item.Category.Name)
         </td>
         <td>
-            <img src="~/Public/images/Blog/@item.BigPhoto" height="100px"/>
-           
+            @Html.DisplayFor(modelItem => item.City.Name)
         </td>
         <td>
-            <img src="~/Public/images/Blog/@item.SmallPhoto" height="100px"/>
-           
+            @Html.DisplayFor(modelItem => item.User.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            <p>@item.CreateAt.ToString("dd MMM yyyy")</p>
+            @Html.DisplayFor(modelItem => item.Slogan)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BlogType)
+            @Html.DisplayFor(modelItem => item.Website)
         </td>
-        
+       
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

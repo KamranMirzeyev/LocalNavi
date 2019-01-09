@@ -7,7 +7,7 @@ namespace Navigation.Models
 {
     public class vwCity
     {
-        public int ListCount { get; set; }
+        public int? ListCount { get; set; }
         public string CityPhoto { get; set; }
         public string Name { get; set; }
     }

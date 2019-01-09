@@ -36,12 +36,28 @@ namespace Navigation.Controllers
                 commentCount = l.Comments.Count()
             }).OrderByDescending(r=>r.commentRat).Take(3).ToList();
 
-            model.Listings = db.Listings.Include("City").Select(c=>new vwCity
-            {
-                CityPhoto = c.City.Photo,
-                Name = c.City.Name,
-                ListCount = c.CityId
-            }).ToList();
+            
+            vwCity cc = new vwCity();
+            //foreach (var city in db.Cities)
+            //{
+                
+            //    cc.ListCount = db.Listings.Where(x => x.CityId == city.Id).ToList().Sum(t=>t.CityId);
+            //    if (cc.ListCount==null)
+            //    {
+            //        cc.ListCount = 0;
+                    
+
+            //    }
+
+            //    if (cc.CityPhoto==null)
+            //    {
+            //        cc.CityPhoto = "gal1.jpg";
+            //    }
+            //    cc.Name = city.Name;
+            //    cc.CityPhoto = city.Photo;
+               
+            //   model.Listings.Add(cc);
+            //}
             return View(model);
         }
 

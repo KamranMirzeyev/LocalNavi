@@ -117,7 +117,7 @@ namespace Navigation.Areas.Control.Controllers
                 if (SmallPhoto != null)
                 {
                     string filename = DateTime.Now.ToString("yyyyMMddHHmmssfff") + SmallPhoto.FileName;
-                    string path = Path.Combine(Server.MapPath("~/Public/img"), filename);
+                    string path = Path.Combine(Server.MapPath("~/Public/img/blog"), filename);
                     SmallPhoto.SaveAs(path);
                     blog.SmallPhoto = filename;
                 }
