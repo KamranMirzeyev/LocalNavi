@@ -83,5 +83,7 @@ C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.phototable.resources
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.like.resources
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.adminblogmodel.resources
-C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.csprojAssemblyReference.cache
 C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.update3.resources
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.csprojAssemblyReference.cache
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.finish.resources
+C:\Users\Kamran\Documents\Visual Studio 2017\Projects\Navigation\Navigation\obj\Debug\Navigation.Migrations.finish1.resources

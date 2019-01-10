@@ -145,7 +145,7 @@
             @foreach (var item in Model.Places)
             {
 
-
+                var istrue = true;
                 <div class="col-md-4 card-1">
                     <div class="card">
 
@@ -157,7 +157,7 @@
 
 
                         <div class="card-body">
-                            <h5 class="card-title">@item.title <span style="float: right"><i class="fa @(item.status? "fa-check-circle-o text-success":"fa-times-circle-o text-danger")"></i></span></h5>
+                            <h5 class="card-title">@item.title </h5>
                             <ul class="card-rating d-flex justify-content-between align-items-center">
 
                                 @if (item.commentRat != null)
@@ -191,20 +191,20 @@
                                 DateTime dt2 = DateTime.ParseExact(@hour.CloseHour.ToString(), "HH:mm:ss", new DateTimeFormatInfo());
 
 
-
-                                if (@hour.WeekNo == DayOfWeek.Wednesday.ToString().ToLower())
+                                
+                                if (istrue)
                                 {
                                     if (@dt1.TimeOfDay < DateTime.Now.TimeOfDay && DateTime.Now.TimeOfDay < dt2.TimeOfDay)
                                     {
-                                        <span class="open-close_green">Open Now </span>
-
+                                      <span class="open-close_green">Open Now </span>
+                                         istrue = false;
                                     }
                                     else
                                     {
                                         <span> Closed Now </span>
-
+                                        istrue = false;
                                     }
-                                }
+                               }
 
 
 
@@ -239,62 +239,58 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <a href="#">
+                <a>
                     <div class="grid">
-                        @*@foreach (var c in Model.Listings.Take(1))
+                        @foreach (var c in Model.Listings.OrderByDescending(x=>x.ListCount).Take(1))
                         {
-                            <img src="~/Public/images/city/@c.CityPhoto" alt="#" class="img-fluid">
+                           
+                            <img src="~/Public/images/city/@c.City.Photo" alt="@c.City.Photo" class="img-fluid">
                             <div class="effect-caption-wrap">
-                                <h3>@c.Name</h3>
+                                <h3>@c.City.Name</h3>
                                 <p class="listing">@c.ListCount</p>
                             </div>
-                        }*@
-                      @*  <img src="https://via.placeholder.com/1334x1280.jpg" alt="#" class="img-fluid">
-                        <div class="effect-caption-wrap">
-                            <h3>India</h3>
-                            <p class="listing">2400+ Listings</p>
-                        </div>*@
+                        }
+                     
                     </div>
-                </a>
+              </a>
             </div>
 
             <div class="col-md-6">
                 <div class="row detailed-item-mr">
                     <div class="col-md-12">
-                        <a href="#">
+                        <a>
                             <div class="grid">
-                                <img src="https://via.placeholder.com/1920x875.jpg" alt="#" class="img-fluid">
-                                <div class="effect-caption-wrap">
-                                    <h3>New York</h3>
-                                    <p class="listing">3100+ Listings</p>
-                                </div>
+                                @foreach (var c in Model.Listings.OrderByDescending(x=>x.ListCount).Skip(1).Take(1))
+                                {
+                           
+                                    <img src="~/Public/images/city/@c.City.Photo" alt="@c.City.Photo" class="img-fluid">
+                                    <div class="effect-caption-wrap">
+                                        <h3>@c.City.Name</h3>
+                                        <p class="listing">@c.ListCount</p>
+                                    </div>
+                                }
+                              
                             </div>
                         </a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <a href="#">
+                    @foreach (var c in Model.Listings.OrderByDescending(x=>x.ListCount).Skip(2).Take(2))
+                    {
+                        <div class="col-md-6">
+                            <a>
                             <div class="grid">
-                                <img src="https://via.placeholder.com/1000x963.jpg" alt="#" class="img-fluid">
+                           
+                        <img src="~/Public/images/city/@c.City.Photo" alt="@c.City.Photo" class="img-fluid">
                                 <div class="effect-caption-wrap">
-                                    <h3>Singapore</h3>
-                                    <p class="listing">900+ Listings</p>
+                                    <h3>@c.City.Name</h3>
+                                    <p class="listing">@c.ListCount</p>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <a href="#">
-                            <div class="grid">
-                                <img src="https://via.placeholder.com/1000x963.jpg" alt="#" class="img-fluid">
-                                <div class="effect-caption-wrap">
-                                    <h3>California</h3>
-                                    <p class="listing">850+ Listings</p>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
+                    }
+                    
                 </div>
             </div>
         </div>

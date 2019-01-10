@@ -153,7 +153,7 @@ namespace Navigation.Controllers
                         slogan = x.Slogan,
                         lat = x.Lat,
                         lng = x.Lng,
-                        commentRat = x.Comments.Average(c => c.Rating),
+                        commentRat = x.Comments.Count() != 0 ? Math.Round(x.Comments.Average(y => y.Rating), 1) : 0,
                         hours = x.WorkHourses.ToList(),
                         photo = x.Photos.ToList().FirstOrDefault().PlacePhoto,
                         status = x.Status,

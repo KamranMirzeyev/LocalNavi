@@ -39,7 +39,7 @@ namespace Navigation.Controllers
                         slogan = x.Slogan,
                         lat = x.Lat,
                         lng = x.Lng,
-                        commentRat = x.Comments.Average(c=>c.Rating),
+                        commentRat = x.Comments.Count() != 0 ? Math.Round(x.Comments.Average(y => y.Rating), 1) : 0,
                         hours = x.WorkHourses.ToList(),
                         photo = x.Photos.ToList().FirstOrDefault().PlacePhoto,
                         status = x.Status,
@@ -62,7 +62,7 @@ namespace Navigation.Controllers
                     slogan = x.Slogan,
                     lat = x.Lat,
                     lng = x.Lng,
-                    commentRat = x.Comments.Average(c=>c.Rating),
+                    commentRat = x.Comments.Count() != 0 ? Math.Round(x.Comments.Average(y => y.Rating), 1) : 0,
                     hours = x.WorkHourses.ToList(),
                     photo = x.Photos.ToList().FirstOrDefault().PlacePhoto,
                     status = x.Status,
@@ -107,7 +107,7 @@ namespace Navigation.Controllers
                         slogan = x.Slogan,
                         lat = x.Lat,
                         lng = x.Lng,
-                        commentRat = x.Comments.Average(c => c.Rating),
+                        commentRat = x.Comments.Count() != 0 ? Math.Round(x.Comments.Average(y => y.Rating), 1) : 0,
                         hours = x.WorkHourses.ToList(),
                         photo = x.Photos.ToList().FirstOrDefault().PlacePhoto,
                         status = x.Status,
@@ -130,7 +130,7 @@ namespace Navigation.Controllers
                     slogan = x.Slogan,
                     lat = x.Lat,
                     lng = x.Lng,
-                    commentRat = x.Comments.Average(c => c.Rating),
+                    commentRat = x.Comments.Count() != 0 ? Math.Round(x.Comments.Average(y => y.Rating), 1) : 0,
                     hours = x.WorkHourses.ToList(),
                     photo = x.Photos.ToList().FirstOrDefault().PlacePhoto,
                     status = x.Status,
@@ -175,15 +175,7 @@ namespace Navigation.Controllers
         [HttpPost]
         public JsonResult Commet(double Rating, string Text, HttpPostedFileBase[] Photo,int id)
         {
-            if (Rating==6)
-            {
-                Rating = Rating - 1;
-            }
-
-            if (Rating==5.5)
-            {
-                Rating = Rating - 0.5;
-            }
+           
             if (Session["Login"]==null)
             {
                 return Json(new { status = 401, message = "Sistemə giriş etməmisiniz", }, JsonRequestBehavior.AllowGet);

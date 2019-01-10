@@ -116,11 +116,7 @@
 
             initMap();
 
-            function setMapOnAll(map) {
-                for (var i = 0; i < markers.length; i++) {
-                    markers[i].setMap(map);
-                }
-            }
+          
 
 
             //local strogage
@@ -190,35 +186,26 @@
                             });
 
 
-                        //map
-                        //var marker = new google.maps.Marker({
-                        //    position: { lat: Number(item.lat), lng: Number(item.lng) },
-                        //    map: map,
-                        //    title: item.title,
-                        //    animation: google.maps.Animation.DROP,
-                        //    draggable: false
-                        //});
+                        map
+                        var marker = new google.maps.Marker({
+                            position: { lat: Number(item.lat), lng: Number(item.lng) },
+                            map: map,
+                            title: item.title,
+                            animation: google.maps.Animation.DROP,
+                            draggable: false
+                        });
 
                     });
 
 
-                //
-                setMapOnAll(map);
-                function setMapOnAll(map) {
+               
+              
                   
-                    $.each(markers,
-                        function (index, item) {
-                        
-                            var marker = new google.maps.Marker({
-                                position: { lat: Number(item.Lat), lng: Number(item.Lng) },
-                                map: map,
-                                // title: item.title,
-                                animation: google.maps.Animation.DROP,
-                                draggable: false
-                            });
-
-                        });
-                }
+                   
+                
+                   
+                       
+                
                
 
               
@@ -233,7 +220,8 @@
             $("select[name='ciKey']").change(function(ev) {
                 ev.preventDefault();
 
-                setMapOnAll(null);
+              
+               
 
                 $.ajax({
                     url: "/SearchPlace/Filter",

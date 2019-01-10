@@ -18,8 +18,9 @@ namespace Navigation.Areas.Control.Controllers
         // GET: Control/Listings
         public ActionResult Index()
         {
-            var listings = db.Listings.Include(l => l.Category).Include(l => l.City).Include(l => l.User);
-            return View(listings.ToList());
+            var listings = db.Listings.Include(l => l.Category).Include(l => l.City).Include(l => l.User).Include(l=>l.Photos).Where(x => x.Status == false).ToList();
+            
+            return View(listings);
         }
 
         // GET: Control/Listings/Details/5

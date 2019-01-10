@@ -238,6 +238,14 @@
     <Compile Include="Migrations\201901091020542_update3.Designer.cs">
       <DependentUpon>201901091020542_update3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901101257486_finish.cs" />
+    <Compile Include="Migrations\201901101257486_finish.Designer.cs">
+      <DependentUpon>201901101257486_finish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901101259291_finish1.cs" />
+    <Compile Include="Migrations\201901101259291_finish1.Designer.cs">
+      <DependentUpon>201901101259291_finish1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Blog.cs" />
@@ -248,7 +256,6 @@
     <Compile Include="Models\CommentPhoto.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\Listing.cs" />
-    <Compile Include="Models\ListPhoto.cs" />
     <Compile Include="Models\ListService.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\PlaceViewModel.cs" />
@@ -395,6 +402,20 @@
     <Content Include="Public\images\bootstrap-formhelpers-googlefonts.png" />
     <Content Include="Public\images\business-icon.svg" />
     <Content Include="Public\images\city\gal1.jpg" />
+    <Content Include="Public\images\city\gal2.jpg" />
+    <Content Include="Public\images\city\gal3.jpg" />
+    <Content Include="Public\images\city\gal4.jpg" />
+    <Content Include="Public\images\CommentPhoto\201901060234448182.png" />
+    <Content Include="Public\images\CommentPhoto\201901060234448535.jpg" />
+    <Content Include="Public\images\CommentPhoto\201901060236119092.png" />
+    <Content Include="Public\images\CommentPhoto\201901060236119205.jpg" />
+    <Content Include="Public\images\CommentPhoto\201901060238056662.png" />
+    <Content Include="Public\images\CommentPhoto\201901060238437985.jpg" />
+    <Content Include="Public\images\CommentPhoto\201901060240505612.png" />
+    <Content Include="Public\images\CommentPhoto\201901060240584605.jpg" />
+    <Content Include="Public\images\CommentPhoto\201901061200458035.jpg" />
+    <Content Include="Public\images\CommentPhoto\201901061216359035.jpg" />
+    <Content Include="Public\images\CommentPhoto\20190107124122138addlist.jpg" />
     <Content Include="Public\images\credit.png" />
     <Content Include="Public\images\enjoy-icon.svg" />
     <Content Include="Public\images\favicon.png" />
@@ -404,6 +425,7 @@
     <Content Include="Public\images\flags\flag-4.png" />
     <Content Include="Public\images\flags\flag-5.png" />
     <Content Include="Public\images\flags\us.svg" />
+    <Content Include="Public\images\gal1.jpg" />
     <Content Include="Public\images\howit-bg.png" />
     <Content Include="Public\images\illus.png" />
     <Content Include="Public\images\prayer.jpg" />
@@ -471,7 +493,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Control\Models\" />
-    <Folder Include="Public\images\CommentPhoto\" />
     <Folder Include="Public\images\UserPhoto\" />
   </ItemGroup>
   <ItemGroup>
@@ -631,6 +652,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901091020542_update3.resx">
       <DependentUpon>201901091020542_update3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901101257486_finish.resx">
+      <DependentUpon>201901101257486_finish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901101259291_finish1.resx">
+      <DependentUpon>201901101259291_finish1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

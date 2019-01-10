@@ -14,7 +14,7 @@ namespace Navigation.Models
         public string lng { get; set; }
         public string city { get; set; }
         public string category { get; set; }
-        public double? commentRat { get; set; }
+        public double commentRat { get; set; }
         public string categoryIcon { get; set; }
         public List<WorkHour> hours { get; set; }
         public string photo { get; set; }

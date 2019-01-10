@@ -29,35 +29,30 @@ namespace Navigation.Controllers
                 slogan = l.Slogan,
                 lat = l.Lat,
                 lng = l.Lng,
-                commentRat = l.Comments.Average(c => c.Rating),
+                commentRat = l.Comments.Count()!= 0 ? Math.Round(l.Comments.Average(y => y.Rating), 1) : 0,
                 hours = l.WorkHourses.ToList(),
                 photo = l.Photos.ToList().FirstOrDefault().PlacePhoto,
                 status = l.Status,
                 commentCount = l.Comments.Count()
             }).OrderByDescending(r=>r.commentRat).Take(3).ToList();
 
+            List<City> allCity = db.Cities.ToList();
+            model.Listings = new List<vwCity>(); 
             
-            vwCity cc = new vwCity();
-            //foreach (var city in db.Cities)
-            //{
+            foreach (var city in allCity)
+            {
+                vwCity cc = new vwCity();
+                cc.ListCount = db.Listings.Where(x => x.CityId == city.Id).Count();
+                cc.City = city;
+
+                if (string.IsNullOrEmpty(city.Photo))
+                {
+                    city.Photo = "gal1.jpg";
+                }
                 
-            //    cc.ListCount = db.Listings.Where(x => x.CityId == city.Id).ToList().Sum(t=>t.CityId);
-            //    if (cc.ListCount==null)
-            //    {
-            //        cc.ListCount = 0;
-                    
 
-            //    }
-
-            //    if (cc.CityPhoto==null)
-            //    {
-            //        cc.CityPhoto = "gal1.jpg";
-            //    }
-            //    cc.Name = city.Name;
-            //    cc.CityPhoto = city.Photo;
-               
-            //   model.Listings.Add(cc);
-            //}
+                model.Listings.Add(cc);
+            }
             return View(model);
         }
 
