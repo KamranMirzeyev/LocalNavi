@@ -12,6 +12,7 @@ using Navigation.Models;
 
 namespace Navigation.Controllers
 {
+    
     public class PlaceController : Controller
     {
         private readonly NaviContext db = new NaviContext();

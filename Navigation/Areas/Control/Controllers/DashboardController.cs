@@ -15,5 +15,11 @@ namespace Navigation.Areas.Control.Controllers
         {
             return View();
         }
+        [AuthAdmin]
+        public ActionResult Logout()
+        {
+            Session["admin"] = null;
+            return RedirectToAction("Index", "Login");
+        }
     }
 }

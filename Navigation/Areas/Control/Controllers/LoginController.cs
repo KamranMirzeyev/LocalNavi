@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using Navigation.DAL;
+using Navigation.Helper;
 using Navigation.Models;
 
 namespace Navigation.Areas.Control.Controllers
@@ -44,10 +45,6 @@ namespace Navigation.Areas.Control.Controllers
 
             
         }
-        public ActionResult Logout()
-        {
-            Session["admin"] = null;
-            return RedirectToAction("Index", "Login");
-        }
+       
     }
 }

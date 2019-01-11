@@ -13,6 +13,7 @@ using Navigation.Models;
 
 namespace Navigation.Controllers
 {
+   
     public class SearchPlaceController : Controller
     {
         private readonly NaviContext db = new NaviContext();
