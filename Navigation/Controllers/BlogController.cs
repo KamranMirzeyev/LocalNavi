@@ -17,7 +17,8 @@ namespace Navigation.Controllers
             List<Blog> blogs = db.Blogs.OrderByDescending(x=>x.Orderby).ToList();
             return View(blogs);
         }
-
+       
+        //blog detailsi
         public ActionResult Details(int? id)
         {
             if (id==null)

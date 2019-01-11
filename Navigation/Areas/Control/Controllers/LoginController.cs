@@ -19,7 +19,7 @@ namespace Navigation.Areas.Control.Controllers
 
             return View();
         }
-
+        //admin login olmasi
         public ActionResult Login(Admin admin)
         {
             if (string.IsNullOrEmpty(admin.Email) || string.IsNullOrEmpty(admin.Password))

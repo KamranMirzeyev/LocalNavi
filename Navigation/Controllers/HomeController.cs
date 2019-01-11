@@ -14,6 +14,7 @@ namespace Navigation.Controllers
     public class HomeController : Controller
     {
        private  readonly NaviContext db = new NaviContext();
+        //home indexi
         public ActionResult Index()
         {
            HomeViewModel model = new HomeViewModel();

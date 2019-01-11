@@ -85,7 +85,7 @@ namespace Navigation.Controllers
             return View(model);
         }
 
-        //filter
+        //filter sehere ve ya categoriye gore
         [HttpGet]
         public JsonResult Filter(string categoryKey,string cityKey)
         {
@@ -201,7 +201,7 @@ namespace Navigation.Controllers
             db.Comments.Add(c);
             db.SaveChanges();
 
-           
+           //fotonun add olunmasi multi
             foreach (HttpPostedFileBase files in Photo)
             {
                 if (files != null && files.ContentLength > 0)

@@ -7,15 +7,18 @@ using Navigation.Helper;
 
 namespace Navigation.Areas.Control.Controllers
 {
+    [AuthAdmin]
     public class DashboardController : Controller
     {
         // GET: Control/Dashboard
-        [AuthAdmin]
+      
         public ActionResult Index()
         {
             return View();
         }
-        [AuthAdmin]
+
+        //logout
+       
         public ActionResult Logout()
         {
             Session["admin"] = null;
